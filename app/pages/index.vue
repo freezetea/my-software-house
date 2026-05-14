@@ -1,153 +1,330 @@
 <template>
-  <div>
+  <div class="text-white overflow-x-hidden" style="background:#0f1147">
 
-    <!-- HERO -->
-    <section class="min-h-screen bg-zinc-950 relative flex items-center px-6 py-24 overflow-hidden">
+    <!-- ══════════════════════════════════════
+         HERO — dark indigo with floating shapes
+    ══════════════════════════════════════ -->
+    <section class="relative min-h-screen flex items-center px-4 md:px-6 py-28 overflow-hidden" style="background: linear-gradient(135deg, #0a0d3d 0%, #0f1147 50%, #1a1060 100%)">
+
+      <!-- animated bg shapes -->
       <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-10 right-10 w-64 h-64 bg-indigo-500/10 rounded-full blur-2xl"></div>
+        <div class="absolute top-10 right-10 w-72 h-72 bg-indigo-500/20 rounded-full blur-[80px] animate-pulse"></div>
+        <div class="absolute bottom-20 left-10 w-96 h-96 bg-violet-600/15 rounded-full blur-[100px]"></div>
+        <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-blue-500/10 rounded-full blur-[60px]"></div>
       </div>
-      <div class="max-w-4xl mx-auto w-full relative z-10">
-        <div class="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-violet-400 border border-violet-800 px-4 py-1 rounded-full mb-6 animate-pulse">
-          <span class="w-2 h-2 bg-violet-400 rounded-full"></span>
-          Available for new projects
-        </div>
-        <h1 class="text-6xl font-black text-white mt-2 mb-4 leading-tight">
-          Bring innovation<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">to every solution</span>
-        </h1>
-        <p class="text-zinc-400 text-lg max-w-xl mb-8">
-          We don't just sell services — we bring solutions and innovations that make your business profitable through custom web and app development.
-        </p>
-        <div class="flex gap-4 flex-wrap">
-          <NuxtLink to="/contact"
-            class="group bg-violet-600 hover:bg-violet-500 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/30 hover:-translate-y-0.5">
-            Let's get started
-            <span class="inline-block transition-transform group-hover:translate-x-1 ml-1">→</span>
-          </NuxtLink>
-          <NuxtLink to="/work"
-            class="border border-zinc-700 hover:border-violet-500 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:-translate-y-0.5">
-            View our work
-          </NuxtLink>
-        </div>
 
-        <!-- Floating tech badges -->
-        <div class="flex flex-wrap gap-3 mt-12">
-          <span v-for="tech in techs" :key="tech"
-            class="text-xs bg-zinc-900 border border-zinc-700 text-zinc-400 px-3 py-1 rounded-full hover:border-violet-500 hover:text-violet-400 transition-colors cursor-default">
-            {{ tech }}
-          </span>
-        </div>
+      <!-- decorative SVG stars -->
+      <svg class="absolute top-20 left-10 opacity-40 animate-spin" style="animation-duration:20s" width="40" height="40" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#818cf8"/></svg>
+      <svg class="absolute bottom-32 right-20 opacity-30 animate-spin" style="animation-duration:30s;animation-direction:reverse" width="28" height="28" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#a78bfa"/></svg>
+      <svg class="absolute top-40 right-1/3 opacity-20 animate-spin" style="animation-duration:25s" width="20" height="20" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#c4b5fd"/></svg>
+      <svg class="absolute bottom-20 left-1/4 opacity-25 animate-spin" style="animation-duration:18s;animation-direction:reverse" width="16" height="16" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#818cf8"/></svg>
+
+      <!-- hero line shape -->
+      <div class="absolute right-0 top-0 h-full w-1/2 pointer-events-none opacity-10">
+        <svg viewBox="0 0 600 800" class="h-full w-full" preserveAspectRatio="xMidYMid slice">
+          <path d="M600 0 Q300 200 400 400 Q500 600 200 800 L600 800 Z" fill="url(#heroGrad)" />
+          <defs><linearGradient id="heroGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs>
+        </svg>
       </div>
-    </section>
 
-    <!-- ANIMATED STATS -->
-    <section class="bg-violet-600 py-14 px-6">
-      <div class="max-w-4xl mx-auto grid grid-cols-3 gap-6 text-center">
-        <div v-for="stat in stats" :key="stat.label" class="group">
-          <div class="text-4xl font-black text-white tabular-nums">
-            {{ stat.display }}<span class="text-violet-300">{{ stat.suffix }}</span>
-          </div>
-          <div class="text-violet-200 text-sm mt-1">{{ stat.label }}</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="bg-zinc-900 py-24 px-6">
-      <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div class="max-w-6xl mx-auto w-full relative z-10 grid md:grid-cols-2 gap-14 items-center">
         <div>
-          <span class="text-xs uppercase tracking-widest text-violet-400">About us</span>
-          <h2 class="text-4xl font-black text-white mt-3 mb-4">Web company &<br>software house</h2>
-          <p class="text-zinc-400 leading-relaxed mb-6">
-            We are a software house specialising in custom web development using Nuxt.js and Vue 3 — tailored to your business needs. Our technology is web-based and built for scale.
+          <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-300 bg-indigo-500/15 border border-indigo-500/30 px-4 py-2 rounded-full mb-8">
+            <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+            Open for new projects · Indonesia & Worldwide
+          </div>
+          <h1 class="text-4xl md:text-[3.5rem] font-black leading-[1.1] mb-6 min-h-[120px] md:min-h-[160px] tracking-tight">
+            <span v-html="typedText"></span><span class="text-indigo-400 animate-pulse">|</span>
+          </h1>
+          <p class="text-slate-400 text-base md:text-lg max-w-lg mb-10 leading-relaxed">
+            Our focus is not to sell you our services but to bring you solutions and innovations that will make your business profitable.
           </p>
-          <NuxtLink to="/contact"
-            class="group bg-violet-600 hover:bg-violet-500 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/30 inline-flex items-center gap-2">
-            Learn more
-            <span class="transition-transform group-hover:translate-x-1">→</span>
-          </NuxtLink>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-          <div v-for="card in aboutCards" :key="card.title"
-            class="bg-zinc-800 hover:bg-zinc-700 rounded-xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl cursor-default">
-            <div class="text-2xl mb-2">{{ card.icon }}</div>
-            <h4 class="text-white font-bold mb-1">{{ card.title }}</h4>
-            <p class="text-zinc-400 text-sm">{{ card.desc }}</p>
+          <div class="flex flex-wrap gap-3 mb-10">
+            <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
+              class="group bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-7 py-3.5 rounded-xl font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/40 hover:-translate-y-0.5 inline-flex items-center gap-2 text-sm md:text-base">
+              Let's get started <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+            <NuxtLink to="/work" class="border border-white/20 hover:border-indigo-400/60 bg-white/5 hover:bg-indigo-600/10 text-white px-7 py-3.5 rounded-xl font-semibold transition-all duration-300 text-sm md:text-base inline-flex items-center gap-2">
+              View our work
+            </NuxtLink>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span v-for="tech in techs" :key="tech" class="text-xs bg-white/5 border border-white/10 text-slate-400 px-3 py-1.5 rounded-lg hover:border-indigo-500/50 hover:text-indigo-300 hover:bg-indigo-600/10 transition-all cursor-default">{{ tech }}</span>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- SERVICES -->
-    <section class="bg-zinc-950 py-24 px-6">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-14">
-          <span class="text-xs uppercase tracking-widest text-violet-400">What we offer</span>
-          <h2 class="text-4xl font-black text-white mt-3">We provide the best IT services</h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div v-for="svc in services" :key="svc.title"
-            class="group border border-zinc-800 hover:border-violet-600 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-violet-900/20 cursor-default">
-            <div class="text-3xl mb-3 transition-transform group-hover:scale-110 duration-300">{{ svc.icon }}</div>
-            <h3 class="text-white font-bold mb-2">{{ svc.title }}</h3>
-            <p class="text-zinc-400 text-sm leading-relaxed">{{ svc.desc }}</p>
-            <div class="mt-4 text-violet-400 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              Learn more →
+        <!-- hero right — 2D illustration -->
+        <div class="hidden md:flex flex-col gap-4 relative">
+          <!-- main illustration card -->
+          <div class="relative bg-gradient-to-br from-indigo-600/20 to-violet-600/20 border border-indigo-500/30 rounded-3xl p-8 overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl"></div>
+            <!-- 2D SVG illustration - laptop/code -->
+            <svg viewBox="0 0 300 200" class="w-full" xmlns="http://www.w3.org/2000/svg">
+              <!-- screen -->
+              <rect x="40" y="20" width="220" height="140" rx="12" fill="#1e1b4b" stroke="#4f46e5" stroke-width="2"/>
+              <rect x="52" y="32" width="196" height="116" rx="6" fill="#0f0a2e"/>
+              <!-- code lines -->
+              <rect x="65" y="50" width="60" height="6" rx="3" fill="#6366f1" opacity="0.8"/>
+              <rect x="65" y="64" width="100" height="6" rx="3" fill="#818cf8" opacity="0.5"/>
+              <rect x="75" y="78" width="80" height="6" rx="3" fill="#a78bfa" opacity="0.6"/>
+              <rect x="75" y="92" width="60" height="6" rx="3" fill="#818cf8" opacity="0.4"/>
+              <rect x="65" y="106" width="90" height="6" rx="3" fill="#6366f1" opacity="0.7"/>
+              <rect x="75" y="120" width="50" height="6" rx="3" fill="#c4b5fd" opacity="0.5"/>
+              <!-- cursor blink -->
+              <rect x="130" y="120" width="3" height="14" rx="1" fill="#a78bfa" opacity="0.9">
+                <animate attributeName="opacity" values="0.9;0;0.9" dur="1s" repeatCount="indefinite"/>
+              </rect>
+              <!-- floating elements -->
+              <circle cx="220" cy="60" r="20" fill="#4f46e5" opacity="0.3"/>
+              <text x="210" y="66" font-size="18" fill="#818cf8">⚡</text>
+              <circle cx="200" cy="110" r="15" fill="#7c3aed" opacity="0.3"/>
+              <text x="192" y="116" font-size="14" fill="#a78bfa">🌐</text>
+              <!-- keyboard -->
+              <rect x="60" y="165" width="180" height="20" rx="4" fill="#1e1b4b" stroke="#4f46e5" stroke-width="1.5"/>
+              <rect x="70" y="169" width="18" height="8" rx="2" fill="#312e81" opacity="0.8"/>
+              <rect x="94" y="169" width="18" height="8" rx="2" fill="#312e81" opacity="0.8"/>
+              <rect x="118" y="169" width="18" height="8" rx="2" fill="#312e81" opacity="0.8"/>
+              <rect x="142" y="169" width="18" height="8" rx="2" fill="#312e81" opacity="0.8"/>
+              <rect x="166" y="169" width="18" height="8" rx="2" fill="#312e81" opacity="0.8"/>
+              <rect x="190" y="169" width="18" height="8" rx="2" fill="#312e81" opacity="0.8"/>
+            </svg>
+          </div>
+          <!-- floating stat cards -->
+          <div class="grid grid-cols-3 gap-3">
+            <div v-for="stat in stats" :key="stat.label" class="bg-white/5 border border-white/10 hover:border-indigo-500/40 rounded-2xl p-4 text-center transition-all hover:-translate-y-0.5">
+              <div class="text-xl font-black text-indigo-300 tabular-nums">{{ stat.display }}<span class="text-indigo-500 text-sm">{{ stat.suffix }}</span></div>
+              <div class="text-slate-500 text-xs mt-0.5">{{ stat.label }}</div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PROCESS -->
-    <section class="bg-zinc-900 py-24 px-6">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-14">
-          <span class="text-xs uppercase tracking-widest text-violet-400">How we work</span>
-          <h2 class="text-4xl font-black text-white mt-3">Industry best practices to the core</h2>
+    <!-- ══════════════════════════════════════
+         PARTNERS — slightly lighter indigo
+    ══════════════════════════════════════ -->
+    <section style="background:#13164f" class="border-y border-white/5 py-14 px-4 md:px-6">
+      <div class="max-w-6xl mx-auto text-center mb-8">
+        <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-300 bg-indigo-500/15 border border-indigo-500/30 px-3 py-1.5 rounded-full mb-3">Global Partners</div>
+        <h2 class="text-2xl md:text-3xl font-black tracking-tight">World Wide Partners</h2>
+      </div>
+      <div class="overflow-hidden">
+        <div class="flex gap-6 animate-marquee whitespace-nowrap">
+          <div v-for="p in [...partners, ...partners]" :key="p + Math.random()"
+            class="inline-flex items-center gap-2 bg-white/5 border border-white/10 hover:border-indigo-500/40 rounded-xl px-5 py-3 text-slate-400 text-sm font-medium shrink-0 transition-all cursor-default">
+            <span class="text-indigo-400 text-base">🔗</span> {{ p }}
+          </div>
         </div>
-        <div class="flex flex-col gap-4">
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         ABOUT — deep violet bg with 2D illustration
+    ══════════════════════════════════════ -->
+    <section id="about" class="py-20 md:py-28 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(160deg, #0f1147 0%, #1a0d5e 100%)">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-violet-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+      <!-- decorative dots grid -->
+      <div class="absolute right-10 top-10 opacity-20 pointer-events-none grid grid-cols-6 gap-3">
+        <div v-for="n in 36" :key="n" class="w-1 h-1 rounded-full bg-indigo-400"></div>
+      </div>
+
+      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center relative z-10">
+        <!-- left 2D illustration -->
+        <div class="relative">
+          <div class="relative bg-gradient-to-br from-violet-600/15 to-indigo-600/15 border border-violet-500/20 rounded-3xl p-8 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-violet-900/20 to-transparent"></div>
+            <svg viewBox="0 0 320 260" class="w-full relative z-10" xmlns="http://www.w3.org/2000/svg">
+              <!-- phone mockup -->
+              <rect x="20" y="10" width="100" height="180" rx="14" fill="#1e1b4b" stroke="#7c3aed" stroke-width="2"/>
+              <rect x="30" y="28" width="80" height="140" rx="6" fill="#0f0a2e"/>
+              <!-- phone screen content -->
+              <rect x="38" y="38" width="64" height="8" rx="4" fill="#7c3aed" opacity="0.8"/>
+              <rect x="38" y="52" width="48" height="5" rx="2.5" fill="#a78bfa" opacity="0.5"/>
+              <rect x="38" y="64" width="56" height="5" rx="2.5" fill="#818cf8" opacity="0.4"/>
+              <rect x="38" y="80" width="64" height="40" rx="6" fill="#312e81" opacity="0.6"/>
+              <text x="55" y="106" font-size="22" fill="#818cf8">📱</text>
+              <rect x="38" y="128" width="30" height="8" rx="4" fill="#4f46e5"/>
+              <rect x="74" y="128" width="28" height="8" rx="4" fill="#312e81"/>
+              <!-- desktop mockup -->
+              <rect x="140" y="30" width="160" height="110" rx="8" fill="#1e1b4b" stroke="#4f46e5" stroke-width="2"/>
+              <rect x="150" y="40" width="140" height="88" rx="4" fill="#0f0a2e"/>
+              <!-- desktop content -->
+              <rect x="158" y="50" width="40" height="5" rx="2.5" fill="#6366f1" opacity="0.8"/>
+              <rect x="158" y="60" width="70" height="5" rx="2.5" fill="#818cf8" opacity="0.4"/>
+              <rect x="158" y="70" width="55" height="5" rx="2.5" fill="#a78bfa" opacity="0.5"/>
+              <rect x="158" y="82" width="120" height="30" rx="6" fill="#1e1b4b" stroke="#4f46e5" stroke-width="1"/>
+              <text x="195" y="103" font-size="18" fill="#818cf8">🌐</text>
+              <rect x="158" y="118" width="40" height="6" rx="3" fill="#4f46e5"/>
+              <!-- stand -->
+              <rect x="208" y="142" width="4" height="20" rx="2" fill="#4f46e5"/>
+              <rect x="188" y="162" width="44" height="5" rx="2.5" fill="#4f46e5" opacity="0.6"/>
+              <!-- floating badges -->
+              <rect x="100" y="80" width="55" height="26" rx="13" fill="#4f46e5" opacity="0.9"/>
+              <text x="113" y="97" font-size="11" fill="white" font-weight="bold">Nuxt.js</text>
+              <rect x="240" y="155" width="52" height="26" rx="13" fill="#7c3aed" opacity="0.9"/>
+              <text x="248" y="172" font-size="11" fill="white" font-weight="bold">Vue 3</text>
+              <rect x="30" y="200" width="60" height="26" rx="13" fill="#312e81" opacity="0.9"/>
+              <text x="38" y="217" font-size="11" fill="#c4b5fd" font-weight="bold">Laravel</text>
+              <!-- connection lines -->
+              <path d="M127 93 L140 80" stroke="#4f46e5" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+              <path d="M240 168 L230 155" stroke="#7c3aed" stroke-width="1" stroke-dasharray="3 2" opacity="0.5"/>
+            </svg>
+          </div>
+          <!-- floating about card -->
+          <div class="absolute -bottom-4 -right-4 bg-indigo-600 rounded-2xl p-4 shadow-xl shadow-indigo-900/50">
+            <div class="text-2xl font-black text-white">40+</div>
+            <div class="text-indigo-200 text-xs">Happy clients</div>
+          </div>
+        </div>
+
+        <!-- right text -->
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-medium text-violet-300 bg-violet-500/15 border border-violet-500/30 px-3 py-1.5 rounded-full mb-5">About Company</div>
+          <h2 class="text-3xl md:text-4xl font-black leading-tight mb-5 tracking-tight">Web company &<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">software house</span></h2>
+          <p class="text-slate-400 leading-relaxed mb-4 text-sm md:text-base">We are kodakode, a web company and software house specializing in custom software development, website development, and mobile apps tailored to business needs.</p>
+          <p class="text-slate-400 leading-relaxed mb-8 text-sm md:text-base">Our technology implementation in the software is web-based and cloud computing system.</p>
+          <div class="grid grid-cols-2 gap-4 mb-8">
+            <div v-for="card in aboutCards" :key="card.title" class="group flex items-start gap-3 bg-white/5 border border-white/10 hover:border-violet-500/40 hover:bg-violet-600/5 rounded-2xl p-4 transition-all duration-300 cursor-default">
+              <div class="w-9 h-9 rounded-xl bg-violet-600/20 border border-violet-500/30 flex items-center justify-center text-base shrink-0 group-hover:bg-violet-600/30 transition-colors">{{ card.icon }}</div>
+              <div>
+                <h4 class="text-white font-bold text-sm mb-0.5">{{ card.title }}</h4>
+                <p class="text-slate-500 text-xs leading-relaxed">{{ card.desc }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 flex-wrap">
+            <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
+              class="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white px-6 py-3 rounded-xl font-semibold transition-all inline-flex items-center gap-2 text-sm hover:shadow-lg hover:shadow-violet-500/30">
+              Learn more →
+            </a>
+            <a href="tel:087784794214" class="text-slate-400 text-sm hover:text-indigo-300 transition-colors">📞 <span class="text-indigo-300 font-semibold">087784794214</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         SERVICES — lighter indigo/royal blue bg
+    ══════════════════════════════════════ -->
+    <section id="services" class="py-20 md:py-28 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #0d1555 0%, #111747 100%)">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/30 to-transparent"></div>
+        <div class="absolute top-20 left-20 w-64 h-64 bg-blue-600/8 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-64 h-64 bg-indigo-600/8 rounded-full blur-3xl"></div>
+      </div>
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 text-xs font-medium text-blue-300 bg-blue-500/15 border border-blue-500/30 px-3 py-1.5 rounded-full mb-4">Latest Services</div>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight mb-6">We Provide Best IT Services</h2>
+          <div class="flex flex-wrap justify-center gap-2">
+            <button v-for="cat in categories" :key="cat"
+              :class="['px-4 py-2 rounded-xl text-xs md:text-sm font-semibold border transition-all duration-200',
+                activeCategory === cat
+                  ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg shadow-indigo-500/25'
+                  : 'border-white/10 bg-white/5 text-slate-400 hover:border-indigo-500/40 hover:text-white']"
+              @click="activeCategory = cat">{{ cat }}</button>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          <div v-for="(svc, i) in filteredServices" :key="svc.title"
+            :class="['group relative bg-white/5 border border-white/10 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 overflow-hidden cursor-default',
+              i % 3 === 1 ? 'md:mt-6' : '']">
+            <div class="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-100 transition-opacity duration-300" :style="`background: linear-gradient(135deg, ${svc.color}15 0%, transparent 100%)`"></div>
+            <div class="absolute top-0 right-0 w-24 h-24 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" :style="`background: ${svc.color}20`"></div>
+            <!-- icon -->
+            <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-5 relative z-10 border border-white/10" :style="`background: ${svc.color}20`">
+              {{ svc.icon }}
+            </div>
+            <h3 class="text-white font-bold mb-2 relative z-10">{{ svc.title }}</h3>
+            <p class="text-slate-500 text-sm leading-relaxed relative z-10 mb-4">{{ svc.desc }}</p>
+            <div class="flex items-center gap-1 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative z-10" :style="`color: ${svc.color}`">
+              Learn more <span class="group-hover:translate-x-1 transition-transform inline-block">→</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         PROCESS — dark with glowing timeline
+    ══════════════════════════════════════ -->
+    <section class="py-20 md:py-28 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(180deg, #0a0d3d 0%, #0f1147 100%)">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-indigo-600/5 rounded-full blur-3xl"></div>
+      </div>
+      <div class="max-w-5xl mx-auto relative z-10">
+        <div class="text-center mb-14">
+          <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-300 bg-indigo-500/15 border border-indigo-500/30 px-3 py-1.5 rounded-full mb-4">Working Process</div>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight">Industry Best Practices<br>to the Core</h2>
+        </div>
+        <!-- horizontal process on desktop, vertical on mobile -->
+        <div class="hidden md:flex items-start justify-between gap-4 relative">
+          <div class="absolute top-6 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent"></div>
           <div v-for="(step, i) in steps" :key="step.num"
-            :class="['group flex items-start gap-6 p-6 rounded-2xl border transition-all duration-300 cursor-pointer',
-              activeStep === i
-                ? 'border-violet-500 bg-violet-900/20'
-                : 'border-zinc-800 hover:border-zinc-600']"
+            :class="['group flex flex-col items-center text-center flex-1 cursor-pointer',]"
             @click="activeStep = i">
-            <div :class="['w-12 h-12 shrink-0 rounded-full font-black text-lg flex items-center justify-center transition-colors duration-300',
-              activeStep === i ? 'bg-violet-600 text-white' : 'bg-zinc-800 text-zinc-400 group-hover:bg-zinc-700']">
+            <div :class="['w-12 h-12 rounded-full font-black text-sm flex items-center justify-center mb-4 border-2 transition-all duration-300 relative z-10',
+              activeStep === i
+                ? 'bg-gradient-to-br from-indigo-500 to-violet-600 border-indigo-400 text-white shadow-xl shadow-indigo-500/50 scale-110'
+                : 'bg-[#0a0d3d] border-indigo-600/50 text-indigo-400 group-hover:border-indigo-400 group-hover:text-white']">
               {{ step.num }}
             </div>
+            <h4 :class="['font-bold text-sm mb-1 transition-colors', activeStep === i ? 'text-indigo-300' : 'text-slate-400 group-hover:text-white']">{{ step.title }}</h4>
+            <p class="text-slate-600 text-xs leading-relaxed">{{ step.desc }}</p>
+          </div>
+        </div>
+        <!-- mobile vertical -->
+        <div class="flex flex-col gap-3 md:hidden">
+          <div v-for="(step, i) in steps" :key="step.num"
+            :class="['flex items-start gap-4 p-4 rounded-2xl border transition-all cursor-pointer',
+              activeStep === i ? 'border-indigo-500/40 bg-indigo-600/10' : 'border-white/10']"
+            @click="activeStep = i">
+            <div :class="['w-10 h-10 shrink-0 rounded-xl font-black text-sm flex items-center justify-center border transition-all',
+              activeStep === i ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-white/5 border-white/10 text-slate-400']">{{ step.num }}</div>
             <div>
-              <h4 class="text-white font-bold mb-1">{{ step.title }}</h4>
-              <p class="text-zinc-400 text-sm">{{ step.desc }}</p>
-              <div v-if="activeStep === i" class="mt-3 text-violet-300 text-sm animate-pulse">
-                ● Currently active phase
-              </div>
+              <h4 class="text-white font-bold text-sm mb-1">{{ step.title }}</h4>
+              <p class="text-slate-500 text-xs">{{ step.desc }}</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="bg-zinc-950 py-24 px-6">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-14">
-          <span class="text-xs uppercase tracking-widest text-violet-400">Testimonials</span>
-          <h2 class="text-4xl font-black text-white mt-3">What our clients say</h2>
+    <!-- ══════════════════════════════════════
+         TESTIMONIALS — purple/violet tint
+    ══════════════════════════════════════ -->
+    <section class="py-20 md:py-28 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #1a0d5e 0%, #0f1147 100%)">
+      <div class="absolute top-0 right-0 w-80 h-80 bg-violet-600/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+      <!-- decorative dots right -->
+      <div class="absolute left-8 bottom-8 opacity-15 pointer-events-none grid grid-cols-5 gap-3">
+        <div v-for="n in 25" :key="n" class="w-1.5 h-1.5 rounded-full bg-violet-400"></div>
+      </div>
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 text-xs font-medium text-violet-300 bg-violet-500/15 border border-violet-500/30 px-3 py-1.5 rounded-full mb-4">Our Testimonials</div>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight">What Our Clients Say<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">About Solutions</span></h2>
         </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div v-for="t in testimonials" :key="t.name"
-            class="bg-zinc-900 border border-zinc-800 hover:border-violet-500 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-violet-900/20">
-            <div class="text-yellow-400 text-sm mb-3">★★★★★</div>
-            <p class="text-zinc-300 text-sm leading-relaxed mb-4">"{{ t.text }}"</p>
-            <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-full bg-violet-700 flex items-center justify-center text-white font-bold text-sm">
-                {{ t.name.charAt(0) }}
-              </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div v-for="(t, i) in testimonials" :key="t.name"
+            :class="['group relative bg-gradient-to-br from-white/5 to-white/3 border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all duration-300 hover:-translate-y-2 overflow-hidden',
+              i === 1 ? 'md:mt-8' : '']">
+            <div class="absolute inset-0 bg-gradient-to-br from-violet-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"></div>
+            <!-- quote mark -->
+            <div class="absolute top-4 right-6 text-5xl text-violet-500/20 font-serif leading-none">"</div>
+            <div class="flex items-center gap-1 mb-1 relative z-10">
+              <span v-for="n in 5" :key="n" class="text-yellow-400 text-sm">★</span>
+            </div>
+            <div class="text-white font-bold text-sm mb-3 relative z-10">Excellent Works</div>
+            <p class="text-slate-400 text-sm leading-relaxed mb-6 relative z-10">"{{ t.text }}"</p>
+            <div class="flex items-center gap-3 pt-4 border-t border-white/5 relative z-10">
+              <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-violet-600/40 to-indigo-600/40 border border-violet-500/30 flex items-center justify-center text-violet-300 font-black text-base shrink-0">{{ t.name.charAt(0) }}</div>
               <div>
                 <div class="text-white font-bold text-sm">{{ t.name }}</div>
-                <div class="text-zinc-500 text-xs">{{ t.role }}</div>
+                <div class="text-slate-500 text-xs">{{ t.role }}</div>
               </div>
             </div>
           </div>
@@ -155,24 +332,61 @@
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="bg-zinc-900 py-24 px-6">
-      <div class="max-w-2xl mx-auto">
-        <div class="text-center mb-14">
-          <span class="text-xs uppercase tracking-widest text-violet-400">FAQ</span>
-          <h2 class="text-4xl font-black text-white mt-3">Common questions</h2>
+    <!-- ══════════════════════════════════════
+         BLOG — dark indigo
+    ══════════════════════════════════════ -->
+    <section class="py-20 md:py-28 px-4 md:px-6 relative" style="background:#0f1147">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-300 bg-indigo-500/15 border border-indigo-500/30 px-3 py-1.5 rounded-full mb-4">Our Blog & News</div>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight">Latest Blog, News & Articles</h2>
         </div>
-        <div class="flex flex-col gap-3">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <a v-for="post in blogPosts" :key="post.title" href="https://kodakode.com/blog-standard/" target="_blank"
+            class="group bg-white/5 border border-white/10 hover:border-indigo-500/40 rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-1.5 block">
+            <!-- illustrated card header -->
+            <div class="relative h-44 overflow-hidden flex items-center justify-center" :style="`background: linear-gradient(135deg, ${post.bg1}, ${post.bg2})`">
+              <div class="absolute inset-0 opacity-20">
+                <div class="absolute top-2 right-4 w-16 h-16 rounded-full border border-white/30"></div>
+                <div class="absolute bottom-2 left-4 w-10 h-10 rounded-full border border-white/20"></div>
+              </div>
+              <div class="text-5xl relative z-10">{{ post.icon }}</div>
+              <div class="absolute top-3 left-3 bg-indigo-600/80 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-medium">{{ post.category }}</div>
+            </div>
+            <div class="p-5">
+              <div class="text-slate-500 text-xs mb-2">{{ post.date }}</div>
+              <h3 class="text-white font-bold text-sm mb-2 group-hover:text-indigo-300 transition-colors leading-snug">{{ post.title }}</h3>
+              <p class="text-slate-500 text-xs leading-relaxed mb-4">{{ post.excerpt }}</p>
+              <div class="text-indigo-400 text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">Read more <span>→</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         FAQ — alternating slightly lighter
+    ══════════════════════════════════════ -->
+    <section class="py-20 md:py-28 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #0d1555 0%, #111747 100%)">
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent pointer-events-none"></div>
+      <div class="max-w-2xl mx-auto relative z-10">
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-300 bg-indigo-500/15 border border-indigo-500/30 px-3 py-1.5 rounded-full mb-4">FAQ</div>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight">Common Questions</h2>
+        </div>
+        <div class="flex flex-col gap-2">
           <div v-for="(faq, i) in faqs" :key="i"
-            class="border border-zinc-800 rounded-xl overflow-hidden">
-            <button
-              class="w-full text-left px-6 py-4 text-white font-semibold flex justify-between items-center hover:bg-zinc-800 transition-colors"
+            :class="['border rounded-2xl overflow-hidden transition-all duration-300',
+              activeFaq === i ? 'border-indigo-500/40 bg-indigo-600/8 shadow-lg shadow-indigo-900/30' : 'border-white/10 bg-white/3 hover:border-white/20']">
+            <button class="w-full text-left px-5 md:px-6 py-4 text-white font-semibold flex justify-between items-center gap-4 text-sm md:text-base"
               @click="activeFaq = activeFaq === i ? null : i">
               {{ faq.q }}
-              <span class="text-violet-400 text-xl transition-transform duration-300"
-                :style="activeFaq === i ? 'transform: rotate(45deg)' : ''">+</span>
+              <span :class="['w-7 h-7 shrink-0 rounded-lg border flex items-center justify-center text-sm transition-all duration-300',
+                activeFaq === i
+                  ? 'bg-indigo-600 border-indigo-500 text-white rotate-45'
+                  : 'bg-white/5 border-white/10 text-indigo-400']">+</span>
             </button>
-            <div v-if="activeFaq === i" class="px-6 py-4 text-zinc-400 text-sm border-t border-zinc-800 leading-relaxed">
+            <div v-if="activeFaq === i" class="px-5 md:px-6 pb-5 text-slate-400 text-xs md:text-sm border-t border-white/5 pt-4 leading-relaxed">
               {{ faq.a }}
             </div>
           </div>
@@ -180,20 +394,119 @@
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="bg-gradient-to-br from-violet-700 to-indigo-700 py-20 px-6 text-center relative overflow-hidden">
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-0 left-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+    <!-- ══════════════════════════════════════
+         CONTACT — deep indigo with 2D illustration
+    ══════════════════════════════════════ -->
+    <section class="py-20 md:py-28 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(160deg, #0a0d3d 0%, #0f1147 100%)">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 bg-violet-600/8 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="max-w-5xl mx-auto relative z-10 grid md:grid-cols-2 gap-14 items-center">
+        <!-- left 2D contact illustration -->
+        <div class="hidden md:block">
+          <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-300 bg-indigo-500/15 border border-indigo-500/30 px-3 py-1.5 rounded-full mb-5">Need Any Consultations?</div>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight mb-4">We're Ready to<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">Grow Your IT Business</span></h2>
+          <p class="text-slate-400 text-sm leading-relaxed mb-8">Empower your business with innovative IT solutions. Let's turn your ideas into technology.</p>
+          <!-- illustrated contact card -->
+          <div class="bg-white/5 border border-white/10 rounded-3xl p-6 relative overflow-hidden">
+            <svg viewBox="0 0 280 160" class="w-full" xmlns="http://www.w3.org/2000/svg">
+              <!-- envelope -->
+              <rect x="20" y="30" width="160" height="110" rx="12" fill="#1e1b4b" stroke="#4f46e5" stroke-width="1.5"/>
+              <path d="M20 42 L100 90 L180 42" stroke="#6366f1" stroke-width="2" fill="none"/>
+              <path d="M20 140 L70 95" stroke="#4f46e5" stroke-width="1.5" opacity="0.5"/>
+              <path d="M180 140 L130 95" stroke="#4f46e5" stroke-width="1.5" opacity="0.5"/>
+              <!-- phone -->
+              <rect x="200" y="20" width="60" height="100" rx="10" fill="#1e1b4b" stroke="#7c3aed" stroke-width="1.5"/>
+              <rect x="208" y="32" width="44" height="70" rx="4" fill="#0f0a2e"/>
+              <rect x="216" y="42" width="28" height="4" rx="2" fill="#7c3aed" opacity="0.8"/>
+              <rect x="216" y="52" width="20" height="4" rx="2" fill="#a78bfa" opacity="0.5"/>
+              <circle cx="230" cy="112" r="4" fill="#4f46e5"/>
+              <!-- notification bubble -->
+              <circle cx="255" cy="25" r="12" fill="#ef4444"/>
+              <text x="250" y="30" font-size="11" fill="white" font-weight="bold">1</text>
+              <!-- chat bubble -->
+              <rect x="30" y="155" width="80" height="30" rx="10" fill="#4f46e5" opacity="0.9"/>
+              <text x="43" y="174" font-size="11" fill="white" font-weight="bold">Hi there! 👋</text>
+              <!-- connection dots -->
+              <circle cx="100" cy="148" r="3" fill="#6366f1" opacity="0.6"/>
+              <circle cx="112" cy="148" r="3" fill="#6366f1" opacity="0.4"/>
+              <circle cx="124" cy="148" r="3" fill="#6366f1" opacity="0.2"/>
+            </svg>
+          </div>
+          <div class="flex flex-col gap-2 mt-5">
+            <a href="mailto:info@kodakode.com" class="flex items-center gap-2 text-slate-400 hover:text-indigo-300 transition-colors text-sm">📧 info@kodakode.com</a>
+            <a href="tel:087784794214" class="flex items-center gap-2 text-slate-400 hover:text-indigo-300 transition-colors text-sm">📞 087784794214</a>
+            <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank" class="flex items-center gap-2 text-slate-400 hover:text-indigo-300 transition-colors text-sm">💬 WhatsApp us</a>
+          </div>
+        </div>
+
+        <!-- right form -->
+        <div class="bg-white/5 border border-white/10 rounded-3xl p-6 md:p-8">
+          <h3 class="text-xl font-black mb-6">Send us a message</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+            <input v-model="form.name" type="text" placeholder="Your name"
+              class="bg-white/5 border border-white/10 focus:border-indigo-500 text-white rounded-xl px-4 py-3 outline-none transition-colors text-sm w-full placeholder-slate-600" />
+            <input v-model="form.email" type="email" placeholder="Email address"
+              class="bg-white/5 border border-white/10 focus:border-indigo-500 text-white rounded-xl px-4 py-3 outline-none transition-colors text-sm w-full placeholder-slate-600" />
+          </div>
+          <textarea v-model="form.message" rows="4" placeholder="Tell us about your project..." maxlength="300"
+            class="w-full bg-white/5 border border-white/10 focus:border-indigo-500 text-white rounded-xl px-4 py-3 outline-none transition-colors resize-none mb-1 font-sans text-sm placeholder-slate-600"></textarea>
+          <div class="text-right text-xs text-slate-600 mb-4">{{ form.message.length }}/300</div>
+          <div class="mb-5">
+            <p class="text-slate-500 text-xs mb-2.5">Budget range</p>
+            <div class="flex flex-wrap gap-2">
+              <button v-for="b in budgets" :key="b"
+                :class="['px-3 py-1.5 rounded-lg text-xs font-medium border transition-all duration-200',
+                  form.budget === b ? 'bg-indigo-600 border-indigo-500 text-white' : 'border-white/10 bg-white/5 text-slate-400 hover:border-indigo-500/40']"
+                @click="form.budget = b">{{ b }}</button>
+            </div>
+          </div>
+          <button
+            :class="['w-full py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2',
+              formSent
+                ? 'bg-green-600/20 border border-green-500/40 text-green-400'
+                : 'bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white hover:shadow-xl hover:shadow-indigo-500/30']"
+            @click="submitForm">
+            <span v-if="!formSent && !formSending">Get Free Quote →</span>
+            <span v-if="formSending" class="flex items-center gap-2">
+              <span class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span> Sending...
+            </span>
+            <span v-if="formSent">✓ Message sent! We'll reply within 24h.</span>
+          </button>
+          <div class="text-center mt-4 text-slate-500 text-xs">
+            Or reach us on <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank" class="text-indigo-400 font-medium hover:text-indigo-300 transition-colors">WhatsApp →</a>
+          </div>
+        </div>
       </div>
-      <div class="relative z-10">
-        <h2 class="text-4xl font-black text-white mb-4">Ready to grow your business?</h2>
-        <p class="text-violet-200 mb-8 max-w-md mx-auto">We're ready to turn your ideas into powerful digital solutions.</p>
-        <NuxtLink to="/contact"
-          class="group bg-white text-violet-600 hover:bg-violet-50 px-10 py-3 rounded-lg font-bold transition-all duration-300 hover:shadow-xl inline-flex items-center gap-2">
-          Get a free quote
-          <span class="transition-transform group-hover:translate-x-1">→</span>
-        </NuxtLink>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         CTA — vibrant gradient, most alive section
+    ══════════════════════════════════════ -->
+    <section class="py-20 md:py-24 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #2d1b69 0%, #1a1060 50%, #0f1147 100%)">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-indigo-600/20 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-64 h-64 bg-violet-500/15 rounded-full blur-2xl"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-2xl"></div>
+      </div>
+      <!-- decorative stars -->
+      <svg class="absolute top-8 left-16 opacity-50 animate-spin" style="animation-duration:20s" width="30" height="30" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#818cf8"/></svg>
+      <svg class="absolute bottom-8 right-16 opacity-40 animate-spin" style="animation-duration:28s;animation-direction:reverse" width="22" height="22" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#c4b5fd"/></svg>
+      <div class="relative z-10 max-w-2xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 text-xs font-medium text-violet-300 bg-violet-500/15 border border-violet-500/30 px-3 py-1.5 rounded-full mb-6">Let's Work Together</div>
+        <h2 class="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight leading-tight">We're Ready to Growth<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-400">Your IT Business</span></h2>
+        <p class="text-slate-400 mb-10 max-w-md mx-auto text-sm md:text-base leading-relaxed">
+          Empower your business with innovative IT solutions. Let's turn your ideas into technology.
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
+            class="group bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-8 md:px-10 py-4 rounded-xl font-bold transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/40 inline-flex items-center gap-2 text-sm md:text-base hover:-translate-y-1">
+            Get Free Quote <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </a>
+          <a href="tel:087784794214"
+            class="border border-white/20 bg-white/5 hover:border-violet-500/50 hover:bg-violet-600/10 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base hover:-translate-y-1">
+            📞 087784794214
+          </a>
+        </div>
       </div>
     </section>
 
@@ -201,70 +514,133 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
-const activeStep = ref(0)
-const activeFaq = ref(null)
+const typedText = ref('')
+const phrases = [
+  'Bring innovation<br>to every solution',
+  'Custom website<br>development',
+  'Mobile app<br>solutions',
+  'Your idea.<br>Our technology.',
+]
+let pIdx = 0, cIdx = 0, deleting = false, typingTimer = null
 
-const techs = ['Nuxt.js', 'Vue 3', 'Tailwind CSS', 'TypeScript', 'Pinia', 'Supabase', 'Vercel', 'Git']
+function typeLoop() {
+  const phrase = phrases[pIdx].replace('<br>', '\n')
+  const raw = phrase.slice(0, cIdx)
+  typedText.value = raw.replace('\n', '<br>')
+  if (!deleting) {
+    cIdx++
+    if (cIdx > phrase.length) { deleting = true; typingTimer = setTimeout(typeLoop, 1800); return }
+  } else {
+    cIdx--
+    if (cIdx < 0) { deleting = false; cIdx = 0; pIdx = (pIdx + 1) % phrases.length; typingTimer = setTimeout(typeLoop, 400); return }
+  }
+  typingTimer = setTimeout(typeLoop, deleting ? 28 : 55)
+}
+
+const stats = ref([
+  { label: 'Projects', target: 50, display: 0, suffix: '+' },
+  { label: 'Clients', target: 40, display: 0, suffix: '+' },
+  { label: 'Retention', target: 98, display: 0, suffix: '%' },
+])
+
+const techs = ['Nuxt.js', 'Vue 3', 'React', 'Laravel', 'Flutter', 'MySQL', 'AWS', 'Vercel']
+
+const partners = ['Go-Nanny', '2M Design Lab', 'Bali Culinary Professionals', 'Amaze Vacations', 'Apex Bali', 'Skal Bali', 'Mahasridana', 'YPI Asia']
 
 const aboutCards = [
-  { icon: '💡', title: 'IT Consulting', desc: 'Smart strategies to boost your performance.' },
-  { icon: '📈', title: 'Business Growth', desc: 'Tailored solutions that drive growth.' },
-  { icon: '🔒', title: 'Security First', desc: 'Built with best practices in mind.' },
-  { icon: '⚡', title: 'Fast Delivery', desc: 'Shipped on time, every time.' },
+  { icon: '💡', title: 'IT Consulting', desc: 'Effective technology strategies to boost performance and security.' },
+  { icon: '📈', title: 'Business Growth', desc: 'Tailored strategies that drive sustainable growth and success.' },
+  { icon: '🔒', title: 'Security First', desc: 'Built with best practices and cloud security in mind.' },
+  { icon: '⚡', title: 'Fast Delivery', desc: 'On-time delivery with agile development methods.' },
 ]
 
-const services = [
-  { icon: '🌐', title: 'Website Development', desc: 'Powerful digital experiences through creative design and robust Nuxt.js development.' },
-  { icon: '📱', title: 'Mobile App Solutions', desc: 'Seamless, user-friendly apps that connect your brand with customers anywhere.' },
-  { icon: '🎨', title: 'UX/UI Design', desc: 'Intuitive, engaging interfaces that turn users into loyal customers.' },
-  { icon: '🔍', title: 'SEO Optimization', desc: 'Data-driven SEO strategies that boost visibility and reach the right audience.' },
-  { icon: '💡', title: 'Digital Consulting', desc: 'Strategies that drive innovation, efficiency, and measurable growth.' },
-  { icon: '⚙️', title: 'API & Backend', desc: 'Secure Nitro server routes and database integrations built to scale.' },
+const categories = ['All', 'Development', 'Design', 'Marketing']
+const activeCategory = ref('All')
+
+const allServices = [
+  { icon: '💡', title: 'Digital Consulting', desc: 'Digital strategies that drive innovation and measurable growth.', cat: 'Marketing', color: '#f59e0b' },
+  { icon: '🌐', title: 'Website Development', desc: 'Powerful digital experiences through creative design and development.', cat: 'Development', color: '#6366f1' },
+  { icon: '📱', title: 'Mobile App Solutions', desc: 'Seamless apps that connect your brand with customers anywhere.', cat: 'Development', color: '#8b5cf6' },
+  { icon: '🎨', title: 'UX/UI Design', desc: 'Intuitive experiences that turn users into loyal customers.', cat: 'Design', color: '#ec4899' },
+  { icon: '🔍', title: 'SEO Optimization', desc: 'Boost your visibility with data-driven SEO strategies.', cat: 'Marketing', color: '#10b981' },
+  { icon: '⚙️', title: 'Custom Software', desc: 'Tailor-made software solutions for unique business needs.', cat: 'Development', color: '#3b82f6' },
+  { icon: '☁️', title: 'Cloud Solutions', desc: 'Scalable cloud infrastructure and web-based systems.', cat: 'Development', color: '#06b6d4' },
+  { icon: '🛠️', title: 'Maintenance', desc: 'Ongoing support to keep your systems running smoothly.', cat: 'Development', color: '#a78bfa' },
 ]
 
+const filteredServices = computed(() =>
+  activeCategory.value === 'All' ? allServices : allServices.filter(s => s.cat === activeCategory.value)
+)
+
+const activeStep = ref(0)
 const steps = [
-  { num: '01', title: 'Discover', desc: 'We understand your goals, challenges, and define exactly what needs to be built.' },
-  { num: '02', title: 'Planning', desc: 'We create a clear strategy, timeline, and technical roadmap for your project.' },
-  { num: '03', title: 'Design & Dev', desc: 'We turn ideas into functional, beautiful digital solutions using modern tech.' },
-  { num: '04', title: 'Testing', desc: 'We ensure quality, performance, and reliability before anything goes live.' },
-  { num: '05', title: 'Deliver', desc: 'We launch, support, and continue driving your success post-delivery.' },
+  { num: '01', title: 'Discover', desc: 'Understand goals and define project needs.' },
+  { num: '02', title: 'Planning', desc: 'Create a clear strategy and roadmap.' },
+  { num: '03', title: 'Design & Dev', desc: 'Turn ideas into digital solutions.' },
+  { num: '04', title: 'Testing', desc: 'Ensure quality and performance.' },
+  { num: '05', title: 'Project Deliver', desc: 'Launch, support, and drive success.' },
 ]
 
 const testimonials = [
-  { name: 'Andrew Bricker', role: 'CEO & Founder', text: 'Their expertise and clear communication made the entire process smooth and efficient. Highly recommended!' },
-  { name: 'Jose McMichael', role: 'Senior Manager', text: 'A reliable partner that truly understands our business goals and turns them into effective digital solutions.' },
-  { name: 'Marcel Shannon', role: 'Senior Manager', text: 'Excellent service from start to finish — innovative, responsive, and results-driven.' },
+  { name: 'Andrew D. Bricker', role: 'CEO & Founder', text: 'Their expertise and clear communication made the entire process smooth and efficient. Highly recommended for website development.' },
+  { name: 'Jose T. McMichael', role: 'Senior Manager', text: 'A reliable partner that truly understands our business goals and turns them into effective digital solutions especially website development.' },
+  { name: 'Marcel A. Shannon', role: 'Senior Manager', text: 'Excellent service from start to finish — innovative, responsive, and results-driven.' },
 ]
 
+const blogPosts = [
+  { title: 'Turn Ideas into Digital Products: The Journey from Concept to Code', category: 'Development', date: 'October 10, 2025', excerpt: 'How we transform your business ideas into powerful digital solutions using modern web technologies.', icon: '💻', bg1: '#1e1b4b', bg2: '#312e81' },
+  { title: 'Why Your Business Needs a Mobile App in 2025', category: 'Mobile', date: 'September 20, 2025', excerpt: 'Mobile apps are no longer a luxury — they are a necessity for businesses looking to stay competitive.', icon: '📱', bg1: '#1a0a3e', bg2: '#2d1b69' },
+  { title: 'The Power of SEO: Getting Your Business Found Online', category: 'Marketing', date: 'August 15, 2025', excerpt: 'Learn how strategic SEO can dramatically increase your online visibility and drive more customers.', icon: '🔍', bg1: '#0c1a4a', bg2: '#1e2d6b' },
+]
+
+const activeFaq = ref(null)
 const faqs = [
-  { q: 'What technologies do you use?', a: 'We specialise in Nuxt.js, Vue 3, Tailwind CSS, TypeScript, and Supabase. We pick the best stack for your project.' },
-  { q: 'How long does a project take?', a: 'A typical landing page takes 1–2 weeks. A full web app takes 4–12 weeks depending on complexity.' },
-  { q: 'Do you offer post-launch support?', a: 'Yes — we offer ongoing maintenance and SLA-backed support packages after every project.' },
-  { q: 'Can you work with an existing codebase?', a: 'Absolutely. We can audit, refactor, or extend your existing Vue or Nuxt.js project.' },
+  { q: 'What services does kodakode offer?', a: 'We offer website development, mobile app development, UI/UX design, digital consulting, SEO optimization, and cloud computing solutions.' },
+  { q: 'How long does a project take?', a: 'A landing page takes 1–2 weeks. A full web app or mobile app takes 4–12 weeks depending on complexity.' },
+  { q: 'Do you work with clients outside Indonesia?', a: 'Yes! We are a global partner and work with clients worldwide. Our team communicates in both English and Indonesian.' },
+  { q: 'How can I get started?', a: 'Click "Get a Quote" or message us on WhatsApp at 087784794214. We will get back to you within 24 hours.' },
+  { q: 'Do you provide post-launch support?', a: 'Yes — we provide ongoing maintenance, updates, and SLA-backed support packages for all our projects.' },
 ]
 
-// Animated counters
-const stats = ref([
-  { label: 'Projects shipped', target: 84, display: 0, suffix: '+' },
-  { label: 'Years in business', target: 6, display: 0, suffix: 'y' },
-  { label: 'Client retention', target: 98, display: 0, suffix: '%' },
-])
+const budgets = ['< $500', '$500–2k', '$2k–5k', '$5k+']
+const form = ref({ name: '', email: '', message: '', budget: '' })
+const formSending = ref(false)
+const formSent = ref(false)
+
+function submitForm() {
+  if (formSent.value || formSending.value) return
+  formSending.value = true
+  setTimeout(() => {
+    formSending.value = false
+    formSent.value = true
+    setTimeout(() => { formSent.value = false }, 4000)
+  }, 1200)
+}
 
 onMounted(() => {
+  typeLoop()
   stats.value.forEach((stat, i) => {
     let start = 0
-    const duration = 1500
-    const step = stat.target / (duration / 16)
+    const step = stat.target / 90
     const timer = setInterval(() => {
       start += step
-      if (start >= stat.target) {
-        start = stat.target
-        clearInterval(timer)
-      }
+      if (start >= stat.target) { start = stat.target; clearInterval(timer) }
       stats.value[i].display = Math.floor(start)
     }, 16)
   })
 })
+
+onUnmounted(() => clearTimeout(typingTimer))
 </script>
+
+<style scoped>
+@keyframes marquee {
+  from { transform: translateX(0) }
+  to { transform: translateX(-50%) }
+}
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+</style>
