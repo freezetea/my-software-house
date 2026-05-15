@@ -185,7 +185,7 @@
               class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-6 py-3 rounded-xl font-semibold transition-all inline-flex items-center gap-2 text-sm hover:shadow-lg hover:shadow-indigo-300">
               Learn more →
             </a>
-            <a href="tel:087784794214" class="text-gray-500 text-sm hover:text-indigo-600 transition-colors">📞 <span class="text-indigo-600 font-semibold">087784794214</span></a>
+            <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"</a>
           </div>
         </div>
       </div>
@@ -418,7 +418,7 @@
           </div>
           <div class="flex flex-col gap-2">
             <a href="mailto:info@kodakode.com" class="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">📧 info@kodakode.com</a>
-            <a href="tel:087784794214" class="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">📞 087784794214</a>
+            <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank" class="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">💬 Chat on WhatsApp</a>
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank" class="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">💬 WhatsApp us</a>
           </div>
         </div>
@@ -475,8 +475,8 @@
             class="group bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white px-8 md:px-10 py-4 rounded-xl font-bold transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/40 inline-flex items-center gap-2 hover:-translate-y-1">
             Get Free Quote <span class="group-hover:translate-x-1 transition-transform">→</span>
           </a>
-          <a href="tel:087784794214" class="border border-white/20 bg-white/5 hover:border-violet-500/50 hover:bg-violet-600/10 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 inline-flex items-center gap-2 hover:-translate-y-1">
-            📞 087784794214
+          <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank" class="border border-white/20 bg-white/5 hover:border-violet-500/50 hover:bg-violet-600/10 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 inline-flex items-center gap-2 hover:-translate-y-1">
+            💬 Chat on WhatsApp
           </a>
         </div>
       </div>
@@ -575,7 +575,7 @@ const faqs = [
   { q: 'What services does kodakode offer?', a: 'We offer website development, mobile app development, UI/UX design, digital consulting, SEO optimization, and cloud computing solutions.' },
   { q: 'How long does a project take?', a: 'A landing page takes 1–2 weeks. A full web app or mobile app takes 4–12 weeks depending on complexity.' },
   { q: 'Do you work with clients outside Indonesia?', a: 'Yes! We are a global partner and work with clients worldwide. Our team communicates in both English and Indonesian.' },
-  { q: 'How can I get started?', a: 'Click "Get a Quote" or message us on WhatsApp at 087784794214. We will get back to you within 24 hours.' },
+  { q: 'How can I get started?', a: 'Click "Get a Quote" or message us on WhatsApp at Chat on WhatsApp. We will get back to you within 24 hours.' },
   { q: 'Do you provide post-launch support?', a: 'Yes — we provide ongoing maintenance, updates, and SLA-backed support packages for all our projects.' },
 ]
 
