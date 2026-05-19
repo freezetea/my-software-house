@@ -39,7 +39,19 @@
             <span v-for="tech in techs" :key="tech" class="text-xs bg-white/5 border border-white/10 text-slate-400 px-3 py-1.5 rounded-lg hover:border-indigo-500/50 hover:text-indigo-300 transition-all cursor-default">{{ tech }}</span>
           </div>
         </div>
-        <div class="hidden md:flex flex-col gap-4">
+        <!-- hero right — Lottie animation + stat cards -->
+<div class="hidden md:flex flex-col gap-4">
+  <div class="relative bg-gradient-to-br from-indigo-600/20 to-violet-600/20 border border-indigo-500/30 rounded-3xl p-6 overflow-hidden flex items-center justify-center" style="min-height:260px">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none"></div>
+    <div id="lottie-hero" style="width:100%;max-width:260px;height:240px"></div>
+  </div>
+  <div class="grid grid-cols-3 gap-3">
+    <div v-for="stat in stats" :key="stat.label" class="bg-white/5 border border-white/10 hover:border-indigo-500/40 rounded-2xl p-4 text-center transition-all hover:-translate-y-0.5">
+      <div class="text-xl font-black text-indigo-300 tabular-nums">{{ stat.display }}<span class="text-indigo-500 text-sm">{{ stat.suffix }}</span></div>
+      <div class="text-slate-500 text-xs mt-0.5">{{ stat.label }}</div>
+    </div>
+  </div>
+</div>
           <div class="relative bg-gradient-to-br from-indigo-600/20 to-violet-600/20 border border-indigo-500/30 rounded-3xl p-8 overflow-hidden">
             <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl"></div>
             <svg viewBox="0 0 300 200" class="w-full" xmlns="http://www.w3.org/2000/svg">
@@ -587,6 +599,19 @@ function submitForm() {
 
 onMounted(() => {
   typeLoop()
+  // load lottie
+const script = document.createElement('script')
+script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js'
+script.onload = () => {
+  window.lottie.loadAnimation({
+    container: document.getElementById('lottie-hero'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: '/Web_Development.json'
+  })
+}
+document.head.appendChild(script)
   stats.value.forEach((stat, i) => {
     let start = 0
     const step = stat.target / 90
