@@ -415,13 +415,7 @@
             class="w-full bg-white/10 border border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3 outline-none transition-colors resize-none mb-1 font-sans text-sm placeholder-white/40 relative z-10"></textarea>
           <div class="text-right text-xs text-white/40 mb-4 relative z-10">{{ form.message.length }}/300</div>
           <div class="mb-5 relative z-10">
-            <p class="text-white/60 text-xs mb-2.5">Budget range</p>
-            <div class="flex flex-wrap gap-2">
-              <button v-for="b in budgets" :key="b"
-                :class="['px-3 py-1.5 rounded-lg text-xs font-medium border transition-all duration-200',
-                  form.budget === b ? 'bg-white text-indigo-700 border-white' : 'border-white/20 bg-white/10 text-white/70 hover:bg-white/20']"
-                @click="form.budget = b">{{ b }}</button>
-            </div>
+            
           </div>
           <button
             :class="['w-full py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 relative z-10',
@@ -567,8 +561,7 @@ const faqs = [
   { q: 'Do you provide post-launch support?', a: 'Yes — we provide ongoing maintenance, updates, and SLA-backed support packages for all our projects.' },
 ]
 
-const budgets = ['< $500', '$500–2k', '$2k–5k', '$5k+']
-const form = ref({ name: '', email: '', message: '', budget: '' })
+const form = ref({ name: '', email: '', message: ''})
 const formSending = ref(false)
 const formSent = ref(false)
 
