@@ -419,7 +419,7 @@
           <div class="flex flex-col gap-2">
             <a href="mailto:info@kodakode.com" class="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">📧 info@kodakode.com</a>
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank" class="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">💬 Chat on WhatsApp</a>
-            <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank" class="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">💬 WhatsApp us</a>
+
           </div>
         </div>
         <div class="bg-gradient-to-br from-indigo-600 to-violet-700 rounded-3xl p-7 md:p-8 shadow-2xl shadow-indigo-200 relative overflow-hidden">
