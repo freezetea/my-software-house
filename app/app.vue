@@ -12,25 +12,26 @@
         <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-violet-600/15 rounded-full blur-3xl pointer-events-none"></div>
 
         <!-- LOGO -->
-        <svg viewBox="0 0 180 48" class="h-14 w-auto mb-8 relative z-10" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="24" fill="#1a1f6e"/>
-          <polygon points="14,12 22,24 14,36 19,36 27,24 19,12" fill="white"/>
-          <polygon points="22,12 30,24 22,36 27,36 35,24 27,12" fill="white" opacity="0.6"/>
-          <text x="54" y="22" font-family="Arial Black, sans-serif" font-weight="900" font-size="16" fill="white" letter-spacing="2">KODA</text>
-          <text x="54" y="38" font-family="Arial Black, sans-serif" font-weight="900" font-size="13" fill="white" letter-spacing="3" opacity="0.85">KODE</text>
-        </svg>
+        <img
+          src="https://kodakode.com/wp-content/uploads/2023/02/kodakode-logo-biru-teks-putih-300x106.png"
+          alt="kodakode logo"
+          class="h-16 w-auto mb-8 relative z-10"
+        />
 
+        <!-- animated loading text -->
         <div class="text-slate-400 text-sm font-medium mb-8 relative z-10 h-5 overflow-hidden">
           <div class="loading-text-wrap" :style="`transform: translateY(-${loadingTextIdx * 20}px); transition: transform 0.4s ease`">
             <div v-for="t in loadingTexts" :key="t" class="h-5 flex items-center justify-center text-indigo-300">{{ t }}</div>
           </div>
         </div>
 
+        <!-- progress bar -->
         <div class="w-48 h-1 bg-white/10 rounded-full overflow-hidden relative z-10">
           <div class="h-full bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-500 rounded-full transition-all duration-300" :style="`width: ${loadingProgress}%`"></div>
         </div>
         <div class="text-slate-600 text-xs mt-3 relative z-10">{{ loadingProgress }}%</div>
 
+        <!-- bouncing dots -->
         <div class="flex gap-2 mt-6 relative z-10">
           <div v-for="i in 3" :key="i" class="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" :style="`animation-delay: ${(i-1) * 0.15}s`"></div>
         </div>
@@ -47,13 +48,11 @@
       <div class="max-w-6xl mx-auto flex items-center justify-between py-3 px-5 md:px-7 rounded-2xl bg-[#0f1147]/85 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/20">
 
         <NuxtLink to="/">
-          <svg viewBox="0 0 180 48" class="h-8 w-auto" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="24" cy="24" r="24" fill="#1a1f6e"/>
-            <polygon points="14,12 22,24 14,36 19,36 27,24 19,12" fill="white"/>
-            <polygon points="22,12 30,24 22,36 27,36 35,24 27,12" fill="white" opacity="0.6"/>
-            <text x="54" y="22" font-family="Arial Black, sans-serif" font-weight="900" font-size="16" fill="white" letter-spacing="2">KODA</text>
-            <text x="54" y="38" font-family="Arial Black, sans-serif" font-weight="900" font-size="13" fill="white" letter-spacing="3" opacity="0.85">KODE</text>
-          </svg>
+          <img
+            src="https://kodakode.com/wp-content/uploads/2023/02/kodakode-logo-biru-teks-putih-300x106.png"
+            alt="kodakode logo"
+            class="h-8 w-auto"
+          />
         </NuxtLink>
 
         <ul class="hidden md:flex gap-1 list-none bg-white/5 rounded-xl px-2 py-1">
@@ -68,6 +67,7 @@
           Get a Quote →
         </a>
 
+        <!-- hamburger -->
         <button class="md:hidden text-white p-2" @click="menuOpen = !menuOpen">
           <span class="block w-5 h-0.5 bg-white mb-1.5 transition-all origin-center" :class="menuOpen ? 'rotate-45 translate-y-2' : ''"></span>
           <span class="block w-5 h-0.5 bg-white mb-1.5 transition-all" :class="menuOpen ? 'opacity-0' : ''"></span>
@@ -99,15 +99,15 @@
 
         <div class="md:col-span-2">
           <!-- Footer logo -->
-          <svg viewBox="0 0 180 48" class="h-10 w-auto mb-5" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="24" cy="24" r="24" fill="#1a1f6e"/>
-            <polygon points="14,12 22,24 14,36 19,36 27,24 19,12" fill="white"/>
-            <polygon points="22,12 30,24 22,36 27,36 35,24 27,12" fill="white" opacity="0.6"/>
-            <text x="54" y="22" font-family="Arial Black, sans-serif" font-weight="900" font-size="16" fill="white" letter-spacing="2">KODA</text>
-            <text x="54" y="38" font-family="Arial Black, sans-serif" font-weight="900" font-size="13" fill="white" letter-spacing="3" opacity="0.85">KODE</text>
-          </svg>
+          <img
+            src="https://kodakode.com/wp-content/uploads/2023/02/kodakode-logo-biru-teks-putih-300x106.png"
+            alt="kodakode logo"
+            class="h-10 w-auto mb-5"
+          />
 
-          <p class="text-slate-400 text-sm leading-relaxed mb-5 max-w-xs">Turning ideas into impact through the power of technology.<br>PT. Tekno Tumbuh Bersama.</p>
+          <p class="text-slate-400 text-sm leading-relaxed mb-5 max-w-xs">
+            Turning ideas into impact through the power of technology.<br>PT. Tekno Tumbuh Bersama.
+          </p>
 
           <div class="flex flex-col gap-2 mb-6">
             <a href="mailto:info@kodakode.com" class="text-slate-400 hover:text-indigo-300 text-sm transition-colors flex items-center gap-2">
