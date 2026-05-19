@@ -56,29 +56,34 @@
     </section>
 
     <!-- PARTNERS — WHITE -->
-    <section class="py-16 px-4 md:px-6 bg-white">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-10">
-          <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-600 bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-full mb-3">Global Partners</div>
+    <section class="py-20 px-4 md:px-6 bg-white relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-0 left-0 w-72 h-72 bg-indigo-50 rounded-full opacity-40 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-50 rounded-full opacity-30 translate-x-1/3 translate-y-1/3"></div>
+      </div>
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-14">
+          <span class="inline-block text-xs font-semibold tracking-widest uppercase text-indigo-500 mb-3">Global Partners</span>
           <h2 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">World Wide Partners</h2>
           <p class="text-gray-500 text-sm mt-2">Trusted by businesses across Indonesia and beyond</p>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <a v-for="partner in partners" :key="partner.name" :href="partner.url" target="_blank"
-            class="group flex flex-col items-center gap-3 bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-300 rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-indigo-100">
-            <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl font-black text-white shadow-md transition-transform group-hover:scale-110 duration-300"
-              :style="`background: linear-gradient(135deg, ${partner.color1}, ${partner.color2})`">
-              {{ partner.logo }}
-            </div>
-            <div class="text-center">
-              <div class="text-gray-800 font-bold text-sm group-hover:text-indigo-700 transition-colors">{{ partner.name }}</div>
-              <div class="text-gray-400 text-xs mt-0.5">{{ partner.type }}</div>
-            </div>
-            <div class="text-indigo-500 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-              Visit site →
-            </div>
-          </a>
-        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+  
+    v-for="partner in partners"
+    :key="partner.name"
+    :href="partner.url"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="group flex items-center justify-center p-6 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 hover:-translate-y-1"
+    :aria-label="partner.name"
+  >
+    <img
+      :src="partner.logo"
+      :alt="partner.name"
+      class="max-h-14 w-auto object-contain grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100 transition-all duration-300"
+      loading="lazy"
+    />
+</div>
       </div>
     </section>
 
@@ -497,14 +502,14 @@ const stats = ref([
 const techs = ['Nuxt.js', 'Vue 3', 'React', 'Laravel', 'Flutter', 'MySQL', 'AWS', 'Vercel']
 
 const partners = [
-  { name: 'Go-Nanny', type: 'Childcare Platform', logo: '👶', url: 'https://go-nanny.id/', color1: '#6366f1', color2: '#8b5cf6' },
-  { name: '2M Design Lab', type: 'Design Agency', logo: '🎨', url: 'https://www.2mdesignlab.com/', color1: '#ec4899', color2: '#a855f7' },
-  { name: 'Bali Culinary', type: 'Food & Tourism', logo: '🍜', url: 'https://baliculinaryprofessionals.com/', color1: '#f59e0b', color2: '#ef4444' },
-  { name: 'Amaze Vacations', type: 'Travel', logo: '✈️', url: 'https://www.amazevacations.com/', color1: '#06b6d4', color2: '#3b82f6' },
-  { name: 'Apex Bali', type: 'Business Services', logo: '🏢', url: 'https://apexbali.com', color1: '#10b981', color2: '#059669' },
-  { name: 'Skal Bali', type: 'Tourism Network', logo: '🌴', url: 'https://www.skalbali.com/', color1: '#f59e0b', color2: '#84cc16' },
-  { name: 'Mahasridana', type: 'Finance', logo: '💰', url: 'https://mahasridana.com/', color1: '#6366f1', color2: '#4f46e5' },
-  { name: 'YPI Asia', type: 'Education', logo: '📚', url: 'https://www.ypi-asia.com/', color1: '#8b5cf6', color2: '#ec4899' },
+  { name: 'Go-Nanny', logo: 'https://kodakode.com/wp-content/uploads/2025/07/6.png', url: 'https://go-nanny.id/' },
+  { name: '2M Design Lab', logo: 'https://kodakode.com/wp-content/uploads/2025/07/8.png', url: 'https://www.2mdesignlab.com/' },
+  { name: 'Bali Culinary Professionals', logo: 'https://kodakode.com/wp-content/uploads/2025/07/9.png', url: 'https://baliculinaryprofessionals.com/' },
+  { name: 'Amaze Vacations', logo: 'https://kodakode.com/wp-content/uploads/2025/07/10.png', url: 'https://www.amazevacations.com/' },
+  { name: 'Apex Bali', logo: 'https://kodakode.com/wp-content/uploads/2025/07/5.png', url: 'https://apexbali.com' },
+  { name: 'Skal Bali', logo: 'https://kodakode.com/wp-content/uploads/2025/07/4.png', url: 'https://www.skalbali.com/' },
+  { name: 'Mahasridana', logo: 'https://kodakode.com/wp-content/uploads/2025/07/2.png', url: 'https://mahasridana.com/' },
+  { name: 'YPI Asia', logo: 'https://kodakode.com/wp-content/uploads/2025/07/1.png', url: 'https://www.ypi-asia.com/' },
 ]
 
 const aboutCards = [
