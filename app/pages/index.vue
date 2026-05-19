@@ -1,9 +1,7 @@
 <template>
   <div class="text-white overflow-x-hidden">
 
-    <!-- ══════════════════════════════════════
-         HERO — dark indigo, stars, shapes
-    ══════════════════════════════════════ -->
+    <!-- HERO -->
     <section class="relative min-h-screen flex items-center px-4 md:px-6 py-28 overflow-hidden" style="background: linear-gradient(135deg, #0a0d3d 0%, #0f1147 50%, #1a1060 100%)">
       <div class="absolute inset-0 pointer-events-none">
         <div class="absolute top-10 right-10 w-72 h-72 bg-indigo-500/20 rounded-full blur-[80px] animate-pulse"></div>
@@ -12,7 +10,6 @@
       <svg class="absolute top-20 left-10 opacity-40 animate-spin" style="animation-duration:20s" width="40" height="40" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#818cf8"/></svg>
       <svg class="absolute bottom-32 right-20 opacity-30 animate-spin" style="animation-duration:30s;animation-direction:reverse" width="28" height="28" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#a78bfa"/></svg>
       <svg class="absolute top-1/2 right-10 opacity-20 animate-spin" style="animation-duration:25s" width="18" height="18" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#c4b5fd"/></svg>
-      <svg class="absolute bottom-20 left-1/4 opacity-25 animate-spin" style="animation-duration:18s;animation-direction:reverse" width="14" height="14" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#818cf8"/></svg>
 
       <div class="max-w-6xl mx-auto w-full relative z-10 grid md:grid-cols-2 gap-14 items-center">
         <div>
@@ -39,49 +36,18 @@
             <span v-for="tech in techs" :key="tech" class="text-xs bg-white/5 border border-white/10 text-slate-400 px-3 py-1.5 rounded-lg hover:border-indigo-500/50 hover:text-indigo-300 transition-all cursor-default">{{ tech }}</span>
           </div>
         </div>
-        <!-- hero right — Lottie animation + stat cards -->
-<div class="hidden md:flex flex-col gap-4">
-  <div class="relative bg-gradient-to-br from-indigo-600/20 to-violet-600/20 border border-indigo-500/30 rounded-3xl p-6 overflow-hidden flex items-center justify-center" style="min-height:260px">
-    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none"></div>
-    <div id="lottie-hero" style="width:100%;max-width:260px;height:240px"></div>
-  </div>
-  <div class="grid grid-cols-3 gap-3">
-    <div v-for="stat in stats" :key="stat.label" class="bg-white/5 border border-white/10 hover:border-indigo-500/40 rounded-2xl p-4 text-center transition-all hover:-translate-y-0.5">
-      <div class="text-xl font-black text-indigo-300 tabular-nums">{{ stat.display }}<span class="text-indigo-500 text-sm">{{ stat.suffix }}</span></div>
-      <div class="text-slate-500 text-xs mt-0.5">{{ stat.label }}</div>
-    </div>
-  </div>
-</div>
-          <div class="relative bg-gradient-to-br from-indigo-600/20 to-violet-600/20 border border-indigo-500/30 rounded-3xl p-8 overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl"></div>
-            <svg viewBox="0 0 300 200" class="w-full" xmlns="http://www.w3.org/2000/svg">
-              <rect x="40" y="20" width="220" height="140" rx="12" fill="#1e1b4b" stroke="#4f46e5" stroke-width="2"/>
-              <rect x="52" y="32" width="196" height="116" rx="6" fill="#0f0a2e"/>
-              <rect x="65" y="50" width="60" height="6" rx="3" fill="#6366f1" opacity="0.8"/>
-              <rect x="65" y="64" width="100" height="6" rx="3" fill="#818cf8" opacity="0.5"/>
-              <rect x="75" y="78" width="80" height="6" rx="3" fill="#a78bfa" opacity="0.6"/>
-              <rect x="75" y="92" width="60" height="6" rx="3" fill="#818cf8" opacity="0.4"/>
-              <rect x="65" y="106" width="90" height="6" rx="3" fill="#6366f1" opacity="0.7"/>
-              <rect x="75" y="120" width="50" height="6" rx="3" fill="#c4b5fd" opacity="0.5"/>
-              <rect x="130" y="120" width="3" height="14" rx="1" fill="#a78bfa" opacity="0.9">
-                <animate attributeName="opacity" values="0.9;0;0.9" dur="1s" repeatCount="indefinite"/>
-              </rect>
-              <circle cx="220" cy="60" r="20" fill="#4f46e5" opacity="0.3"/>
-              <text x="210" y="66" font-size="18" fill="#818cf8">⚡</text>
-              <circle cx="200" cy="110" r="15" fill="#7c3aed" opacity="0.3"/>
-              <text x="192" y="116" font-size="14" fill="#a78bfa">🌐</text>
-              <rect x="60" y="165" width="180" height="20" rx="4" fill="#1e1b4b" stroke="#4f46e5" stroke-width="1.5"/>
-              <rect x="70" y="169" width="18" height="8" rx="2" fill="#312e81" opacity="0.8"/>
-              <rect x="94" y="169" width="18" height="8" rx="2" fill="#312e81" opacity="0.8"/>
-              <rect x="118" y="169" width="18" height="8" rx="2" fill="#312e81" opacity="0.8"/>
-              <rect x="142" y="169" width="18" height="8" rx="2" fill="#312e81" opacity="0.8"/>
-              <rect x="166" y="169" width="18" height="8" rx="2" fill="#312e81" opacity="0.8"/>
-              <rect x="190" y="169" width="18" height="8" rx="2" fill="#312e81" opacity="0.8"/>
-            </svg>
+
+        <!-- hero right — Lottie + stats -->
+        <div class="hidden md:flex flex-col gap-4">
+          <div class="relative bg-gradient-to-br from-indigo-600/20 to-violet-600/20 border border-indigo-500/30 rounded-3xl p-6 overflow-hidden flex items-center justify-center" style="min-height:260px">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none"></div>
+            <div id="lottie-hero" style="width:100%;max-width:260px;height:240px"></div>
           </div>
           <div class="grid grid-cols-3 gap-3">
             <div v-for="stat in stats" :key="stat.label" class="bg-white/5 border border-white/10 hover:border-indigo-500/40 rounded-2xl p-4 text-center transition-all hover:-translate-y-0.5">
-              <div class="text-xl font-black text-indigo-300 tabular-nums">{{ stat.display }}<span class="text-indigo-500 text-sm">{{ stat.suffix }}</span></div>
+              <div class="text-xl font-black text-indigo-300 tabular-nums">
+                {{ stat.display }}<span class="text-indigo-500 text-sm">{{ stat.suffix }}</span>
+              </div>
               <div class="text-slate-500 text-xs mt-0.5">{{ stat.label }}</div>
             </div>
           </div>
@@ -89,9 +55,7 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         PARTNERS — WHITE bg with real logos
-    ══════════════════════════════════════ -->
+    <!-- PARTNERS — WHITE -->
     <section class="py-16 px-4 md:px-6 bg-white">
       <div class="max-w-6xl mx-auto">
         <div class="text-center mb-10">
@@ -102,8 +66,8 @@
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <a v-for="partner in partners" :key="partner.name" :href="partner.url" target="_blank"
             class="group flex flex-col items-center gap-3 bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-300 rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-indigo-100">
-            <!-- partner logo placeholder with initial -->
-            <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl font-black text-white shadow-md transition-transform group-hover:scale-110 duration-300" :style="`background: linear-gradient(135deg, ${partner.color1}, ${partner.color2})`">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl font-black text-white shadow-md transition-transform group-hover:scale-110 duration-300"
+              :style="`background: linear-gradient(135deg, ${partner.color1}, ${partner.color2})`">
               {{ partner.logo }}
             </div>
             <div class="text-center">
@@ -111,33 +75,26 @@
               <div class="text-gray-400 text-xs mt-0.5">{{ partner.type }}</div>
             </div>
             <div class="text-indigo-500 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-              Visit site <span>→</span>
+              Visit site →
             </div>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         ABOUT — WHITE + purple accent, 2D illo
-    ══════════════════════════════════════ -->
+    <!-- ABOUT — WHITE -->
     <section id="about" class="py-20 md:py-28 px-4 md:px-6 bg-white relative overflow-hidden">
-      <!-- purple wave top -->
       <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-500"></div>
-      <!-- decorative circles -->
       <div class="absolute top-10 right-0 w-64 h-64 bg-indigo-50 rounded-full -translate-x-1/2 pointer-events-none"></div>
       <div class="absolute bottom-10 left-0 w-48 h-48 bg-violet-50 rounded-full translate-x-1/4 pointer-events-none"></div>
-      <!-- dots -->
-      <div class="absolute right-8 top-16 opacity-30 pointer-events-none grid grid-cols-6 gap-3">
+      <div class="absolute right-8 top-16 opacity-20 pointer-events-none grid grid-cols-6 gap-3">
         <div v-for="n in 36" :key="n" class="w-1.5 h-1.5 rounded-full bg-indigo-300"></div>
       </div>
 
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center relative z-10">
         <div class="relative">
-          <!-- 2D illustration on white -->
           <div class="relative bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100 rounded-3xl p-8 overflow-hidden">
             <svg viewBox="0 0 320 260" class="w-full" xmlns="http://www.w3.org/2000/svg">
-              <!-- phone -->
               <rect x="20" y="10" width="100" height="180" rx="14" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
               <rect x="30" y="28" width="80" height="140" rx="6" fill="white"/>
               <rect x="38" y="38" width="64" height="8" rx="4" fill="#7c3aed" opacity="0.8"/>
@@ -147,7 +104,6 @@
               <text x="55" y="106" font-size="22" fill="#7c3aed">📱</text>
               <rect x="38" y="128" width="30" height="8" rx="4" fill="#6366f1"/>
               <rect x="74" y="128" width="28" height="8" rx="4" fill="#e0e7ff"/>
-              <!-- desktop -->
               <rect x="140" y="30" width="160" height="110" rx="8" fill="#ede9fe" stroke="#4f46e5" stroke-width="2"/>
               <rect x="150" y="40" width="140" height="88" rx="4" fill="white"/>
               <rect x="158" y="50" width="40" height="5" rx="2.5" fill="#6366f1" opacity="0.8"/>
@@ -158,14 +114,12 @@
               <rect x="158" y="118" width="40" height="6" rx="3" fill="#4f46e5"/>
               <rect x="208" y="142" width="4" height="20" rx="2" fill="#4f46e5"/>
               <rect x="188" y="162" width="44" height="5" rx="2.5" fill="#4f46e5" opacity="0.6"/>
-              <!-- tech badges -->
               <rect x="100" y="80" width="55" height="26" rx="13" fill="#4f46e5"/>
               <text x="113" y="97" font-size="11" fill="white" font-weight="bold">Nuxt.js</text>
               <rect x="240" y="155" width="52" height="26" rx="13" fill="#7c3aed"/>
               <text x="248" y="172" font-size="11" fill="white" font-weight="bold">Vue 3</text>
               <rect x="25" y="205" width="60" height="26" rx="13" fill="#6366f1" opacity="0.15" stroke="#6366f1" stroke-width="1"/>
               <text x="33" y="222" font-size="11" fill="#4f46e5" font-weight="bold">Laravel</text>
-              <!-- animated ping -->
               <circle cx="70" cy="93" r="6" fill="#22c55e" opacity="0.8">
                 <animate attributeName="r" values="4;8;4" dur="2s" repeatCount="indefinite"/>
                 <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite"/>
@@ -180,11 +134,14 @@
 
         <div>
           <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-600 bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-full mb-5">About Company</div>
-          <h2 class="text-3xl md:text-4xl font-black leading-tight mb-5 tracking-tight text-gray-900">Web company &<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">software house</span></h2>
+          <h2 class="text-3xl md:text-4xl font-black leading-tight mb-5 tracking-tight text-gray-900">
+            Web company &<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">software house</span>
+          </h2>
           <p class="text-gray-500 leading-relaxed mb-4 text-sm md:text-base">We are kodakode, a web company and software house specializing in custom software development, website development, and mobile apps tailored to business needs.</p>
           <p class="text-gray-500 leading-relaxed mb-8 text-sm md:text-base">Our technology is web-based and cloud computing system — built to scale.</p>
           <div class="grid grid-cols-2 gap-3 mb-8">
-            <div v-for="card in aboutCards" :key="card.title" class="group flex items-start gap-3 bg-indigo-50 hover:bg-indigo-100 border border-indigo-100 hover:border-indigo-300 rounded-2xl p-4 transition-all duration-300 cursor-default">
+            <div v-for="card in aboutCards" :key="card.title"
+              class="group flex items-start gap-3 bg-indigo-50 hover:bg-indigo-100 border border-indigo-100 hover:border-indigo-300 rounded-2xl p-4 transition-all duration-300 cursor-default">
               <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-base shrink-0 shadow-md">{{ card.icon }}</div>
               <div>
                 <h4 class="text-gray-800 font-bold text-sm mb-0.5">{{ card.title }}</h4>
@@ -197,15 +154,16 @@
               class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-6 py-3 rounded-xl font-semibold transition-all inline-flex items-center gap-2 text-sm hover:shadow-lg hover:shadow-indigo-300">
               Learn more →
             </a>
-            <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"</a>
+            <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
+              class="text-gray-500 text-sm hover:text-indigo-600 transition-colors inline-flex items-center gap-1">
+              💬 <span class="text-indigo-600 font-semibold">Chat on WhatsApp</span>
+            </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         SERVICES — dark indigo bg
-    ══════════════════════════════════════ -->
+    <!-- SERVICES — DARK -->
     <section id="services" class="py-20 md:py-28 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #0d1555 0%, #111747 100%)">
       <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent pointer-events-none"></div>
       <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/30 to-transparent pointer-events-none"></div>
@@ -225,23 +183,24 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           <div v-for="(svc, i) in filteredServices" :key="svc.title"
-            :class="['group relative bg-white/5 border border-white/10 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 overflow-hidden cursor-default', i % 3 === 1 ? 'md:mt-6' : '']">
-            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" :style="`background: linear-gradient(135deg, ${svc.color}12 0%, transparent 100%)`"></div>
-            <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-5 relative z-10 border border-white/10 group-hover:scale-110 transition-transform duration-300" :style="`background: ${svc.color}25`">{{ svc.icon }}</div>
+            :class="['group relative bg-white/5 border border-white/10 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 overflow-hidden cursor-default',
+              i % 3 === 1 ? 'md:mt-6' : '']">
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
+              :style="`background: linear-gradient(135deg, ${svc.color}12 0%, transparent 100%)`"></div>
+            <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-5 relative z-10 border border-white/10 group-hover:scale-110 transition-transform duration-300"
+              :style="`background: ${svc.color}25`">{{ svc.icon }}</div>
             <h3 class="text-white font-bold mb-2 relative z-10">{{ svc.title }}</h3>
             <p class="text-slate-500 text-sm leading-relaxed relative z-10 mb-4">{{ svc.desc }}</p>
-            <div class="text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative z-10 flex items-center gap-1" :style="`color: ${svc.color}`">Learn more →</div>
+            <div class="text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative z-10 flex items-center gap-1"
+              :style="`color: ${svc.color}`">Learn more →</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         PROCESS — WHITE bg with purple accents
-    ══════════════════════════════════════ -->
+    <!-- PROCESS — WHITE -->
     <section class="py-20 md:py-28 px-4 md:px-6 bg-white relative overflow-hidden">
       <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-500 opacity-30"></div>
-      <!-- large bg circle -->
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-50 rounded-full pointer-events-none"></div>
       <div class="absolute top-8 left-8 opacity-20 pointer-events-none grid grid-cols-5 gap-3">
         <div v-for="n in 25" :key="n" class="w-1.5 h-1.5 rounded-full bg-indigo-400"></div>
@@ -251,20 +210,22 @@
           <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-600 bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-full mb-4">Working Process</div>
           <h2 class="text-3xl md:text-4xl font-black tracking-tight text-gray-900">Industry Best Practices<br>to the Core</h2>
         </div>
-        <!-- animated 2D process illustration -->
         <div class="mb-12 bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100 rounded-3xl p-6 md:p-10 overflow-hidden relative">
-          <svg viewBox="0 0 700 120" class="w-full" xmlns="http://www.w3.org/2000/svg">
-            <!-- connecting line -->
+          <svg viewBox="0 0 700 120" class="w-full hidden md:block" xmlns="http://www.w3.org/2000/svg">
             <line x1="70" y1="40" x2="630" y2="40" stroke="#e0e7ff" stroke-width="2" stroke-dasharray="6 4"/>
-            <!-- animated pulse along line -->
             <circle r="5" fill="#6366f1" opacity="0.7">
               <animateMotion dur="3s" repeatCount="indefinite" path="M70,40 L630,40"/>
             </circle>
-            <!-- step circles -->
             <g v-for="(step, i) in steps" :key="step.num">
-              <circle :cx="70 + i*140" cy="40" r="28" :fill="activeStep === i ? '#4f46e5' : '#ede9fe'" :stroke="activeStep === i ? '#4f46e5' : '#c4b5fd'" stroke-width="2" style="cursor:pointer" @click="activeStep = i"/>
-              <text :x="70 + i*140" y="45" text-anchor="middle" font-size="12" font-weight="bold" :fill="activeStep === i ? 'white' : '#6366f1'">{{ step.num }}</text>
-              <text :x="70 + i*140" y="82" text-anchor="middle" font-size="10" :fill="activeStep === i ? '#4f46e5' : '#9ca3af'" font-weight="600">{{ step.title }}</text>
+              <circle :cx="70 + i*140" cy="40" r="28"
+                :fill="activeStep === i ? '#4f46e5' : '#ede9fe'"
+                :stroke="activeStep === i ? '#4f46e5' : '#c4b5fd'"
+                stroke-width="2" style="cursor:pointer"
+                @click="activeStep = i"/>
+              <text :x="70 + i*140" y="45" text-anchor="middle" font-size="12" font-weight="bold"
+                :fill="activeStep === i ? 'white' : '#6366f1'">{{ step.num }}</text>
+              <text :x="70 + i*140" y="82" text-anchor="middle" font-size="10"
+                :fill="activeStep === i ? '#4f46e5' : '#9ca3af'" font-weight="600">{{ step.title }}</text>
             </g>
           </svg>
           <div class="mt-4 text-center">
@@ -272,14 +233,15 @@
             <div class="text-gray-500 text-sm">{{ steps[activeStep].desc }}</div>
           </div>
         </div>
-        <!-- mobile step list -->
         <div class="flex flex-col gap-3 md:hidden">
           <div v-for="(step, i) in steps" :key="step.num"
             :class="['flex items-start gap-4 p-4 rounded-2xl border transition-all cursor-pointer',
               activeStep === i ? 'border-indigo-300 bg-indigo-50' : 'border-gray-200 bg-gray-50']"
             @click="activeStep = i">
             <div :class="['w-10 h-10 shrink-0 rounded-xl font-black text-sm flex items-center justify-center border',
-              activeStep === i ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-white border-gray-200 text-indigo-600']">{{ step.num }}</div>
+              activeStep === i ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-white border-gray-200 text-indigo-600']">
+              {{ step.num }}
+            </div>
             <div>
               <h4 class="text-gray-800 font-bold text-sm mb-1">{{ step.title }}</h4>
               <p class="text-gray-500 text-xs">{{ step.desc }}</p>
@@ -289,9 +251,7 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         TESTIMONIALS — deep violet/purple
-    ══════════════════════════════════════ -->
+    <!-- TESTIMONIALS — DEEP VIOLET -->
     <section class="py-20 md:py-28 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #1a0d5e 0%, #0f1147 60%, #0a0d3d 100%)">
       <div class="absolute top-0 right-0 w-96 h-96 bg-violet-600/15 rounded-full blur-3xl pointer-events-none"></div>
       <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -299,15 +259,18 @@
         <div v-for="n in 25" :key="n" class="w-1.5 h-1.5 rounded-full bg-violet-400"></div>
       </div>
       <svg class="absolute top-12 left-12 opacity-30 animate-spin" style="animation-duration:22s" width="24" height="24" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#a78bfa"/></svg>
-      <svg class="absolute bottom-12 right-12 opacity-20 animate-spin" style="animation-duration:18s;animation-direction:reverse" width="18" height="18" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#c4b5fd"/></svg>
       <div class="max-w-6xl mx-auto relative z-10">
         <div class="text-center mb-12">
           <div class="inline-flex items-center gap-2 text-xs font-medium text-violet-300 bg-violet-500/15 border border-violet-500/30 px-3 py-1.5 rounded-full mb-4">Our Testimonials</div>
-          <h2 class="text-3xl md:text-4xl font-black tracking-tight">What Our Clients Say<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">About Solutions</span></h2>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight">
+            What Our Clients Say<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">About Solutions</span>
+          </h2>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div v-for="(t, i) in testimonials" :key="t.name"
-            :class="['group relative bg-white/5 border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all duration-300 hover:-translate-y-2 overflow-hidden', i === 1 ? 'md:mt-8' : '']">
+            :class="['group relative bg-white/5 border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all duration-300 hover:-translate-y-2 overflow-hidden',
+              i === 1 ? 'md:mt-8' : '']">
             <div class="absolute inset-0 bg-gradient-to-br from-violet-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"></div>
             <div class="absolute top-4 right-6 text-6xl text-violet-500/15 font-serif leading-none">"</div>
             <div class="flex items-center gap-1 mb-1 relative z-10">
@@ -316,7 +279,9 @@
             <div class="text-white font-bold text-sm mb-3 relative z-10">Excellent Works</div>
             <p class="text-slate-400 text-sm leading-relaxed mb-6 relative z-10">"{{ t.text }}"</p>
             <div class="flex items-center gap-3 pt-4 border-t border-white/5 relative z-10">
-              <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-violet-600/40 to-indigo-600/40 border border-violet-500/30 flex items-center justify-center text-violet-300 font-black text-base shrink-0">{{ t.name.charAt(0) }}</div>
+              <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-violet-600/40 to-indigo-600/40 border border-violet-500/30 flex items-center justify-center text-violet-300 font-black text-base shrink-0">
+                {{ t.name.charAt(0) }}
+              </div>
               <div>
                 <div class="text-white font-bold text-sm">{{ t.name }}</div>
                 <div class="text-slate-500 text-xs">{{ t.role }}</div>
@@ -327,9 +292,7 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         BLOG — WHITE bg, colorful cards
-    ══════════════════════════════════════ -->
+    <!-- BLOG — WHITE -->
     <section class="py-20 md:py-28 px-4 md:px-6 bg-white relative overflow-hidden">
       <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-500"></div>
       <div class="absolute bottom-0 right-0 w-64 h-64 bg-indigo-50 rounded-full translate-x-1/4 pointer-events-none"></div>
@@ -341,14 +304,15 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <a v-for="post in blogPosts" :key="post.title" :href="post.url" target="_blank"
             class="group bg-white border border-gray-200 hover:border-indigo-300 rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-100 block">
-            <div class="relative h-44 flex items-center justify-center overflow-hidden" :style="`background: linear-gradient(135deg, ${post.bg1}, ${post.bg2})`">
+            <div class="relative h-44 flex items-center justify-center overflow-hidden"
+              :style="`background: linear-gradient(135deg, ${post.bg1}, ${post.bg2})`">
               <div class="absolute inset-0 opacity-10">
                 <div class="absolute top-2 right-4 w-20 h-20 rounded-full border-2 border-white"></div>
                 <div class="absolute bottom-2 left-4 w-12 h-12 rounded-full border-2 border-white"></div>
-                <div class="absolute top-1/2 left-1/2 w-32 h-32 rounded-full border border-white -translate-x-1/2 -translate-y-1/2"></div>
               </div>
               <div class="text-5xl relative z-10 group-hover:scale-110 transition-transform duration-300">{{ post.icon }}</div>
-              <div class="absolute top-3 left-3 text-white text-xs px-3 py-1 rounded-full font-medium" :style="`background: ${post.bg2}cc`">{{ post.category }}</div>
+              <div class="absolute top-3 left-3 text-white text-xs px-3 py-1 rounded-full font-medium"
+                :style="`background: ${post.bg2}cc`">{{ post.category }}</div>
             </div>
             <div class="p-5">
               <div class="text-gray-400 text-xs mb-2">{{ post.date }}</div>
@@ -361,9 +325,7 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         FAQ — light gray/indigo tint
-    ══════════════════════════════════════ -->
+    <!-- FAQ — LIGHT LAVENDER -->
     <section class="py-20 md:py-28 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #f5f3ff 0%, #eef2ff 100%)">
       <div class="absolute top-8 right-8 opacity-20 pointer-events-none grid grid-cols-6 gap-3">
         <div v-for="n in 36" :key="n" class="w-1 h-1 rounded-full bg-indigo-400"></div>
@@ -391,17 +353,17 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         CONTACT — WHITE + purple split
-    ══════════════════════════════════════ -->
+    <!-- CONTACT — WHITE + PURPLE FORM -->
     <section class="py-20 md:py-28 px-4 md:px-6 bg-white relative overflow-hidden">
       <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-500"></div>
       <div class="max-w-5xl mx-auto relative z-10 grid md:grid-cols-2 gap-14 items-center">
         <div>
           <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-600 bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-full mb-5">Need Any Consultations?</div>
-          <h2 class="text-3xl md:text-4xl font-black tracking-tight mb-4 text-gray-900">We're Ready to<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Grow Your Business</span></h2>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight mb-4 text-gray-900">
+            We're Ready to<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Grow Your Business</span>
+          </h2>
           <p class="text-gray-500 text-sm leading-relaxed mb-8">Empower your business with innovative IT solutions. Let's turn your ideas into technology.</p>
-          <!-- contact illustration -->
           <div class="bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100 rounded-3xl p-6 relative overflow-hidden mb-6">
             <svg viewBox="0 0 280 160" class="w-full" xmlns="http://www.w3.org/2000/svg">
               <rect x="20" y="30" width="160" height="110" rx="12" fill="#ede9fe" stroke="#6366f1" stroke-width="1.5"/>
@@ -431,24 +393,29 @@
           <div class="flex flex-col gap-2">
             <a href="mailto:info@kodakode.com" class="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">📧 info@kodakode.com</a>
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank" class="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">💬 Chat on WhatsApp</a>
-
           </div>
         </div>
+
         <div class="bg-gradient-to-br from-indigo-600 to-violet-700 rounded-3xl p-7 md:p-8 shadow-2xl shadow-indigo-200 relative overflow-hidden">
           <div class="absolute top-0 right-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
           <div class="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
           <h3 class="text-xl font-black mb-6 text-white relative z-10">Send us a message</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3 relative z-10">
             <input v-model="form.name" type="text" placeholder="Your name"
-              class="bg-white/10 border border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3 outline-none transition-colors text-sm w-full placeholder-white/40" />
+              class="bg-white/10 border border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3 outline-none transition-colors text-sm w-full placeholder-white/40"/>
             <input v-model="form.email" type="email" placeholder="Email address"
-              class="bg-white/10 border border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3 outline-none transition-colors text-sm w-full placeholder-white/40" />
+              class="bg-white/10 border border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3 outline-none transition-colors text-sm w-full placeholder-white/40"/>
           </div>
           <textarea v-model="form.message" rows="4" placeholder="Tell us about your project..." maxlength="300"
             class="w-full bg-white/10 border border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3 outline-none transition-colors resize-none mb-1 font-sans text-sm placeholder-white/40 relative z-10"></textarea>
           <div class="text-right text-xs text-white/40 mb-4 relative z-10">{{ form.message.length }}/300</div>
           <div class="mb-5 relative z-10">
+            <p class="text-white/60 text-xs mb-2.5">Budget range</p>
             <div class="flex flex-wrap gap-2">
+              <button v-for="b in budgets" :key="b"
+                :class="['px-3 py-1.5 rounded-lg text-xs font-medium border transition-all duration-200',
+                  form.budget === b ? 'bg-white text-indigo-700 border-white' : 'border-white/20 bg-white/10 text-white/70 hover:bg-white/20']"
+                @click="form.budget = b">{{ b }}</button>
             </div>
           </div>
           <button
@@ -456,16 +423,16 @@
               formSent ? 'bg-green-400/20 border border-green-400/40 text-green-300' : 'bg-white text-indigo-700 hover:bg-indigo-50 hover:shadow-xl']"
             @click="submitForm">
             <span v-if="!formSent && !formSending">Get Free Quote →</span>
-            <span v-if="formSending" class="flex items-center gap-2"><span class="w-4 h-4 border-2 border-indigo-300/30 border-t-indigo-600 rounded-full animate-spin"></span> Sending...</span>
+            <span v-if="formSending" class="flex items-center gap-2">
+              <span class="w-4 h-4 border-2 border-indigo-300/30 border-t-indigo-600 rounded-full animate-spin"></span> Sending...
+            </span>
             <span v-if="formSent">✓ Message sent! We'll reply within 24h.</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         CTA — vibrant gradient
-    ══════════════════════════════════════ -->
+    <!-- CTA -->
     <section class="py-20 md:py-24 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #2d1b69 0%, #1a1060 50%, #0f1147 100%)">
       <div class="absolute inset-0 pointer-events-none">
         <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-indigo-600/20 rounded-full blur-3xl"></div>
@@ -475,14 +442,18 @@
       <svg class="absolute bottom-8 right-16 opacity-40 animate-spin" style="animation-duration:28s;animation-direction:reverse" width="20" height="20" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#c4b5fd"/></svg>
       <div class="relative z-10 max-w-2xl mx-auto text-center">
         <div class="inline-flex items-center gap-2 text-xs font-medium text-violet-300 bg-violet-500/15 border border-violet-500/30 px-3 py-1.5 rounded-full mb-6">Let's Work Together</div>
-        <h2 class="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight leading-tight">We're Ready to Growth<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-400">Your IT Business</span></h2>
+        <h2 class="text-3xl md:text-5xl font-black text-white mb-4 tracking-tight leading-tight">
+          We're Ready to Growth<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-400">Your IT Business</span>
+        </h2>
         <p class="text-slate-400 mb-10 max-w-md mx-auto text-sm md:text-base leading-relaxed">Empower your business with innovative IT solutions. Let's turn your ideas into technology.</p>
         <div class="flex flex-wrap gap-4 justify-center">
           <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
             class="group bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-400 hover:to-violet-400 text-white px-8 md:px-10 py-4 rounded-xl font-bold transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/40 inline-flex items-center gap-2 hover:-translate-y-1">
             Get Free Quote <span class="group-hover:translate-x-1 transition-transform">→</span>
           </a>
-          <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank" class="border border-white/20 bg-white/5 hover:border-violet-500/50 hover:bg-violet-600/10 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 inline-flex items-center gap-2 hover:-translate-y-1">
+          <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
+            class="border border-white/20 bg-white/5 hover:border-violet-500/50 hover:bg-violet-600/10 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 inline-flex items-center gap-2 hover:-translate-y-1">
             💬 Chat on WhatsApp
           </a>
         </div>
@@ -496,7 +467,12 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const typedText = ref('')
-const phrases = ['Bring innovation<br>to every solution', 'Custom website<br>development', 'Mobile app<br>solutions', 'Your idea.<br>Our technology.']
+const phrases = [
+  'Bring innovation<br>to every solution',
+  'Custom website<br>development',
+  'Mobile app<br>solutions',
+  'Your idea.<br>Our technology.',
+]
 let pIdx = 0, cIdx = 0, deleting = false, typingTimer = null
 
 function typeLoop() {
@@ -582,36 +558,28 @@ const faqs = [
   { q: 'What services does kodakode offer?', a: 'We offer website development, mobile app development, UI/UX design, digital consulting, SEO optimization, and cloud computing solutions.' },
   { q: 'How long does a project take?', a: 'A landing page takes 1–2 weeks. A full web app or mobile app takes 4–12 weeks depending on complexity.' },
   { q: 'Do you work with clients outside Indonesia?', a: 'Yes! We are a global partner and work with clients worldwide. Our team communicates in both English and Indonesian.' },
-  { q: 'How can I get started?', a: 'Click "Get a Quote" or message us on WhatsApp at Chat on WhatsApp. We will get back to you within 24 hours.' },
+  { q: 'How can I get started?', a: 'Click "Get a Quote" or message us on WhatsApp at 087784794214. We will get back to you within 24 hours.' },
   { q: 'Do you provide post-launch support?', a: 'Yes — we provide ongoing maintenance, updates, and SLA-backed support packages for all our projects.' },
 ]
 
-
-const form = ref({ name: '', email: '', message: '' })
+const budgets = ['< $500', '$500–2k', '$2k–5k', '$5k+']
+const form = ref({ name: '', email: '', message: '', budget: '' })
 const formSending = ref(false)
 const formSent = ref(false)
 
 function submitForm() {
   if (formSent.value || formSending.value) return
   formSending.value = true
-  setTimeout(() => { formSending.value = false; formSent.value = true; setTimeout(() => { formSent.value = false }, 4000) }, 1200)
+  setTimeout(() => {
+    formSending.value = false
+    formSent.value = true
+    setTimeout(() => { formSent.value = false }, 4000)
+  }, 1200)
 }
 
 onMounted(() => {
   typeLoop()
-  // load lottie
-const script = document.createElement('script')
-script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js'
-script.onload = () => {
-  window.lottie.loadAnimation({
-    container: document.getElementById('lottie-hero'),
-    renderer: 'svg',
-    loop: true,
-    autoplay: true,
-    path: '/Web_Development.json'
-  })
-}
-document.head.appendChild(script)
+
   stats.value.forEach((stat, i) => {
     let start = 0
     const step = stat.target / 90
@@ -621,6 +589,19 @@ document.head.appendChild(script)
       stats.value[i].display = Math.floor(start)
     }, 16)
   })
+
+  const script = document.createElement('script')
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js'
+  script.onload = () => {
+    window.lottie.loadAnimation({
+      container: document.getElementById('lottie-hero'),
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: '/Web_Development.json'
+    })
+  }
+  document.head.appendChild(script)
 })
 
 onUnmounted(() => clearTimeout(typingTimer))
@@ -631,5 +612,7 @@ onUnmounted(() => clearTimeout(typingTimer))
   from { transform: translateX(0) }
   to { transform: translateX(-50%) }
 }
-.animate-marquee { animation: marquee 30s linear infinite; }
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
 </style>
