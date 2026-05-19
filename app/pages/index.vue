@@ -68,22 +68,22 @@
           <p class="text-gray-500 text-sm mt-2">Trusted by businesses across Indonesia and beyond</p>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-  
-    v-for="partner in partners"
-    :key="partner.name"
-    :href="partner.url"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="group flex items-center justify-center p-6 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 hover:-translate-y-1"
-    :aria-label="partner.name"
-  >
-    <img
-      :src="partner.logo"
-      :alt="partner.name"
-      class="max-h-14 w-auto object-contain grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100 transition-all duration-300"
-      loading="lazy"
-    />
-</div>
+          <a
+            v-for="partner in partners"
+            :key="partner.name"
+            :href="partner.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex items-center justify-center p-6 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 hover:-translate-y-1"
+          >
+            <img
+              :src="partner.logo"
+              :alt="partner.name"
+               class="max-h-14 w-auto object-contain transition-all duration-300"
+              loading="lazy"
+            />
+          </a>
+        </div>
       </div>
     </section>
 
