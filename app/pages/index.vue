@@ -145,15 +145,18 @@
           <p class="text-gray-500 leading-relaxed mb-4 text-sm md:text-base">We are kodakode, a web company and software house specializing in custom software development, website development, and mobile apps tailored to business needs.</p>
           <p class="text-gray-500 leading-relaxed mb-8 text-sm md:text-base">Our technology is web-based and cloud computing system — built to scale.</p>
           <div class="grid grid-cols-2 gap-3 mb-8">
-            <div v-for="card in aboutCards" :key="card.title"
-              class="group flex items-start gap-3 bg-indigo-50 hover:bg-indigo-100 border border-indigo-100 hover:border-indigo-300 rounded-2xl p-4 transition-all duration-300 cursor-default">
-              <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-base shrink-0 shadow-md">{{ card.icon }}</div>
-              <div>
-                <h4 class="text-gray-800 font-bold text-sm mb-0.5">{{ card.title }}</h4>
-                <p class="text-gray-500 text-xs leading-relaxed">{{ card.desc }}</p>
-              </div>
-            </div>
-          </div>
+  <div v-for="(card, i) in aboutCards" :key="card.title"
+    class="group flex items-start gap-3 bg-indigo-50 hover:bg-indigo-100 border border-indigo-100 hover:border-indigo-300 rounded-2xl p-4 transition-all duration-300 cursor-default">
+    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-base shrink-0 shadow-md overflow-hidden">
+      <div v-if="card.lottie" :id="`lottie-card-${i}`" style="width:36px;height:36px"></div>
+      <span v-else>{{ card.icon }}</span>
+    </div>
+    <div>
+      <h4 class="text-gray-800 font-bold text-sm mb-0.5">{{ card.title }}</h4>
+      <p class="text-gray-500 text-xs leading-relaxed">{{ card.desc }}</p>
+    </div>
+  </div>
+</div>
           <div class="flex items-center gap-4 flex-wrap">
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
               class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-6 py-3 rounded-xl font-semibold transition-all inline-flex items-center gap-2 text-sm hover:shadow-lg hover:shadow-indigo-300">
@@ -507,10 +510,10 @@ const partners = [
 ]
 
 const aboutCards = [
-  { icon: '💡', title: 'IT Consulting', desc: 'Smart strategies to boost performance and security.' },
-  { icon: '📈', title: 'Business Growth', desc: 'Tailored strategies that drive sustainable growth.' },
-  { icon: '🔒', title: 'Security First', desc: 'Built with best practices and cloud security.' },
-  { icon: '⚡', title: 'Fast Delivery', desc: 'On-time delivery with agile development.' },
+  { icon: '💡', title: 'IT Consulting', desc: 'Smart strategies to boost performance and security.', lottie: '/Backend_Icon.json' },
+  { icon: '📈', title: 'Business Growth', desc: 'Tailored strategies that drive sustainable growth.', lottie: '/Business_Growth_Icon.json' },
+  { icon: '🔒', title: 'Security First', desc: 'Built with best practices and cloud security.', lottie: '/Security_Icon.json' },
+  { icon: '⚡', title: 'Fast Delivery', desc: 'On-time delivery with agile development.', lottie: '/Delivery_Icon.json' },
 ]
 
 const categories = ['All', 'Development', 'Design', 'Marketing']
@@ -591,14 +594,30 @@ onMounted(() => {
   const script = document.createElement('script')
   script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js'
   script.onload = () => {
-    window.lottie.loadAnimation({
-      container: document.getElementById('lottie-hero'),
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: '/Web_Development.json'
-    })
-  }
+  window.lottie.loadAnimation({
+    container: document.getElementById('lottie-hero'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: '/Web_Development.json'
+  })
+
+  // load about card lotties
+  aboutCards.forEach((card, i) => {
+    if (card.lottie) {
+      const el = document.getElementById(`lottie-card-${i}`)
+      if (el) {
+        window.lottie.loadAnimation({
+          container: el,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: card.lottie
+        })
+      }
+    }
+  })
+}
   document.head.appendChild(script)
 })
 
