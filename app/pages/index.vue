@@ -56,32 +56,27 @@
     </section>
 
     <!-- PARTNERS — WHITE -->
-    <section class="py-20 px-4 md:px-6 bg-white relative overflow-hidden">
-      <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-0 left-0 w-72 h-72 bg-indigo-50 rounded-full opacity-40 -translate-x-1/2 -translate-y-1/2"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-50 rounded-full opacity-30 translate-x-1/3 translate-y-1/3"></div>
-      </div>
-      <div class="max-w-6xl mx-auto relative z-10">
-        <div class="text-center mb-14">
-          <span class="inline-block text-xs font-semibold tracking-widest uppercase text-indigo-500 mb-3">Global Partners</span>
+    <section class="py-16 px-4 md:px-6 bg-white">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-10">
+          <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-600 bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-full mb-3">Global Partners</div>
           <h2 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">World Wide Partners</h2>
           <p class="text-gray-500 text-sm mt-2">Trusted by businesses across Indonesia and beyond</p>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-          <a
-            v-for="partner in partners"
-            :key="partner.name"
-            :href="partner.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group flex items-center justify-center p-6 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 hover:-translate-y-1"
-          >
-            <img
-              :src="partner.logo"
-              :alt="partner.name"
-               class="max-h-14 w-auto object-contain transition-all duration-300"
-              loading="lazy"
-            />
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <a v-for="partner in partners" :key="partner.name" :href="partner.url" target="_blank"
+            class="group flex flex-col items-center gap-3 bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-300 rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-indigo-100">
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl font-black text-white shadow-md transition-transform group-hover:scale-110 duration-300"
+              :style="`background: linear-gradient(135deg, ${partner.color1}, ${partner.color2})`">
+              {{ partner.logo }}
+            </div>
+            <div class="text-center">
+              <div class="text-gray-800 font-bold text-sm group-hover:text-indigo-700 transition-colors">{{ partner.name }}</div>
+              <div class="text-gray-400 text-xs mt-0.5">{{ partner.type }}</div>
+            </div>
+            <div class="text-indigo-500 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+              Visit site →
+            </div>
           </a>
         </div>
       </div>
@@ -144,19 +139,22 @@
           </h2>
           <p class="text-gray-500 leading-relaxed mb-4 text-sm md:text-base">We are kodakode, a web company and software house specializing in custom software development, website development, and mobile apps tailored to business needs.</p>
           <p class="text-gray-500 leading-relaxed mb-8 text-sm md:text-base">Our technology is web-based and cloud computing system — built to scale.</p>
+
+          <!-- about cards with lottie support -->
           <div class="grid grid-cols-2 gap-3 mb-8">
-  <div v-for="(card, i) in aboutCards" :key="card.title"
-    class="group flex items-start gap-3 bg-indigo-50 hover:bg-indigo-100 border border-indigo-100 hover:border-indigo-300 rounded-2xl p-4 transition-all duration-300 cursor-default">
-    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-base shrink-0 shadow-md overflow-hidden">
-      <div v-if="card.lottie" :id="`lottie-card-${i}`" style="width:36px;height:36px"></div>
-      <span v-else>{{ card.icon }}</span>
-    </div>
-    <div>
-      <h4 class="text-gray-800 font-bold text-sm mb-0.5">{{ card.title }}</h4>
-      <p class="text-gray-500 text-xs leading-relaxed">{{ card.desc }}</p>
-    </div>
-  </div>
-</div>
+            <div v-for="(card, i) in aboutCards" :key="card.title"
+              class="group flex items-start gap-3 bg-indigo-50 hover:bg-indigo-100 border border-indigo-100 hover:border-indigo-300 rounded-2xl p-4 transition-all duration-300 cursor-default">
+              <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-base shrink-0 shadow-md overflow-hidden">
+                <div v-if="card.lottie" :id="`lottie-card-${i}`" style="width:36px;height:36px"></div>
+                <span v-else>{{ card.icon }}</span>
+              </div>
+              <div>
+                <h4 class="text-gray-800 font-bold text-sm mb-0.5">{{ card.title }}</h4>
+                <p class="text-gray-500 text-xs leading-relaxed">{{ card.desc }}</p>
+              </div>
+            </div>
+          </div>
+
           <div class="flex items-center gap-4 flex-wrap">
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
               class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-6 py-3 rounded-xl font-semibold transition-all inline-flex items-center gap-2 text-sm hover:shadow-lg hover:shadow-indigo-300">
@@ -418,7 +416,13 @@
             class="w-full bg-white/10 border border-white/20 focus:border-white/50 text-white rounded-xl px-4 py-3 outline-none transition-colors resize-none mb-1 font-sans text-sm placeholder-white/40 relative z-10"></textarea>
           <div class="text-right text-xs text-white/40 mb-4 relative z-10">{{ form.message.length }}/300</div>
           <div class="mb-5 relative z-10">
-            
+            <p class="text-white/60 text-xs mb-2.5">Budget range</p>
+            <div class="flex flex-wrap gap-2">
+              <button v-for="b in budgets" :key="b"
+                :class="['px-3 py-1.5 rounded-lg text-xs font-medium border transition-all duration-200',
+                  form.budget === b ? 'bg-white text-indigo-700 border-white' : 'border-white/20 bg-white/10 text-white/70 hover:bg-white/20']"
+                @click="form.budget = b">{{ b }}</button>
+            </div>
           </div>
           <button
             :class="['w-full py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 relative z-10',
@@ -499,21 +503,21 @@ const stats = ref([
 const techs = ['Nuxt.js', 'Vue 3', 'React', 'Laravel', 'Flutter', 'MySQL', 'AWS', 'Vercel']
 
 const partners = [
-  { name: 'Go-Nanny', logo: 'https://kodakode.com/wp-content/uploads/2025/07/6.png', url: 'https://go-nanny.id/' },
-  { name: '2M Design Lab', logo: 'https://kodakode.com/wp-content/uploads/2025/07/8.png', url: 'https://www.2mdesignlab.com/' },
-  { name: 'Bali Culinary Professionals', logo: 'https://kodakode.com/wp-content/uploads/2025/07/9.png', url: 'https://baliculinaryprofessionals.com/' },
-  { name: 'Amaze Vacations', logo: 'https://kodakode.com/wp-content/uploads/2025/07/10.png', url: 'https://www.amazevacations.com/' },
-  { name: 'Apex Bali', logo: 'https://kodakode.com/wp-content/uploads/2025/07/5.png', url: 'https://apexbali.com' },
-  { name: 'Skal Bali', logo: 'https://kodakode.com/wp-content/uploads/2025/07/4.png', url: 'https://www.skalbali.com/' },
-  { name: 'Mahasridana', logo: 'https://kodakode.com/wp-content/uploads/2025/07/2.png', url: 'https://mahasridana.com/' },
-  { name: 'YPI Asia', logo: 'https://kodakode.com/wp-content/uploads/2025/07/1.png', url: 'https://www.ypi-asia.com/' },
+  { name: 'Go-Nanny', type: 'Childcare Platform', logo: '👶', url: 'https://go-nanny.id/', color1: '#6366f1', color2: '#8b5cf6' },
+  { name: '2M Design Lab', type: 'Design Agency', logo: '🎨', url: 'https://www.2mdesignlab.com/', color1: '#ec4899', color2: '#a855f7' },
+  { name: 'Bali Culinary', type: 'Food & Tourism', logo: '🍜', url: 'https://baliculinaryprofessionals.com/', color1: '#f59e0b', color2: '#ef4444' },
+  { name: 'Amaze Vacations', type: 'Travel', logo: '✈️', url: 'https://www.amazevacations.com/', color1: '#06b6d4', color2: '#3b82f6' },
+  { name: 'Apex Bali', type: 'Business Services', logo: '🏢', url: 'https://apexbali.com', color1: '#10b981', color2: '#059669' },
+  { name: 'Skal Bali', type: 'Tourism Network', logo: '🌴', url: 'https://www.skalbali.com/', color1: '#f59e0b', color2: '#84cc16' },
+  { name: 'Mahasridana', type: 'Finance', logo: '💰', url: 'https://mahasridana.com/', color1: '#6366f1', color2: '#4f46e5' },
+  { name: 'YPI Asia', type: 'Education', logo: '📚', url: 'https://www.ypi-asia.com/', color1: '#8b5cf6', color2: '#ec4899' },
 ]
 
 const aboutCards = [
   { icon: '💡', title: 'IT Consulting', desc: 'Smart strategies to boost performance and security.', lottie: '/Backend_Icon.json' },
-  { icon: '📈', title: 'Business Growth', desc: 'Tailored strategies that drive sustainable growth.', lottie: '/Business_Growth_Icon.json' },
-  { icon: '🔒', title: 'Security First', desc: 'Built with best practices and cloud security.', lottie: '/Security_Icon.json' },
-  { icon: '⚡', title: 'Fast Delivery', desc: 'On-time delivery with agile development.', lottie: '/Delivery_Icon.json' },
+  { icon: '📈', title: 'Business Growth', desc: 'Tailored strategies that drive sustainable growth.' },
+  { icon: '🔒', title: 'Security First', desc: 'Built with best practices and cloud security.' },
+  { icon: '⚡', title: 'Fast Delivery', desc: 'On-time delivery with agile development.' },
 ]
 
 const categories = ['All', 'Development', 'Design', 'Marketing']
@@ -560,11 +564,12 @@ const faqs = [
   { q: 'What services does kodakode offer?', a: 'We offer website development, mobile app development, UI/UX design, digital consulting, SEO optimization, and cloud computing solutions.' },
   { q: 'How long does a project take?', a: 'A landing page takes 1–2 weeks. A full web app or mobile app takes 4–12 weeks depending on complexity.' },
   { q: 'Do you work with clients outside Indonesia?', a: 'Yes! We are a global partner and work with clients worldwide. Our team communicates in both English and Indonesian.' },
-  { q: 'How can I get started?', a: 'Click "Get a Quote" or message us on WhatsApp at 087784794214. We will get back to you within 24 hours.' },
+  { q: 'How can I get started?', a: 'Click "Get a Quote" or message us on WhatsApp. We will get back to you within 24 hours.' },
   { q: 'Do you provide post-launch support?', a: 'Yes — we provide ongoing maintenance, updates, and SLA-backed support packages for all our projects.' },
 ]
 
-const form = ref({ name: '', email: '', message: ''})
+const budgets = ['< $500', '$500–2k', '$2k–5k', '$5k+']
+const form = ref({ name: '', email: '', message: '', budget: '' })
 const formSending = ref(false)
 const formSent = ref(false)
 
@@ -591,34 +596,38 @@ onMounted(() => {
     }, 16)
   })
 
-  const script = document.createElement('script')
-  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js'
-  script.onload = () => {
-  window.lottie.loadAnimation({
-    container: document.getElementById('lottie-hero'),
-    renderer: 'svg',
-    loop: true,
-    autoplay: true,
-    path: '/Web_Development.json'
-  })
-
-  // load about card lotties
-  aboutCards.forEach((card, i) => {
-    if (card.lottie) {
-      const el = document.getElementById(`lottie-card-${i}`)
-      if (el) {
+  setTimeout(() => {
+    const script = document.createElement('script')
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js'
+    script.onload = () => {
+      const heroEl = document.getElementById('lottie-hero')
+      if (heroEl) {
         window.lottie.loadAnimation({
-          container: el,
+          container: heroEl,
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: card.lottie
+          path: '/Web_Development.json'
         })
       }
+
+      aboutCards.forEach((card, i) => {
+        if (card.lottie) {
+          const el = document.getElementById(`lottie-card-${i}`)
+          if (el) {
+            window.lottie.loadAnimation({
+              container: el,
+              renderer: 'svg',
+              loop: true,
+              autoplay: true,
+              path: card.lottie
+            })
+          }
+        }
+      })
     }
-  })
-}
-  document.head.appendChild(script)
+    document.head.appendChild(script)
+  }, 500)
 })
 
 onUnmounted(() => clearTimeout(typingTimer))
