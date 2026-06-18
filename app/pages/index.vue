@@ -200,8 +200,12 @@
               i % 3 === 1 ? 'md:mt-6' : '']">
             <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
               :style="`background: linear-gradient(135deg, ${svc.color}12 0%, transparent 100%)`"></div>
-            <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl mb-5 relative z-10 border border-white/10 group-hover:scale-110 transition-transform duration-300"
-              :style="`background: ${svc.color}25`">{{ svc.icon }}</div>
+            <div
+              class="service-lottie-icon mb-5 relative z-10"
+              :style="{ '--service-color': svc.color }"
+            >
+              <div :id="`lottie-service-${svc.key}`" class="w-full h-full"></div>
+            </div>
             <h3 class="text-white font-bold mb-2 relative z-10">{{ svc.title }}</h3>
             <p class="text-slate-500 text-sm leading-relaxed relative z-10 mb-4">{{ svc.desc }}</p>
             <div class="text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative z-10 flex items-center gap-1"
@@ -519,10 +523,41 @@
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 16px 30px var(--icon-ring);
 }
+
+.service-lottie-icon {
+  display: flex;
+  width: 4.25rem;
+  height: 4.25rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--service-color) 45%, transparent);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.18), transparent 34%),
+    color-mix(in srgb, var(--service-color) 18%, transparent);
+  box-shadow: 0 14px 32px color-mix(in srgb, var(--service-color) 20%, transparent);
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-lottie-icon > div {
+  transform: scale(1.38);
+  transition: transform 0.3s ease;
+}
+
+.group:hover .service-lottie-icon {
+  border-color: color-mix(in srgb, var(--service-color) 75%, white 12%);
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--service-color) 34%, transparent);
+  transform: translateY(-3px) scale(1.04);
+}
+
+.group:hover .service-lottie-icon > div {
+  transform: scale(1.52);
+}
 </style>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, nextTick, onMounted, onUnmounted, watch } from 'vue'
 
 const typedText = ref('')
 const phrases = [
@@ -606,6 +641,17 @@ const categories = ['All', 'Development', 'Design', 'Marketing']
 const activeCategory = ref('All')
 
 const allServices = [
+  { key: 'digital-consulting', title: 'Digital Consulting', desc: 'Digital strategies that drive innovation and measurable growth.', cat: 'Marketing', color: '#f59e0b', lottie: '/Loading 40 _ Paperplane.json' },
+  { key: 'website-development', title: 'Website Development', desc: 'Powerful digital experiences through creative design and development.', cat: 'Development', color: '#6366f1', lottie: '/Web_Development.json' },
+  { key: 'mobile-app-solutions', title: 'Mobile App Solutions', desc: 'Seamless apps that connect your brand with customers anywhere.', cat: 'Development', color: '#8b5cf6', lottie: '/Backend_Icon.json' },
+  { key: 'ux-ui-design', title: 'UX/UI Design', desc: 'Intuitive experiences that turn users into loyal customers.', cat: 'Design', color: '#ec4899', lottie: '/Loading 40 _ Paperplane.json' },
+  { key: 'seo-optimization', title: 'SEO Optimization', desc: 'Boost your visibility with data-driven SEO strategies.', cat: 'Marketing', color: '#10b981', lottie: '/Seo isometric composition with human characters.json' },
+  { key: 'custom-software', title: 'Custom Software', desc: 'Tailor-made software solutions for unique business needs.', cat: 'Development', color: '#3b82f6', lottie: '/Backend_Icon.json' },
+  { key: 'cloud-solutions', title: 'Cloud Solutions', desc: 'Scalable cloud infrastructure and web-based systems.', cat: 'Development', color: '#06b6d4', lottie: '/Web_Development.json' },
+  { key: 'maintenance', title: 'Maintenance', desc: 'Ongoing support to keep your systems running smoothly.', cat: 'Development', color: '#a78bfa', lottie: '/Cyber Security.json' },
+]
+
+const legacyServices = [
   { icon: '💡', title: 'Digital Consulting', desc: 'Digital strategies that drive innovation and measurable growth.', cat: 'Marketing', color: '#f59e0b' },
   { icon: '🌐', title: 'Website Development', desc: 'Powerful digital experiences through creative design and development.', cat: 'Development', color: '#6366f1' },
   { icon: '📱', title: 'Mobile App Solutions', desc: 'Seamless apps that connect your brand with customers anywhere.', cat: 'Development', color: '#8b5cf6' },
@@ -664,6 +710,28 @@ function submitForm() {
   }, 1200)
 }
 
+let serviceAnimations = []
+
+function loadServiceLotties() {
+  if (!window.lottie) return
+
+  serviceAnimations.forEach(animation => animation.destroy())
+  serviceAnimations = []
+
+  filteredServices.value.forEach((svc) => {
+    const el = document.getElementById(`lottie-service-${svc.key}`)
+    if (!el) return
+
+    serviceAnimations.push(window.lottie.loadAnimation({
+      container: el,
+      renderer: 'svg',
+      loop: true,
+      autoplay: true,
+      path: svc.lottie,
+    }))
+  })
+}
+
 onMounted(() => {
   typeLoop()
 
@@ -694,12 +762,21 @@ onMounted(() => {
         })
       }
 
+      loadServiceLotties()
     }
     document.head.appendChild(script)
   }, 500)
 })
 
-onUnmounted(() => clearTimeout(typingTimer))
+watch(activeCategory, async () => {
+  await nextTick()
+  loadServiceLotties()
+})
+
+onUnmounted(() => {
+  clearTimeout(typingTimer)
+  serviceAnimations.forEach(animation => animation.destroy())
+})
 </script>
 
 <style scoped>
