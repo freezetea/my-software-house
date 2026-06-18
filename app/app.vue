@@ -84,25 +84,25 @@
 
     <!-- NAVBAR -->
     <nav class="fixed top-2 left-0 right-0 z-[100] px-4 md:px-6">
-      <div class="max-w-6xl mx-auto flex items-center justify-between py-3 px-5 md:px-7 rounded-2xl bg-[#0f1147]/85 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/20">
+      <div class="max-w-6xl mx-auto flex items-center justify-between py-4 px-5 md:px-8 rounded-2xl bg-[#0f1147]/88 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/20">
 
         <NuxtLink to="/">
           <img
             src="https://kodakode.com/wp-content/uploads/2023/02/kodakode-logo-biru-teks-putih-300x106.png"
             alt="kodakode logo"
-            class="h-8 w-auto"
+            class="h-10 md:h-12 w-auto"
           />
         </NuxtLink>
 
-        <ul class="hidden md:flex gap-1 list-none bg-white/5 rounded-xl px-2 py-1">
-          <li><NuxtLink to="/" class="text-slate-300 hover:text-white hover:bg-white/10 text-sm px-4 py-2 rounded-lg transition-all block">Home</NuxtLink></li>
-          <li><NuxtLink to="/#about" class="text-slate-300 hover:text-white hover:bg-white/10 text-sm px-4 py-2 rounded-lg transition-all block">About</NuxtLink></li>
-          <li><NuxtLink to="/#services" class="text-slate-300 hover:text-white hover:bg-white/10 text-sm px-4 py-2 rounded-lg transition-all block">Services</NuxtLink></li>
-          <li><NuxtLink to="/work" class="text-slate-300 hover:text-white hover:bg-white/10 text-sm px-4 py-2 rounded-lg transition-all block">Work</NuxtLink></li>
+        <ul class="hidden md:flex gap-1 list-none bg-white/5 rounded-xl px-2 py-1.5">
+          <li><NuxtLink to="/" class="text-slate-300 hover:text-white hover:bg-white/10 text-base px-5 py-2.5 rounded-lg transition-all block">Home</NuxtLink></li>
+          <li><NuxtLink to="/#about" class="text-slate-300 hover:text-white hover:bg-white/10 text-base px-5 py-2.5 rounded-lg transition-all block">About</NuxtLink></li>
+          <li><NuxtLink to="/#services" class="text-slate-300 hover:text-white hover:bg-white/10 text-base px-5 py-2.5 rounded-lg transition-all block">Services</NuxtLink></li>
+          <li><NuxtLink to="/work" class="text-slate-300 hover:text-white hover:bg-white/10 text-base px-5 py-2.5 rounded-lg transition-all block">Work</NuxtLink></li>
         </ul>
 
         <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
-          class="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all hover:shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-0.5">
+          class="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-white text-base font-bold px-6 py-3 rounded-xl transition-all hover:shadow-lg hover:shadow-green-500/30 hover:-translate-y-0.5">
           Get a Quote →
         </a>
 
@@ -128,9 +128,19 @@
       </div>
     </nav>
 
-    <div class="pt-16">
+    <div class="pt-20 md:pt-24">
       <NuxtPage />
     </div>
+
+    <button
+      type="button"
+      class="back-to-top"
+      :class="{ 'is-visible': scrollProgress > 8 }"
+      aria-label="Back to top"
+      @click="scrollToTop"
+    >
+      ↑
+    </button>
 
     <!-- FOOTER -->
     <footer style="background:#0a0d3d" class="border-t border-white/10">
@@ -153,7 +163,7 @@
               📧 info@kodakode.com
             </a>
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
-              class="inline-flex items-center gap-2 text-slate-400 hover:text-green-400 transition-colors text-sm group">
+              class="inline-flex items-center gap-2 rounded-xl border border-green-500/25 bg-green-500/10 px-4 py-2.5 text-green-300 hover:bg-green-500/15 hover:text-green-200 transition-colors text-base font-semibold group">
               <svg viewBox="0 0 24 24" class="w-4 h-4 shrink-0 group-hover:scale-110 transition-transform" fill="#25d366" xmlns="http://www.w3.org/2000/svg">
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
               </svg>
@@ -163,7 +173,7 @@
           </div>
 
           <!-- Social icons -->
-          <div class="flex gap-2">
+          <div class="hidden gap-2">
             <a href="https://facebook.com/kodakode" target="_blank" title="Facebook"
               class="w-9 h-9 rounded-xl flex items-center justify-center transition-all hover:-translate-y-0.5 hover:shadow-lg"
               style="background:#1877f220; border:1px solid #1877f240">
@@ -292,6 +302,10 @@ function onScroll() {
   scrollProgress.value = total > 0 ? Math.round((scrolled / total) * 100) : 0
 }
 
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
 onMounted(() => {
   window.addEventListener('scroll', onScroll)
 
@@ -330,14 +344,47 @@ html, body {
   padding: 0;
 }
 
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 140;
+  width: 3.1rem;
+  height: 3.1rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(129, 140, 248, 0.42);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+  font-size: 1.35rem;
+  font-weight: 900;
+  box-shadow: 0 16px 36px rgba(79, 70, 229, 0.34);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.8rem) scale(0.9);
+  transition: opacity 0.24s ease, transform 0.24s ease, box-shadow 0.24s ease;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.back-to-top:hover {
+  transform: translateY(-0.18rem) scale(1.03);
+  box-shadow: 0 20px 44px rgba(79, 70, 229, 0.44);
+}
+
 .preloader {
   background:
     radial-gradient(circle at 50% 45%, rgba(124, 58, 237, 0.28), transparent 32%),
     radial-gradient(circle at 22% 24%, rgba(79, 70, 229, 0.24), transparent 28%),
     linear-gradient(135deg, #080b33 0%, #0f1147 52%, #1b0f58 100%);
   color: white;
-  backdrop-filter: blur(18px) saturate(1.08);
-  transition: background 1s ease, backdrop-filter 1s ease, opacity 0.62s ease;
+  transition: background 0.8s ease, opacity 0.52s ease;
+  contain: layout paint style;
 }
 
 .preloader::before,
@@ -388,16 +435,15 @@ html, body {
     linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
   background-size: 42px 42px;
   mask-image: radial-gradient(circle at center, black 0%, transparent 68%);
-  opacity: 0.55;
-  animation: loader-grid-drift 10s linear infinite;
+  opacity: 0.3;
 }
 
 .preloader-glow {
   position: absolute;
-  width: 20rem;
-  height: 20rem;
+  width: 14rem;
+  height: 14rem;
   border-radius: 999px;
-  filter: blur(60px);
+  filter: blur(36px);
   pointer-events: none;
 }
 
@@ -421,7 +467,7 @@ html, body {
   aspect-ratio: 1;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 999px;
-  animation: loader-orbit 10s linear infinite;
+  opacity: 0.55;
 }
 
 .preloader-orbit::before,
@@ -481,11 +527,12 @@ html, body {
   border-radius: 999px;
   background: var(--hue);
   box-shadow:
-    0 0 14px color-mix(in srgb, var(--hue) 72%, transparent),
-    0 0 32px color-mix(in srgb, var(--hue) 38%, transparent);
-  opacity: 0.86;
-  transform: translate(var(--x), var(--y)) scale(0.72);
-  animation: magnetic-gather 2.2s cubic-bezier(.22, 1, .36, 1) infinite;
+    0 0 10px rgba(129, 140, 248, 0.45),
+    0 0 18px rgba(167, 139, 250, 0.22);
+  opacity: 0.78;
+  transform: translate3d(var(--x), var(--y), 0) scale(0.72);
+  will-change: transform, opacity;
+  animation: magnetic-gather 2.25s cubic-bezier(.22, 1, .36, 1) infinite;
   animation-delay: var(--delay);
 }
 
@@ -645,7 +692,6 @@ html, body {
   background:
     radial-gradient(circle at 50% 45%, rgba(167, 139, 250, 0.14), transparent 46%),
     rgba(8, 11, 51, 0);
-  backdrop-filter: blur(0) saturate(1);
 }
 
 .preloader.is-opening::before,
@@ -658,9 +704,8 @@ html, body {
 .preloader.is-opening .preloader-glow,
 .preloader.is-opening .preloader-orbit {
   opacity: 0;
-  filter: blur(12px);
-  transform: scale(1.08);
-  transition: opacity 0.48s ease, transform 0.78s ease, filter 0.78s ease;
+  transform: scale(1.04);
+  transition: opacity 0.42s ease, transform 0.68s ease;
 }
 
 .preloader.is-opening .brand-loader {
@@ -670,13 +715,12 @@ html, body {
 .preloader.is-opening .loader-reference-text,
 .preloader.is-opening .loader-bar {
   opacity: 0;
-  filter: blur(8px);
   transform: translateY(0.8rem);
-  transition: opacity 0.38s ease, transform 0.55s ease, filter 0.55s ease;
+  transition: opacity 0.34s ease, transform 0.5s ease;
 }
 
 .loader-leave-active {
-  transition: opacity 0.62s ease, background 0.62s ease, backdrop-filter 0.62s ease;
+  transition: opacity 0.52s ease, background 0.52s ease;
 }
 
 .loader-leave-active::before,
@@ -711,7 +755,6 @@ html, body {
 
 .loader-leave-to {
   background: transparent;
-  backdrop-filter: blur(0);
   opacity: 0;
 }
 
@@ -745,34 +788,34 @@ html, body {
 @keyframes magnetic-gather {
   0% {
     opacity: 0;
-    transform: translate(var(--x), var(--y)) scale(0.55);
+    transform: translate3d(var(--x), var(--y), 0) scale(0.55);
   }
   36% {
     opacity: 0.92;
-    transform: translate(var(--near-x), var(--near-y)) scale(1.05);
+    transform: translate3d(var(--near-x), var(--near-y), 0) scale(1.05);
   }
   64% {
     opacity: 1;
-    transform: translate(0, 0) scale(0.78);
+    transform: translate3d(0, 0, 0) scale(0.78);
   }
   100% {
     opacity: 0.78;
-    transform: translate(var(--near-x), var(--near-y)) scale(0.9);
+    transform: translate3d(var(--near-x), var(--near-y), 0) scale(0.9);
   }
 }
 
 @keyframes magnetic-release {
   0% {
     opacity: 0.96;
-    transform: translate(var(--near-x), var(--near-y)) scale(0.9);
+    transform: translate3d(var(--near-x), var(--near-y), 0) scale(0.9);
   }
   62% {
     opacity: 0.78;
-    transform: translate(var(--mid-x), var(--mid-y)) scale(1.16);
+    transform: translate3d(var(--mid-x), var(--mid-y), 0) scale(1.12);
   }
   100% {
     opacity: 0;
-    transform: translate(var(--far-x), var(--far-y)) scale(0.55);
+    transform: translate3d(var(--far-x), var(--far-y), 0) scale(0.55);
   }
 }
 

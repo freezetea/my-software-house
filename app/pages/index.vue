@@ -33,7 +33,7 @@
             </NuxtLink>
           </div>
           <div class="flex flex-wrap gap-2">
-            <span v-for="tech in techs" :key="tech" class="text-xs bg-white/5 border border-white/10 text-slate-400 px-3 py-1.5 rounded-lg hover:border-indigo-500/50 hover:text-indigo-300 transition-all cursor-default">{{ tech }}</span>
+            <span v-for="tech in techs" :key="tech" class="tech-badge text-xs px-3 py-1.5 rounded-lg transition-all cursor-default">{{ tech }}</span>
           </div>
         </div>
 
@@ -192,7 +192,7 @@
             <div
               v-for="card in aboutCards"
               :key="card.title"
-              class="group flex items-start gap-3 bg-white hover:bg-indigo-50 border border-indigo-100 hover:border-indigo-200 rounded-2xl p-4 transition-all duration-300 cursor-default shadow-sm hover:shadow-lg hover:shadow-indigo-100/70"
+              class="group flex h-full min-h-[116px] items-start gap-3 bg-white hover:bg-indigo-50 border border-indigo-100 hover:border-indigo-200 rounded-2xl p-4 transition-all duration-300 cursor-default shadow-sm hover:shadow-lg hover:shadow-indigo-100/70"
             >
               <div
                 class="about-card-icon"
@@ -212,7 +212,7 @@
               Learn more →
             </a>
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
-              class="text-gray-500 text-sm hover:text-indigo-600 transition-colors inline-flex items-center gap-1">
+              class="rounded-xl border border-green-200 bg-green-50 px-4 py-2.5 text-green-700 text-base font-semibold hover:bg-green-100 transition-colors inline-flex items-center gap-2">
               💬 <span class="text-indigo-600 font-semibold">Chat on WhatsApp</span>
             </a>
           </div>
@@ -240,8 +240,7 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           <div v-for="(svc, i) in filteredServices" :key="svc.title"
-            :class="['group relative bg-white/5 border border-white/10 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 overflow-hidden cursor-default',
-              i % 3 === 1 ? 'md:mt-6' : '']">
+            class="group relative flex h-full min-h-[260px] flex-col bg-white/5 border border-white/10 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 overflow-hidden cursor-default">
             <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
               :style="`background: linear-gradient(135deg, ${svc.color}12 0%, transparent 100%)`"></div>
             <div
@@ -286,14 +285,14 @@
           <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-600 bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-full mb-4">Working Process</div>
           <h2 class="text-3xl md:text-4xl font-black tracking-tight text-gray-900">Industry Best Practices<br>to the Core</h2>
         </div>
-        <div class="mb-12 bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100 rounded-3xl p-6 md:p-10 overflow-hidden relative">
+        <div class="working-process-panel mb-12 bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100 rounded-3xl p-6 md:p-10 overflow-hidden relative">
           <svg viewBox="0 0 700 120" class="w-full hidden md:block" xmlns="http://www.w3.org/2000/svg">
             <line x1="70" y1="40" x2="630" y2="40" stroke="#e0e7ff" stroke-width="2" stroke-dasharray="6 4"/>
             <circle r="5" fill="#6366f1" opacity="0.7">
               <animateMotion dur="3s" repeatCount="indefinite" path="M70,40 L630,40"/>
             </circle>
             <g v-for="(step, i) in steps" :key="step.num">
-              <circle :cx="70 + i*140" cy="40" r="28"
+              <circle class="process-step-node" :cx="70 + i*140" cy="40" r="28"
                 :fill="activeStep === i ? '#4f46e5' : '#ede9fe'"
                 :stroke="activeStep === i ? '#4f46e5' : '#c4b5fd'"
                 stroke-width="2" style="cursor:pointer"
@@ -346,8 +345,8 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div v-for="(t, i) in testimonials" :key="t.name"
-            :class="['group relative bg-white/5 border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all duration-300 hover:-translate-y-2 overflow-hidden',
-              i === 1 ? 'md:mt-8' : '']">
+            :class="['testimonial-card group relative bg-white/5 border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all duration-300 hover:-translate-y-2 overflow-hidden',
+              `testimonial-card-${i}`]">
             <div class="absolute inset-0 bg-gradient-to-br from-violet-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"></div>
             <div class="absolute top-4 right-6 text-6xl text-violet-500/15 font-serif leading-none">"</div>
             <div class="hidden items-center gap-1 mb-1 relative z-10">
@@ -480,7 +479,7 @@
           </div>
           <div class="hidden flex-col gap-2">
             <a href="mailto:info@kodakode.com" class="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">📧 info@kodakode.com</a>
-            <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank" class="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">💬 Chat on WhatsApp</a>
+            <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank" class="inline-flex items-center gap-2 rounded-xl border border-green-200 bg-green-50 px-4 py-2.5 text-green-700 hover:bg-green-100 transition-colors text-base font-semibold">💬 Chat on WhatsApp</a>
           </div>
         </div>
 
@@ -1212,6 +1211,8 @@ function submitForm() {
 }
 
 let serviceAnimations = []
+let processTimer = null
+let revealObserver = null
 
 function loadServiceLotties() {
   if (!window.lottie) return
@@ -1235,6 +1236,25 @@ function loadServiceLotties() {
 
 onMounted(() => {
   typeLoop()
+
+  revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('section-in')
+        revealObserver.unobserve(entry.target)
+      }
+    })
+  }, { threshold: 0.16 })
+
+  document.querySelectorAll('section').forEach((section, index) => {
+    section.classList.add('section-reveal')
+    section.style.setProperty('--section-delay', `${Math.min(index * 0.04, 0.22)}s`)
+    revealObserver.observe(section)
+  })
+
+  processTimer = setInterval(() => {
+    activeStep.value = (activeStep.value + 1) % steps.length
+  }, 1800)
 
   stats.value.forEach((stat, i) => {
     let start = 0
@@ -1287,16 +1307,135 @@ watch(activeCategory, async () => {
 
 onUnmounted(() => {
   clearTimeout(typingTimer)
+  clearInterval(processTimer)
+  revealObserver?.disconnect()
   serviceAnimations.forEach(animation => animation.destroy())
 })
 </script>
 
 <style scoped>
+.section-reveal {
+  opacity: 0;
+  transform: translateY(32px) scale(0.985);
+  transition: opacity 0.72s ease, transform 0.72s cubic-bezier(.22, 1, .36, 1);
+  transition-delay: var(--section-delay, 0s);
+}
+
+.section-reveal.section-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.tech-badge {
+  color: #dbeafe;
+  border: 1px solid rgba(129, 140, 248, 0.28);
+  background:
+    linear-gradient(135deg, rgba(79, 70, 229, 0.24), rgba(124, 58, 237, 0.16)),
+    rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.tech-badge:hover {
+  color: white;
+  border-color: rgba(167, 139, 250, 0.58);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(79, 70, 229, 0.18);
+}
+
+.working-process-panel::before {
+  content: "";
+  position: absolute;
+  inset: -30% auto auto -10%;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent 62%);
+  animation: process-glow-drift 4.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.working-process-panel svg {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 14px 24px rgba(79, 70, 229, 0.12));
+  animation: process-panel-float 4.2s ease-in-out infinite;
+}
+
+.process-step-node {
+  transition: fill 0.34s ease, stroke 0.34s ease, transform 0.34s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.process-step-node:hover {
+  transform: scale(1.08);
+}
+
+.testimonial-card {
+  min-height: 100%;
+}
+
+.section-in .testimonial-card-0 {
+  animation: testimonial-from-top 0.72s cubic-bezier(.22, 1, .36, 1) 0.06s both;
+}
+
+.section-in .testimonial-card-1 {
+  animation: testimonial-from-bottom 0.72s cubic-bezier(.22, 1, .36, 1) 0.22s both;
+}
+
+.section-in .testimonial-card-2 {
+  animation: testimonial-from-top 0.72s cubic-bezier(.22, 1, .36, 1) 0.38s both;
+}
+
 @keyframes marquee {
   from { transform: translateX(0) }
   to { transform: translateX(-50%) }
 }
 .animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+@keyframes process-glow-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.72; }
+  50% { transform: translate3d(24rem, 4rem, 0) scale(1.18); opacity: 0.35; }
+}
+
+@keyframes process-panel-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.28rem); }
+}
+
+@keyframes testimonial-from-top {
+  from {
+    opacity: 0;
+    transform: translateY(-36px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes testimonial-from-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(36px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-reveal,
+  .testimonial-card,
+  .working-process-panel svg,
+  .working-process-panel::before {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1;
+    transform: none;
+  }
 }
 </style>
