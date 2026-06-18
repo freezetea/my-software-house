@@ -408,7 +408,7 @@ html, body {
   color: transparent;
   text-shadow: 0 18px 40px rgba(129, 140, 248, 0.28);
   transform: translate(-50%, -50%);
-  animation: loader-letter 2.2s cubic-bezier(.34, 1.56, .64, 1) infinite;
+  animation: loader-letter 1.85s cubic-bezier(.34, 1.56, .64, 1) both;
 }
 
 .loader-status {
@@ -524,29 +524,28 @@ html, body {
 }
 
 @keyframes loader-letter {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.76);
+  0%, 16% {
+    opacity: 0.2;
+    filter: blur(3px);
+    transform: translate(-50%, -50%) scale(0.78);
   }
-  12% {
+  38% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(0.9);
-  }
-  48% {
-    opacity: 1;
+    filter: blur(0);
     transform: translate(
-      calc(-50% + (var(--spread) * clamp(1.52rem, 6.2vw, 2.95rem))),
+      calc(-50% + (var(--spread) * clamp(2.75rem, 11vw, 5.35rem))),
       -50%
-    ) scale(1.08);
+    ) scale(1.06);
   }
-  64% {
+  62% {
     transform: translate(
-      calc(-50% + (var(--spread) * clamp(1.32rem, 5.5vw, 2.55rem))),
+      calc(-50% + (var(--spread) * clamp(1.12rem, 4.7vw, 2.15rem))),
       -50%
-    ) scale(0.98);
+    ) scale(0.96);
   }
-  78%, 100% {
+  100% {
     opacity: 1;
+    filter: blur(0);
     transform: translate(
       calc(-50% + (var(--spread) * clamp(1.42rem, 5.8vw, 2.72rem))),
       -50%

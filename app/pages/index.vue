@@ -99,7 +99,10 @@
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center relative z-10">
         <div class="relative">
           <div class="relative bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100 rounded-3xl p-8 overflow-hidden">
-            <svg viewBox="0 0 320 260" class="w-full" xmlns="http://www.w3.org/2000/svg">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-200/40 rounded-full blur-2xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-28 h-28 bg-violet-200/50 rounded-full blur-2xl -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
+            <div id="lottie-about-company" class="relative z-10 w-full h-72 md:h-80"></div>
+            <svg viewBox="0 0 320 260" class="hidden w-full" xmlns="http://www.w3.org/2000/svg">
               <rect x="20" y="10" width="100" height="180" rx="14" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
               <rect x="30" y="28" width="80" height="140" rx="6" fill="white"/>
               <rect x="38" y="38" width="64" height="8" rx="4" fill="#7c3aed" opacity="0.8"/>
@@ -789,6 +792,17 @@ onMounted(() => {
       if (heroEl) {
         window.lottie.loadAnimation({
           container: heroEl,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: '/Web_Development.json'
+        })
+      }
+
+      const aboutCompanyEl = document.getElementById('lottie-about-company')
+      if (aboutCompanyEl) {
+        window.lottie.loadAnimation({
+          container: aboutCompanyEl,
           renderer: 'svg',
           loop: true,
           autoplay: true,
