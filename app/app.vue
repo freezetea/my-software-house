@@ -3,7 +3,11 @@
 
     <!-- LOADING SCREEN -->
     <Transition name="loader">
-      <div v-if="loading" class="preloader fixed inset-0 z-[999] flex items-center justify-center overflow-hidden">
+      <div
+        v-if="loading"
+        class="preloader fixed inset-0 z-[999] flex items-center justify-center overflow-hidden"
+        :class="{ 'is-opening': curtainOpening }"
+      >
         <div class="preloader-grid"></div>
         <div class="preloader-glow preloader-glow-one"></div>
         <div class="preloader-glow preloader-glow-two"></div>
@@ -14,27 +18,42 @@
           <span></span>
         </div>
 
+        <div class="magnetic-field" aria-hidden="true">
+          <span
+            v-for="(dot, i) in magneticDots"
+            :key="`magnetic-dot-${i}`"
+            :style="{
+              '--x': dot.x,
+              '--y': dot.y,
+              '--near-x': dot.nearX,
+              '--near-y': dot.nearY,
+              '--mid-x': dot.midX,
+              '--mid-y': dot.midY,
+              '--far-x': dot.farX,
+              '--far-y': dot.farY,
+              '--delay': `${dot.delay}s`,
+              '--size': `${dot.size}px`,
+              '--hue': dot.hue,
+            }"
+          ></span>
+        </div>
+
         <div class="relative z-10 flex flex-col items-center px-6 text-center">
-          <div class="brand-loader mb-5" aria-label="KODAKODE">
+          <div class="brand-loader mb-4" aria-label="KODAKODE">
             <span
               v-for="(letter, i) in brandLetters"
               :key="`${letter}-${i}`"
-              :style="{ animationDelay: `${i * 0.08}s`, '--spread': i - (brandLetters.length - 1) / 2 }"
+              :style="{ animationDelay: `${i * 0.08}s` }"
             >
               {{ letter }}
             </span>
           </div>
 
-          <div class="loader-status mb-8">
-            <span class="loader-pulse-dot"></span>
-            <span class="h-5 overflow-hidden">
-              <span class="loading-text-wrap" :style="`transform: translateY(-${loadingTextIdx * 20}px); transition: transform 0.45s cubic-bezier(.22,1,.36,1)`">
-                <span v-for="t in loadingTexts" :key="t" class="h-5 flex items-center justify-center">{{ t }}</span>
-              </span>
-            </span>
+          <div class="loader-reference-text mb-7">
+            Loading
           </div>
 
-          <div class="loader-ring mb-7">
+          <div class="loader-ring hidden mb-7">
             <svg viewBox="0 0 120 120" class="loader-ring-svg" aria-hidden="true">
               <circle cx="60" cy="60" r="48" class="loader-ring-track" />
               <circle
@@ -51,7 +70,7 @@
             </div>
           </div>
 
-          <div class="loader-bar">
+          <div class="loader-bar reference-loader-bar">
             <div :style="{ width: `${loadingProgress}%` }"></div>
           </div>
         </div>
@@ -231,14 +250,29 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const loading = ref(true)
 const loadingProgress = ref(0)
 const loadingTextIdx = ref(0)
+const curtainOpening = ref(false)
 const brandLetters = 'KODAKODE'.split('')
-const loadingTexts = [
-  'Loading',
-  'Preparing ideas',
-  'Building experience',
-  'Almost ready',
-  'Welcome to kodakode',
-]
+const loadingTexts = ['Loading']
+const magneticDots = [
+  { x: -44, y: -22, delay: 0.02, size: 5, hue: '#818cf8' },
+  { x: -32, y: 18, delay: 0.1, size: 4, hue: '#c4b5fd' },
+  { x: -14, y: 28, delay: 0.06, size: 4, hue: '#a78bfa' },
+  { x: -6, y: -18, delay: 0.22, size: 5, hue: '#93c5fd' },
+  { x: 8, y: 22, delay: 0.12, size: 6, hue: '#818cf8' },
+  { x: 16, y: -26, delay: 0.28, size: 4, hue: '#c4b5fd' },
+  { x: 34, y: -18, delay: 0.16, size: 6, hue: '#a78bfa' },
+  { x: 44, y: 24, delay: 0.24, size: 4, hue: '#93c5fd' },
+].map(dot => ({
+  ...dot,
+  x: `${dot.x}vw`,
+  y: `${dot.y}vh`,
+  nearX: `${dot.x * 0.08}vw`,
+  nearY: `${dot.y * 0.08}vh`,
+  midX: `${dot.x * 0.72}vw`,
+  midY: `${dot.y * 0.72}vh`,
+  farX: `${dot.x * 1.08}vw`,
+  farY: `${dot.y * 1.08}vh`,
+}))
 
 const menuOpen = ref(false)
 const scrollProgress = ref(0)
@@ -270,19 +304,20 @@ onMounted(() => {
     }
   }, duration / loadingTexts.length)
 
-  function animateProgress(now) {
-    const elapsed = now - start
+  const progressTimer = setInterval(() => {
+    const elapsed = performance.now() - start
     const pct = Math.min(Math.round((elapsed / duration) * 100), 100)
     loadingProgress.value = pct
-    if (pct < 100) {
-      requestAnimationFrame(animateProgress)
-    } else {
+    if (pct >= 100) {
+      clearInterval(progressTimer)
       clearInterval(textTimer)
       loadingTextIdx.value = loadingTexts.length - 1
-      setTimeout(() => { loading.value = false }, 400)
+      setTimeout(() => {
+        curtainOpening.value = true
+        setTimeout(() => { loading.value = false }, 1420)
+      }, 280)
     }
-  }
-  requestAnimationFrame(animateProgress)
+  }, 32)
 })
 
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
@@ -301,6 +336,48 @@ html, body {
     radial-gradient(circle at 22% 24%, rgba(79, 70, 229, 0.24), transparent 28%),
     linear-gradient(135deg, #080b33 0%, #0f1147 52%, #1b0f58 100%);
   color: white;
+  backdrop-filter: blur(18px) saturate(1.08);
+  transition: background 1s ease, backdrop-filter 1s ease, opacity 0.62s ease;
+}
+
+.preloader::before,
+.preloader::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  z-index: 30;
+  width: 50.5%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 100% 50%, rgba(167, 139, 250, 0.24), transparent 38%),
+    linear-gradient(90deg, #070a2e 0%, #0d1045 58%, #17105b 100%);
+  box-shadow:
+    inset 0 0 90px rgba(255, 255, 255, 0.035),
+    0 0 42px rgba(10, 13, 61, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(0);
+}
+
+.preloader::before {
+  left: 0;
+  transform-origin: left center;
+  border-right: 1px solid rgba(199, 210, 254, 0.26);
+  box-shadow:
+    inset -24px 0 42px rgba(167, 139, 250, 0.18),
+    20px 0 46px rgba(129, 140, 248, 0.22);
+}
+
+.preloader::after {
+  right: 0;
+  transform-origin: right center;
+  background:
+    radial-gradient(circle at 0% 50%, rgba(167, 139, 250, 0.24), transparent 38%),
+    linear-gradient(270deg, #070a2e 0%, #0d1045 58%, #17105b 100%);
+  border-left: 1px solid rgba(199, 210, 254, 0.26);
+  box-shadow:
+    inset 24px 0 42px rgba(167, 139, 250, 0.18),
+    -20px 0 46px rgba(129, 140, 248, 0.22);
 }
 
 .preloader-grid {
@@ -387,28 +464,73 @@ html, body {
   background: #a78bfa;
 }
 
+.magnetic-field {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.magnetic-field span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 999px;
+  background: var(--hue);
+  box-shadow:
+    0 0 14px color-mix(in srgb, var(--hue) 72%, transparent),
+    0 0 32px color-mix(in srgb, var(--hue) 38%, transparent);
+  opacity: 0.86;
+  transform: translate(var(--x), var(--y)) scale(0.72);
+  animation: magnetic-gather 2.2s cubic-bezier(.22, 1, .36, 1) infinite;
+  animation-delay: var(--delay);
+}
+
+.preloader.is-opening .magnetic-field span {
+  animation: magnetic-release 1.05s cubic-bezier(.16, 1, .3, 1) forwards;
+  animation-delay: var(--delay);
+}
+
 .brand-loader {
-  position: relative;
-  width: min(24rem, 86vw);
-  height: clamp(2.4rem, 8vw, 5rem);
-  font-size: clamp(1.8rem, 7vw, 4.2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.48rem, 2.5vw, 1.35rem);
+  width: min(31rem, 88vw);
+  min-height: clamp(2.4rem, 8vw, 5rem);
+  font-size: clamp(1.65rem, 6.2vw, 4rem);
   font-weight: 900;
   letter-spacing: 0;
   line-height: 1;
 }
 
 .brand-loader span {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  display: block;
+  display: inline-block;
   background: linear-gradient(180deg, #ffffff 0%, #c7d2fe 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  text-shadow: 0 18px 40px rgba(129, 140, 248, 0.28);
-  transform: translate(-50%, -50%);
-  animation: loader-letter 1.85s cubic-bezier(.34, 1.56, .64, 1) both;
+  filter: drop-shadow(0 18px 28px rgba(129, 140, 248, 0.22));
+  animation: loader-letter 1.5s ease-in-out infinite;
+}
+
+.loader-reference-text {
+  color: #c7d2fe;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+
+.loader-reference-text::after {
+  content: "";
+  display: inline-block;
+  width: 1.15rem;
+  text-align: left;
+  animation: loading-dots 1.2s steps(4, end) infinite;
 }
 
 .loader-status {
@@ -505,6 +627,12 @@ html, body {
   background: rgba(255, 255, 255, 0.1);
 }
 
+.reference-loader-bar {
+  width: min(14rem, 58vw);
+  height: 0.16rem;
+  background: rgba(199, 210, 254, 0.14);
+}
+
 .loader-bar div {
   height: 100%;
   border-radius: inherit;
@@ -513,43 +641,156 @@ html, body {
   transition: width 0.28s ease;
 }
 
+.preloader.is-opening {
+  background:
+    radial-gradient(circle at 50% 45%, rgba(167, 139, 250, 0.14), transparent 46%),
+    rgba(8, 11, 51, 0);
+  backdrop-filter: blur(0) saturate(1);
+}
+
+.preloader.is-opening::before,
+.preloader.is-opening::after {
+  opacity: 0;
+  animation: none;
+}
+
+.preloader.is-opening .preloader-grid,
+.preloader.is-opening .preloader-glow,
+.preloader.is-opening .preloader-orbit {
+  opacity: 0;
+  filter: blur(12px);
+  transform: scale(1.08);
+  transition: opacity 0.48s ease, transform 0.78s ease, filter 0.78s ease;
+}
+
+.preloader.is-opening .brand-loader {
+  animation: logo-soft-release 1.12s cubic-bezier(.22, 1, .36, 1) forwards;
+}
+
+.preloader.is-opening .loader-reference-text,
+.preloader.is-opening .loader-bar {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(0.8rem);
+  transition: opacity 0.38s ease, transform 0.55s ease, filter 0.55s ease;
+}
+
 .loader-leave-active {
-  transition: opacity 0.75s ease, transform 0.75s ease, filter 0.75s ease;
+  transition: opacity 0.62s ease, background 0.62s ease, backdrop-filter 0.62s ease;
+}
+
+.loader-leave-active::before,
+.loader-leave-active::after {
+  opacity: 0;
+  animation: none;
+}
+
+.loader-leave-active::before {
+  animation: none;
+}
+
+.loader-leave-active::after {
+  animation: none;
+}
+
+.loader-leave-active .preloader-grid,
+.loader-leave-active .preloader-glow,
+.loader-leave-active .preloader-orbit,
+.loader-leave-active .relative.z-10 {
+  transition: opacity 0.35s ease, transform 0.55s ease, filter 0.55s ease;
+}
+
+.loader-leave-to .preloader-grid,
+.loader-leave-to .preloader-glow,
+.loader-leave-to .preloader-orbit,
+.loader-leave-to .relative.z-10 {
+  opacity: 0;
+  filter: blur(10px);
+  transform: scale(0.94);
 }
 
 .loader-leave-to {
+  background: transparent;
+  backdrop-filter: blur(0);
   opacity: 0;
-  filter: blur(12px);
-  transform: scale(1.04);
 }
 
 @keyframes loader-letter {
-  0%, 16% {
-    opacity: 0.2;
-    filter: blur(3px);
-    transform: translate(-50%, -50%) scale(0.78);
+  0%, 100% {
+    opacity: 0.76;
+    transform: translateY(0) scale(1);
   }
-  38% {
+  45% {
     opacity: 1;
-    filter: blur(0);
-    transform: translate(
-      calc(-50% + (var(--spread) * clamp(2.75rem, 11vw, 5.35rem))),
-      -50%
-    ) scale(1.06);
+    transform: translateY(-0.32rem) scale(1.03);
+    filter: drop-shadow(0 18px 34px rgba(167, 139, 250, 0.38));
   }
-  62% {
-    transform: translate(
-      calc(-50% + (var(--spread) * clamp(1.12rem, 4.7vw, 2.15rem))),
-      -50%
-    ) scale(0.96);
+}
+
+@keyframes loading-dots {
+  0% {
+    content: "";
+  }
+  25% {
+    content: ".";
+  }
+  50% {
+    content: "..";
+  }
+  75%, 100% {
+    content: "...";
+  }
+}
+
+@keyframes magnetic-gather {
+  0% {
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) scale(0.55);
+  }
+  36% {
+    opacity: 0.92;
+    transform: translate(var(--near-x), var(--near-y)) scale(1.05);
+  }
+  64% {
+    opacity: 1;
+    transform: translate(0, 0) scale(0.78);
   }
   100% {
+    opacity: 0.78;
+    transform: translate(var(--near-x), var(--near-y)) scale(0.9);
+  }
+}
+
+@keyframes magnetic-release {
+  0% {
+    opacity: 0.96;
+    transform: translate(var(--near-x), var(--near-y)) scale(0.9);
+  }
+  62% {
+    opacity: 0.78;
+    transform: translate(var(--mid-x), var(--mid-y)) scale(1.16);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--far-x), var(--far-y)) scale(0.55);
+  }
+}
+
+@keyframes logo-soft-release {
+  0% {
     opacity: 1;
-    filter: blur(0);
-    transform: translate(
-      calc(-50% + (var(--spread) * clamp(1.42rem, 5.8vw, 2.72rem))),
-      -50%
-    ) scale(1);
+    filter: blur(0) drop-shadow(0 18px 28px rgba(129, 140, 248, 0.22));
+    transform: translateY(0) scale(1);
+  }
+  42% {
+    opacity: 1;
+    filter: blur(0) drop-shadow(0 22px 36px rgba(167, 139, 250, 0.34));
+    transform: translateY(-0.72rem) scale(0.9);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(12px) drop-shadow(0 26px 42px rgba(167, 139, 250, 0));
+    transform: translateY(-1.35rem) scale(0.76);
   }
 }
 
@@ -582,6 +823,42 @@ html, body {
   50% {
     opacity: 1;
     transform: scale(1.1);
+  }
+}
+
+@keyframes curtain-left-open {
+  0% {
+    transform: translateX(0) scaleX(1);
+  }
+  12% {
+    transform: translateX(0) scaleX(1.025);
+  }
+  68% {
+    transform: translateX(-82%) scaleX(1.08);
+  }
+  84% {
+    transform: translateX(-103%) scaleX(0.96);
+  }
+  100% {
+    transform: translateX(-115%) scaleX(1);
+  }
+}
+
+@keyframes curtain-right-open {
+  0% {
+    transform: translateX(0) scaleX(1);
+  }
+  12% {
+    transform: translateX(0) scaleX(1.025);
+  }
+  68% {
+    transform: translateX(82%) scaleX(1.08);
+  }
+  84% {
+    transform: translateX(103%) scaleX(0.96);
+  }
+  100% {
+    transform: translateX(115%) scaleX(1);
   }
 }
 </style>
