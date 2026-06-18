@@ -145,18 +145,23 @@
           <p class="text-gray-500 leading-relaxed mb-4 text-sm md:text-base">We are kodakode, a web company and software house specializing in custom software development, website development, and mobile apps tailored to business needs.</p>
           <p class="text-gray-500 leading-relaxed mb-8 text-sm md:text-base">Our technology is web-based and cloud computing system — built to scale.</p>
           <div class="grid grid-cols-2 gap-3 mb-8">
-  <div v-for="(card, i) in aboutCards" :key="card.title"
-    class="group flex items-start gap-3 bg-indigo-50 hover:bg-indigo-100 border border-indigo-100 hover:border-indigo-300 rounded-2xl p-4 transition-all duration-300 cursor-default">
-    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-base shrink-0 shadow-md overflow-hidden">
-      <div v-if="card.lottie" :id="`lottie-card-${i}`" style="width:36px;height:36px"></div>
-      <span v-else>{{ card.icon }}</span>
-    </div>
-    <div>
-      <h4 class="text-gray-800 font-bold text-sm mb-0.5">{{ card.title }}</h4>
-      <p class="text-gray-500 text-xs leading-relaxed">{{ card.desc }}</p>
-    </div>
-  </div>
-</div>
+            <div
+              v-for="card in aboutCards"
+              :key="card.title"
+              class="group flex items-start gap-3 bg-white hover:bg-indigo-50 border border-indigo-100 hover:border-indigo-200 rounded-2xl p-4 transition-all duration-300 cursor-default shadow-sm hover:shadow-lg hover:shadow-indigo-100/70"
+            >
+              <div
+                class="about-card-icon"
+                :style="{ '--icon-from': card.gradientFrom, '--icon-to': card.gradientTo, '--icon-ring': card.ringColor }"
+              >
+                <svg class="w-5 h-5 text-white relative z-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" v-html="card.iconSvg"></svg>
+              </div>
+              <div>
+                <h4 class="text-gray-800 font-bold text-sm mb-0.5">{{ card.title }}</h4>
+                <p class="text-gray-500 text-xs leading-relaxed">{{ card.desc }}</p>
+              </div>
+            </div>
+          </div>
           <div class="flex items-center gap-4 flex-wrap">
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
               class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-6 py-3 rounded-xl font-semibold transition-all inline-flex items-center gap-2 text-sm hover:shadow-lg hover:shadow-indigo-300">
@@ -485,6 +490,35 @@
     scroll-snap-align: start;
   }
 }
+
+.about-card-icon {
+  position: relative;
+  display: flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, var(--icon-from), var(--icon-to));
+  box-shadow: 0 12px 24px var(--icon-ring);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0.45rem 0.45rem auto auto;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.group:hover .about-card-icon {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 16px 30px var(--icon-ring);
+}
 </style>
 
 <script setup>
@@ -534,10 +568,38 @@ const partners = [
 
 
 const aboutCards = [
-  { icon: '💡', title: 'IT Consulting', desc: 'Smart strategies to boost performance and security.', lottie: '/Backend_Icon.json' },
-  { icon: '📈', title: 'Business Growth', desc: 'Tailored strategies that drive sustainable growth.', lottie: '/Business_Growth_Icon.json' },
-  { icon: '🔒', title: 'Security First', desc: 'Built with best practices and cloud security.', lottie: '/Security_Icon.json' },
-  { icon: '⚡', title: 'Fast Delivery', desc: 'On-time delivery with agile development.', lottie: '/Delivery_Icon.json' },
+  {
+    title: 'IT Consulting',
+    desc: 'Smart strategies to boost performance and security.',
+    gradientFrom: '#4f46e5',
+    gradientTo: '#7c3aed',
+    ringColor: 'rgba(79, 70, 229, 0.24)',
+    iconSvg: '<path d="M12 3v3"/><path d="M18.5 5.5 16.4 7.6"/><path d="M21 12h-3"/><path d="M5.5 5.5l2.1 2.1"/><path d="M3 12h3"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M8 14a5 5 0 1 1 8 0c-.7.7-1 1.4-1 2H9c0-.6-.3-1.3-1-2Z"/>',
+  },
+  {
+    title: 'Business Growth',
+    desc: 'Tailored strategies that drive sustainable growth.',
+    gradientFrom: '#0891b2',
+    gradientTo: '#10b981',
+    ringColor: 'rgba(16, 185, 129, 0.24)',
+    iconSvg: '<path d="M3 19h18"/><path d="M7 15l4-4 3 3 6-7"/><path d="M15 7h5v5"/>',
+  },
+  {
+    title: 'Security First',
+    desc: 'Built with best practices and cloud security.',
+    gradientFrom: '#2563eb',
+    gradientTo: '#0f766e',
+    ringColor: 'rgba(37, 99, 235, 0.24)',
+    iconSvg: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/>',
+  },
+  {
+    title: 'Fast Delivery',
+    desc: 'On-time delivery with agile development.',
+    gradientFrom: '#f59e0b',
+    gradientTo: '#ef4444',
+    ringColor: 'rgba(245, 158, 11, 0.26)',
+    iconSvg: '<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/>',
+  },
 ]
 
 const categories = ['All', 'Development', 'Design', 'Marketing']
@@ -632,21 +694,6 @@ onMounted(() => {
         })
       }
 
-      // about card lotties
-      aboutCards.forEach((card, i) => {
-        if (card.lottie) {
-          const el = document.getElementById(`lottie-card-${i}`)
-          if (el) {
-            window.lottie.loadAnimation({
-              container: el,
-              renderer: 'svg',
-              loop: true,
-              autoplay: true,
-              path: card.lottie
-            })
-          }
-        }
-      })
     }
     document.head.appendChild(script)
   }, 500)
