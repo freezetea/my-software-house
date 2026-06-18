@@ -245,9 +245,12 @@
             <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
               :style="`background: linear-gradient(135deg, ${svc.color}12 0%, transparent 100%)`"></div>
             <div
-              class="service-lottie-icon mb-5 relative z-10"
+              :class="['service-lottie-icon mb-5 relative z-10', `service-${svc.key}`]"
               :style="{ '--service-color': svc.color }"
             >
+              <span class="service-icon-orbit"></span>
+              <span class="service-icon-spark spark-one"></span>
+              <span class="service-icon-spark spark-two"></span>
               <svg
                 v-if="svc.iconSvg"
                 class="service-svg-icon"
@@ -593,6 +596,7 @@
 }
 
 .service-lottie-icon {
+  position: relative;
   display: flex;
   width: 4.25rem;
   height: 4.25rem;
@@ -605,21 +609,138 @@
     color-mix(in srgb, var(--service-color) 18%, transparent);
   box-shadow: 0 14px 32px color-mix(in srgb, var(--service-color) 20%, transparent);
   overflow: hidden;
+  isolation: isolate;
+  animation: service-tile-float 3.4s ease-in-out infinite;
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+.service-lottie-icon::before {
+  content: "";
+  position: absolute;
+  inset: -45%;
+  z-index: 0;
+  background: conic-gradient(from 0deg, transparent, color-mix(in srgb, var(--service-color) 55%, white 20%), transparent 35%);
+  opacity: 0.35;
+  animation: service-shine-spin 4.8s linear infinite;
+}
+
+.service-lottie-icon::after {
+  content: "";
+  position: absolute;
+  inset: 0.45rem;
+  z-index: 0;
+  border-radius: 1rem;
+  background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--service-color) 28%, transparent), transparent 68%);
+  opacity: 0.65;
+  animation: service-core-pulse 2.4s ease-in-out infinite;
+}
+
 .service-lottie-icon > div {
+  position: relative;
+  z-index: 2;
   transform: scale(1.38);
   transition: transform 0.3s ease;
 }
 
 .service-svg-icon {
+  position: relative;
+  z-index: 2;
   width: 2.45rem;
   height: 2.45rem;
   color: white;
   filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
+  animation: service-icon-breathe 2.6s ease-in-out infinite;
   transition: transform 0.3s ease, filter 0.3s ease;
 }
+
+.service-svg-icon :deep(path),
+.service-svg-icon :deep(circle),
+.service-svg-icon :deep(rect) {
+  vector-effect: non-scaling-stroke;
+}
+
+.service-icon-orbit {
+  position: absolute;
+  z-index: 1;
+  width: 3.35rem;
+  height: 3.35rem;
+  border: 1px solid color-mix(in srgb, var(--service-color) 48%, white 12%);
+  border-radius: 999px;
+  opacity: 0.38;
+  animation: service-orbit 5.5s linear infinite;
+}
+
+.service-icon-orbit::after {
+  content: "";
+  position: absolute;
+  top: -0.18rem;
+  left: 50%;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: white;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--service-color) 80%, white 20%);
+}
+
+.service-icon-spark {
+  position: absolute;
+  z-index: 3;
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 999px;
+  background: white;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--service-color) 75%, white 25%);
+  opacity: 0.6;
+  animation: service-spark 2.2s ease-in-out infinite;
+}
+
+.spark-one {
+  top: 0.9rem;
+  right: 0.85rem;
+}
+
+.spark-two {
+  left: 0.85rem;
+  bottom: 0.95rem;
+  animation-delay: 0.45s;
+}
+
+.service-digital-consulting .service-svg-icon {
+  animation-name: service-compass-swing;
+}
+
+.service-website-development .service-svg-icon,
+.service-custom-software .service-svg-icon {
+  animation-name: service-code-pop;
+}
+
+.service-mobile-app-solutions .service-svg-icon {
+  animation-name: service-phone-bob;
+}
+
+.service-ux-ui-design .service-svg-icon {
+  animation-name: service-cursor-draw;
+}
+
+.service-seo-optimization .service-svg-icon {
+  animation-name: service-search-zoom;
+}
+
+.service-cloud-solutions .service-svg-icon {
+  animation-name: service-cloud-drift;
+}
+
+.service-maintenance .service-svg-icon {
+  animation-name: service-wrench-turn;
+}
+
+.service-website-development { animation-delay: 0.1s; }
+.service-mobile-app-solutions { animation-delay: 0.2s; }
+.service-ux-ui-design { animation-delay: 0.3s; }
+.service-seo-optimization { animation-delay: 0.4s; }
+.service-custom-software { animation-delay: 0.5s; }
+.service-cloud-solutions { animation-delay: 0.6s; }
+.service-maintenance { animation-delay: 0.7s; }
 
 .group:hover .service-lottie-icon {
   border-color: color-mix(in srgb, var(--service-color) 75%, white 12%);
@@ -634,6 +755,70 @@
 .group:hover .service-svg-icon {
   filter: drop-shadow(0 10px 16px color-mix(in srgb, var(--service-color) 45%, transparent));
   transform: translateY(-1px) rotate(-3deg) scale(1.08);
+}
+
+@keyframes service-tile-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-0.35rem) rotate(1.5deg); }
+}
+
+@keyframes service-shine-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes service-core-pulse {
+  0%, 100% { opacity: 0.42; transform: scale(0.86); }
+  50% { opacity: 0.86; transform: scale(1.08); }
+}
+
+@keyframes service-icon-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-0.12rem) scale(1.08); }
+}
+
+@keyframes service-orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes service-spark {
+  0%, 100% { opacity: 0.32; transform: scale(0.65); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+@keyframes service-compass-swing {
+  0%, 100% { transform: rotate(-8deg) scale(1); }
+  50% { transform: rotate(10deg) scale(1.08); }
+}
+
+@keyframes service-code-pop {
+  0%, 100% { transform: translateY(0) scale(1); }
+  35% { transform: translateY(-0.18rem) scale(1.12); }
+  70% { transform: translateY(0.08rem) scale(0.98); }
+}
+
+@keyframes service-phone-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg) scale(1); }
+  50% { transform: translateY(-0.3rem) rotate(3deg) scale(1.08); }
+}
+
+@keyframes service-cursor-draw {
+  0%, 100% { transform: translate(-0.08rem, 0.08rem) rotate(-5deg) scale(1); }
+  50% { transform: translate(0.16rem, -0.16rem) rotate(4deg) scale(1.1); }
+}
+
+@keyframes service-search-zoom {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.14) rotate(-4deg); }
+}
+
+@keyframes service-cloud-drift {
+  0%, 100% { transform: translateX(-0.12rem) scale(1); }
+  50% { transform: translateX(0.22rem) scale(1.08); }
+}
+
+@keyframes service-wrench-turn {
+  0%, 100% { transform: rotate(-8deg) scale(1); }
+  50% { transform: rotate(12deg) scale(1.08); }
 }
 
 .about-company-visual {
