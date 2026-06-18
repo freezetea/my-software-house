@@ -4,12 +4,12 @@
     <!-- HERO -->
     <section class="relative min-h-screen flex items-center px-4 md:px-6 py-28 overflow-hidden" style="background: linear-gradient(135deg, #0a0d3d 0%, #0f1147 50%, #1a1060 100%)">
       <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-10 right-10 w-72 h-72 bg-indigo-500/20 rounded-full blur-[80px] animate-pulse"></div>
-        <div class="absolute bottom-20 left-10 w-96 h-96 bg-violet-600/15 rounded-full blur-[100px]"></div>
+        <div class="absolute top-10 right-10 w-60 h-60 bg-indigo-500/14 rounded-full blur-[48px]"></div>
+        <div class="absolute bottom-20 left-10 w-72 h-72 bg-violet-600/10 rounded-full blur-[56px]"></div>
       </div>
-      <svg class="absolute top-20 left-10 opacity-40 animate-spin" style="animation-duration:20s" width="40" height="40" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#818cf8"/></svg>
-      <svg class="absolute bottom-32 right-20 opacity-30 animate-spin" style="animation-duration:30s;animation-direction:reverse" width="28" height="28" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#a78bfa"/></svg>
-      <svg class="absolute top-1/2 right-10 opacity-20 animate-spin" style="animation-duration:25s" width="18" height="18" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#c4b5fd"/></svg>
+      <svg class="hero-orbit-star star-one" width="40" height="40" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#818cf8"/></svg>
+      <svg class="hero-orbit-star star-two" width="28" height="28" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#a78bfa"/></svg>
+      <svg class="hero-orbit-star star-three" width="18" height="18" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#c4b5fd"/></svg>
 
       <div class="max-w-6xl mx-auto w-full relative z-10 grid md:grid-cols-2 gap-14 items-center">
         <div>
@@ -40,7 +40,7 @@
         <!-- hero right — Lottie + stats -->
         <div class="hidden md:flex flex-col gap-4">
           <div class="relative bg-gradient-to-br from-indigo-600/20 to-violet-600/20 border border-indigo-500/30 rounded-3xl p-6 overflow-hidden flex items-center justify-center" style="min-height:260px">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/15 rounded-full blur-xl pointer-events-none"></div>
             <div id="lottie-hero" style="width:100%;max-width:260px;height:240px"></div>
           </div>
           <div class="grid grid-cols-3 gap-3">
@@ -99,8 +99,8 @@
       <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-14 items-center relative z-10">
         <div class="relative">
           <div class="relative bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100 rounded-3xl p-8 overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-200/40 rounded-full blur-2xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
-            <div class="absolute bottom-0 left-0 w-28 h-28 bg-violet-200/50 rounded-full blur-2xl -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-200/30 rounded-full blur-xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-24 h-24 bg-violet-200/35 rounded-full blur-xl -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
             <div class="about-company-visual relative z-10 w-full h-72 md:h-80">
               <div class="about-orbit about-orbit-one"></div>
               <div class="about-orbit about-orbit-two"></div>
@@ -224,7 +224,7 @@
     <section id="services" class="py-20 md:py-28 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #0d1555 0%, #111747 100%)">
       <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent pointer-events-none"></div>
       <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-500/30 to-transparent pointer-events-none"></div>
-      <div class="absolute top-20 right-20 w-72 h-72 bg-indigo-500/8 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-20 right-20 w-56 h-56 bg-indigo-500/8 rounded-full blur-2xl pointer-events-none"></div>
       <div class="max-w-6xl mx-auto relative z-10">
         <div class="text-center mb-12">
           <div class="inline-flex items-center gap-2 text-xs font-medium text-blue-300 bg-blue-500/15 border border-blue-500/30 px-3 py-1.5 rounded-full mb-4">Latest Services</div>
@@ -245,7 +245,7 @@
               :style="`background: linear-gradient(135deg, ${svc.color}12 0%, transparent 100%)`"></div>
             <div
               :class="['service-lottie-icon mb-5 relative z-10', `service-${svc.key}`]"
-              :style="{ '--service-color': svc.color }"
+              :style="{ '--service-color': svc.color, '--service-delay': `${i * 0.08}s` }"
             >
               <span class="service-icon-orbit"></span>
               <span class="service-icon-spark spark-one"></span>
@@ -286,21 +286,29 @@
           <h2 class="text-3xl md:text-4xl font-black tracking-tight text-gray-900">Industry Best Practices<br>to the Core</h2>
         </div>
         <div class="working-process-panel mb-12 bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100 rounded-3xl p-6 md:p-10 overflow-hidden relative">
-          <svg viewBox="0 0 700 120" class="w-full hidden md:block" xmlns="http://www.w3.org/2000/svg">
-            <line x1="70" y1="40" x2="630" y2="40" stroke="#e0e7ff" stroke-width="2" stroke-dasharray="6 4"/>
-            <circle r="5" fill="#6366f1" opacity="0.7">
-              <animateMotion dur="3s" repeatCount="indefinite" path="M70,40 L630,40"/>
-            </circle>
+          <svg viewBox="0 0 700 120" class="process-zigzag-svg w-full" xmlns="http://www.w3.org/2000/svg">
+            <polyline points="70,56 210,24 350,56 490,24 630,56" fill="none" stroke="#e0e7ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 8"/>
+            <path class="process-zigzag-path" d="M70 56 L210 24 L350 56 L490 24 L630 56" fill="none" stroke="url(#processGradient)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" :stroke-dasharray="processStrokeDash"/>
+            <defs>
+              <linearGradient id="processGradient" x1="70" y1="40" x2="630" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#4f46e5"/>
+                <stop offset="0.52" stop-color="#8b5cf6"/>
+                <stop offset="1" stop-color="#22c55e"/>
+              </linearGradient>
+            </defs>
+            <circle r="12" fill="#c4b5fd" opacity="0.24" class="process-travel-halo" :cx="processDot.x" :cy="processDot.y"/>
+            <circle r="7" fill="#4f46e5" opacity="0.96" class="process-travel-dot" :cx="processDot.x" :cy="processDot.y"/>
+            <circle r="3.5" fill="#22c55e" opacity="0.92" class="process-travel-trail" :cx="processTrail.x" :cy="processTrail.y"/>
             <g v-for="(step, i) in steps" :key="step.num">
-              <circle class="process-step-node" :cx="70 + i*140" cy="40" r="28"
-                :fill="activeStep === i ? '#4f46e5' : '#ede9fe'"
-                :stroke="activeStep === i ? '#4f46e5' : '#c4b5fd'"
+              <circle class="process-step-node" :cx="processPoints[i].x" :cy="processPoints[i].y" r="28"
+                :fill="i <= activeStep ? '#4f46e5' : '#ede9fe'"
+                :stroke="i <= activeStep ? '#4f46e5' : '#c4b5fd'"
                 stroke-width="2" style="cursor:pointer"
                 @click="activeStep = i"/>
-              <text :x="70 + i*140" y="45" text-anchor="middle" font-size="12" font-weight="bold"
-                :fill="activeStep === i ? 'white' : '#6366f1'">{{ step.num }}</text>
-              <text :x="70 + i*140" y="82" text-anchor="middle" font-size="10"
-                :fill="activeStep === i ? '#4f46e5' : '#9ca3af'" font-weight="600">{{ step.title }}</text>
+              <text :x="processPoints[i].x" :y="processPoints[i].y + 5" text-anchor="middle" font-size="12" font-weight="bold"
+                :fill="i <= activeStep ? 'white' : '#6366f1'">{{ step.num }}</text>
+              <text class="process-step-label" :x="processPoints[i].x" y="96" text-anchor="middle" font-size="10"
+                :fill="i <= activeStep ? '#4f46e5' : '#9ca3af'" font-weight="600">{{ step.title }}</text>
             </g>
           </svg>
           <div class="mt-4 text-center">
@@ -308,28 +316,13 @@
             <div class="text-gray-500 text-sm">{{ steps[activeStep].desc }}</div>
           </div>
         </div>
-        <div class="flex flex-col gap-3 md:hidden">
-          <div v-for="(step, i) in steps" :key="step.num"
-            :class="['flex items-start gap-4 p-4 rounded-2xl border transition-all cursor-pointer',
-              activeStep === i ? 'border-indigo-300 bg-indigo-50' : 'border-gray-200 bg-gray-50']"
-            @click="activeStep = i">
-            <div :class="['w-10 h-10 shrink-0 rounded-xl font-black text-sm flex items-center justify-center border',
-              activeStep === i ? 'bg-indigo-600 border-indigo-500 text-white' : 'bg-white border-gray-200 text-indigo-600']">
-              {{ step.num }}
-            </div>
-            <div>
-              <h4 class="text-gray-800 font-bold text-sm mb-1">{{ step.title }}</h4>
-              <p class="text-gray-500 text-xs">{{ step.desc }}</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
     <!-- TESTIMONIALS — DEEP VIOLET -->
     <section class="py-20 md:py-28 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #1a0d5e 0%, #0f1147 60%, #0a0d3d 100%)">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-violet-600/15 rounded-full blur-3xl pointer-events-none"></div>
-      <div class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-0 right-0 w-72 h-72 bg-violet-600/12 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 w-52 h-52 bg-indigo-600/8 rounded-full blur-2xl pointer-events-none"></div>
       <div class="absolute right-8 top-8 opacity-15 pointer-events-none grid grid-cols-5 gap-3">
         <div v-for="n in 25" :key="n" class="w-1.5 h-1.5 rounded-full bg-violet-400"></div>
       </div>
@@ -450,7 +443,7 @@
           </h2>
           <p class="text-gray-500 text-sm leading-relaxed mb-8">Empower your business with innovative IT solutions. Let's turn your ideas into technology.</p>
           <div class="bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100 rounded-3xl p-6 relative overflow-hidden mb-6">
-            <div class="absolute top-0 right-0 w-28 h-28 bg-indigo-200/30 rounded-full blur-2xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-200/24 rounded-full blur-xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
             <div id="lottie-growth" class="relative z-10 w-full h-52"></div>
             <svg viewBox="0 0 280 160" class="hidden w-full" xmlns="http://www.w3.org/2000/svg">
               <rect x="20" y="30" width="160" height="110" rx="12" fill="#ede9fe" stroke="#6366f1" stroke-width="1.5"/>
@@ -516,8 +509,8 @@
     <!-- CTA -->
     <section class="py-20 md:py-24 px-4 md:px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #2d1b69 0%, #1a1060 50%, #0f1147 100%)">
       <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-indigo-600/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 right-0 w-64 h-64 bg-violet-500/15 rounded-full blur-2xl"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[620px] h-[220px] bg-indigo-600/14 rounded-full blur-2xl"></div>
+        <div class="absolute bottom-0 right-0 w-52 h-52 bg-violet-500/12 rounded-full blur-xl"></div>
       </div>
       <svg class="absolute top-8 left-16 opacity-50 animate-spin" style="animation-duration:20s" width="28" height="28" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#818cf8"/></svg>
       <svg class="absolute bottom-8 right-16 opacity-40 animate-spin" style="animation-duration:28s;animation-direction:reverse" width="20" height="20" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#c4b5fd"/></svg>
@@ -606,10 +599,10 @@
   background:
     radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.18), transparent 34%),
     color-mix(in srgb, var(--service-color) 18%, transparent);
-  box-shadow: 0 14px 32px color-mix(in srgb, var(--service-color) 20%, transparent);
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--service-color) 14%, transparent);
   overflow: hidden;
   isolation: isolate;
-  animation: service-tile-float 3.4s ease-in-out infinite;
+  animation: none;
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -620,7 +613,7 @@
   z-index: 0;
   background: conic-gradient(from 0deg, transparent, color-mix(in srgb, var(--service-color) 55%, white 20%), transparent 35%);
   opacity: 0.35;
-  animation: service-shine-spin 4.8s linear infinite;
+  animation: none;
 }
 
 .service-lottie-icon::after {
@@ -631,7 +624,7 @@
   border-radius: 1rem;
   background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--service-color) 28%, transparent), transparent 68%);
   opacity: 0.65;
-  animation: service-core-pulse 2.4s ease-in-out infinite;
+  animation: none;
 }
 
 .service-lottie-icon > div {
@@ -647,9 +640,8 @@
   width: 2.45rem;
   height: 2.45rem;
   color: white;
-  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
-  animation: service-icon-breathe 2.6s ease-in-out infinite;
-  transition: transform 0.3s ease, filter 0.3s ease;
+  animation: none;
+  transition: transform 0.3s ease;
 }
 
 .service-svg-icon :deep(path),
@@ -666,7 +658,7 @@
   border: 1px solid color-mix(in srgb, var(--service-color) 48%, white 12%);
   border-radius: 999px;
   opacity: 0.38;
-  animation: service-orbit 5.5s linear infinite;
+  animation: none;
 }
 
 .service-icon-orbit::after {
@@ -678,7 +670,7 @@
   height: 0.42rem;
   border-radius: 999px;
   background: white;
-  box-shadow: 0 0 14px color-mix(in srgb, var(--service-color) 80%, white 20%);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--service-color) 55%, white 20%);
 }
 
 .service-icon-spark {
@@ -688,9 +680,9 @@
   height: 0.38rem;
   border-radius: 999px;
   background: white;
-  box-shadow: 0 0 14px color-mix(in srgb, var(--service-color) 75%, white 25%);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--service-color) 55%, white 25%);
   opacity: 0.6;
-  animation: service-spark 2.2s ease-in-out infinite;
+  animation: none;
 }
 
 .spark-one {
@@ -871,8 +863,7 @@
   border: 1px solid rgba(99, 102, 241, 0.28);
   border-radius: 1.5rem;
   background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 26px 70px rgba(79, 70, 229, 0.18);
-  backdrop-filter: blur(16px);
+  box-shadow: 0 18px 44px rgba(79, 70, 229, 0.16);
   animation: about-float 4.5s ease-in-out infinite;
 }
 
@@ -981,7 +972,7 @@
   bottom: 11%;
   width: 4.5rem;
   color: #6366f1;
-  filter: drop-shadow(0 16px 26px rgba(99, 102, 241, 0.32));
+  filter: drop-shadow(0 10px 16px rgba(99, 102, 241, 0.24));
   animation: about-rocket 3.8s ease-in-out infinite;
 }
 
@@ -1023,26 +1014,29 @@
 <script setup>
 import { ref, computed, nextTick, onMounted, onUnmounted, watch } from 'vue'
 
-const typedText = ref('')
 const phrases = [
   'Bring innovation<br>to every solution',
   'Custom website<br>development',
   'Mobile app<br>solutions',
   'Your idea.<br>Our technology.',
 ]
-let pIdx = 0, cIdx = 0, deleting = false, typingTimer = null
+const typedText = ref(phrases[0])
+let pIdx = 0
+let cIdx = phrases[0].replace('<br>', '\n').length
+let deleting = true
+let typingTimer = null
 
 function typeLoop() {
   const phrase = phrases[pIdx].replace('<br>', '\n')
   typedText.value = phrase.slice(0, cIdx).replace('\n', '<br>')
   if (!deleting) {
     cIdx++
-    if (cIdx > phrase.length) { deleting = true; typingTimer = setTimeout(typeLoop, 1800); return }
+    if (cIdx > phrase.length) { deleting = true; typingTimer = setTimeout(typeLoop, 2600); return }
   } else {
     cIdx--
-    if (cIdx < 0) { deleting = false; cIdx = 0; pIdx = (pIdx + 1) % phrases.length; typingTimer = setTimeout(typeLoop, 400); return }
+    if (cIdx < 0) { deleting = false; cIdx = 0; pIdx = (pIdx + 1) % phrases.length; typingTimer = setTimeout(typeLoop, 650); return }
   }
-  typingTimer = setTimeout(typeLoop, deleting ? 28 : 55)
+  typingTimer = setTimeout(typeLoop, deleting ? 42 : 78)
 }
 
 const stats = ref([
@@ -1131,6 +1125,7 @@ const filteredServices = computed(() =>
 )
 
 const activeStep = ref(0)
+const processProgress = ref(0)
 const steps = [
   { num: '01', title: 'Discover', desc: 'Understand your goals, challenges, and define exactly what needs to be built.' },
   { num: '02', title: 'Planning', desc: 'Create a clear strategy, timeline, and technical roadmap for your project.' },
@@ -1138,6 +1133,35 @@ const steps = [
   { num: '04', title: 'Testing', desc: 'Ensure quality, performance, and reliability before anything goes live.' },
   { num: '05', title: 'Project Deliver', desc: 'Launch, support, and continue driving your success post-delivery.' },
 ]
+const processPoints = [
+  { x: 70, y: 56 },
+  { x: 210, y: 24 },
+  { x: 350, y: 56 },
+  { x: 490, y: 24 },
+  { x: 630, y: 56 },
+]
+const processCycleMs = 18000
+const processTravelRatio = 0.9
+const processPathLength = 574
+
+function getProcessPoint(progress) {
+  const clamped = Math.min(Math.max(progress, 0), 0.999)
+  const segmentProgress = clamped * (processPoints.length - 1)
+  const index = Math.min(Math.floor(segmentProgress), processPoints.length - 2)
+  const local = segmentProgress - index
+  const from = processPoints[index]
+  const to = processPoints[index + 1]
+
+  return {
+    x: from.x + (to.x - from.x) * local,
+    y: from.y + (to.y - from.y) * local,
+  }
+}
+
+const processTravelProgress = computed(() => Math.min(processProgress.value / processTravelRatio, 1))
+const processDot = computed(() => getProcessPoint(processTravelProgress.value))
+const processTrail = computed(() => getProcessPoint(Math.max(processTravelProgress.value - 0.025, 0)))
+const processStrokeDash = computed(() => `${Math.max(processTravelProgress.value * processPathLength, 12)} ${processPathLength}`)
 
 const testimonials = [
   {
@@ -1211,36 +1235,123 @@ function submitForm() {
 }
 
 let serviceAnimations = []
-let processTimer = null
+let processFrame = 0
+let processStart = 0
 let revealObserver = null
+let lottiePromise = null
+let statTimers = []
 
 function loadServiceLotties() {
-  if (!window.lottie) return
+  return
+}
 
-  serviceAnimations.forEach(animation => animation.destroy())
-  serviceAnimations = []
+function ensureLottie() {
+  if (window.lottie) return Promise.resolve(window.lottie)
+  if (lottiePromise) return lottiePromise
 
-  filteredServices.value.forEach((svc) => {
-    const el = document.getElementById(`lottie-service-${svc.key}`)
-    if (!el) return
+  lottiePromise = new Promise((resolve) => {
+    const existing = document.querySelector('script[data-kodakode-lottie]')
+    if (existing) {
+      existing.addEventListener('load', () => resolve(window.lottie), { once: true })
+      return
+    }
 
-    serviceAnimations.push(window.lottie.loadAnimation({
+    const script = document.createElement('script')
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js'
+    script.async = true
+    script.defer = true
+    script.dataset.kodakodeLottie = 'true'
+    script.onload = () => resolve(window.lottie)
+    document.head.appendChild(script)
+  })
+
+  return lottiePromise
+}
+
+function observeLottie(id, path) {
+  const el = document.getElementById(id)
+  if (!el) return
+
+  const load = async () => {
+    if (el.dataset.lottieLoaded) return
+    el.dataset.lottieLoaded = 'true'
+    const lottie = await ensureLottie()
+    if (!lottie) return
+    serviceAnimations.push(lottie.loadAnimation({
       container: el,
-      renderer: 'svg',
+      renderer: 'canvas',
       loop: true,
       autoplay: true,
-      path: svc.lottie,
+      rendererSettings: {
+        clearCanvas: true,
+        progressiveLoad: true,
+      },
+      path,
     }))
-  })
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    load()
+    return
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    if (entries.some(entry => entry.isIntersecting)) {
+      observer.disconnect()
+      const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 120))
+      idle(load)
+    }
+  }, { rootMargin: '160px', threshold: 0.12 })
+
+  observer.observe(el)
+}
+
+async function loadLottieNow(id, path) {
+  const el = document.getElementById(id)
+  if (!el || el.dataset.lottieLoaded) return
+  el.dataset.lottieLoaded = 'true'
+  const lottie = await ensureLottie()
+  if (!lottie) return
+
+  serviceAnimations.push(lottie.loadAnimation({
+    container: el,
+    renderer: 'canvas',
+    loop: true,
+    autoplay: true,
+    rendererSettings: {
+      clearCanvas: true,
+      progressiveLoad: true,
+    },
+    path,
+  }))
+}
+
+function startProcessTimer() {
+  if (processFrame) return
+  processStart = performance.now()
+
+  const tick = (now) => {
+    const progress = ((now - processStart) % processCycleMs) / processCycleMs
+    const travelProgress = Math.min(progress / processTravelRatio, 1)
+    processProgress.value = progress
+    activeStep.value = Math.min(steps.length - 1, Math.floor(travelProgress * (steps.length - 1)))
+    processFrame = requestAnimationFrame(tick)
+  }
+
+  processFrame = requestAnimationFrame(tick)
 }
 
 onMounted(() => {
-  typeLoop()
+  typingTimer = setTimeout(typeLoop, 4200)
+  nextTick(() => {
+    loadLottieNow('lottie-hero', '/Mobile_App_Icon.json')
+  })
 
   revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('section-in')
+        if (entry.target.querySelector('.working-process-panel')) startProcessTimer()
         revealObserver.unobserve(entry.target)
       }
     })
@@ -1248,56 +1359,25 @@ onMounted(() => {
 
   document.querySelectorAll('section').forEach((section, index) => {
     section.classList.add('section-reveal')
+    section.classList.add(`section-reveal-${index % 5}`)
     section.style.setProperty('--section-delay', `${Math.min(index * 0.04, 0.22)}s`)
     revealObserver.observe(section)
   })
 
-  processTimer = setInterval(() => {
-    activeStep.value = (activeStep.value + 1) % steps.length
-  }, 1800)
-
   stats.value.forEach((stat, i) => {
     let start = 0
-    const step = stat.target / 90
+    const step = stat.target / 55
     const timer = setInterval(() => {
       start += step
       if (start >= stat.target) { start = stat.target; clearInterval(timer) }
       stats.value[i].display = Math.floor(start)
-    }, 16)
+    }, 40)
+    statTimers.push(timer)
   })
 
-  // load lottie after a short delay to ensure DOM is ready
   setTimeout(() => {
-    const script = document.createElement('script')
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js'
-    script.onload = () => {
-      // hero lottie
-      const heroEl = document.getElementById('lottie-hero')
-      if (heroEl) {
-        window.lottie.loadAnimation({
-          container: heroEl,
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          path: '/Web_Development.json'
-        })
-      }
-
-      const growthEl = document.getElementById('lottie-growth')
-      if (growthEl) {
-        window.lottie.loadAnimation({
-          container: growthEl,
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          path: '/Seo isometric composition with human characters.json'
-        })
-      }
-
-      loadServiceLotties()
-    }
-    document.head.appendChild(script)
-  }, 500)
+    observeLottie('lottie-growth', '/Seo isometric composition with human characters.json')
+  }, 1800)
 })
 
 watch(activeCategory, async () => {
@@ -1307,23 +1387,94 @@ watch(activeCategory, async () => {
 
 onUnmounted(() => {
   clearTimeout(typingTimer)
-  clearInterval(processTimer)
+  if (processFrame) cancelAnimationFrame(processFrame)
+  statTimers.forEach(timer => clearInterval(timer))
   revealObserver?.disconnect()
   serviceAnimations.forEach(animation => animation.destroy())
 })
 </script>
 
 <style scoped>
+section {
+  overflow: clip;
+}
+
+@supports not (overflow: clip) {
+  section {
+    overflow: hidden;
+  }
+}
+
 .section-reveal {
   opacity: 0;
-  transform: translateY(32px) scale(0.985);
-  transition: opacity 0.72s ease, transform 0.72s cubic-bezier(.22, 1, .36, 1);
+  transform: translateY(18px) scale(0.992);
+  transition: opacity 0.48s ease, transform 0.52s cubic-bezier(.22, 1, .36, 1);
   transition-delay: var(--section-delay, 0s);
+  transform-origin: center;
+}
+
+.section-reveal-0 {
+  transform: translateY(20px) scale(0.992);
+}
+
+.section-reveal-1 {
+  transform: translateX(-18px) scale(0.994);
+}
+
+.section-reveal-2 {
+  transform: translateX(18px) scale(0.994);
+}
+
+.section-reveal-3 {
+  transform: translateY(14px) scale(0.982);
+}
+
+.section-reveal-4 {
+  transform: translateY(18px) scale(0.992);
 }
 
 .section-reveal.section-in {
   opacity: 1;
   transform: translateY(0) scale(1);
+}
+
+.section-reveal:not(.section-in) * {
+  animation-play-state: paused !important;
+}
+
+.hero-orbit-star {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0.3;
+}
+
+.hero-orbit-star path {
+  transform-origin: center;
+  animation: hero-star-spin 12s linear infinite;
+}
+
+.star-one {
+  left: 8%;
+  top: 18%;
+  opacity: 0.42;
+  animation: hero-star-orbit-one 24s ease-in-out infinite;
+}
+
+.star-two {
+  right: 10%;
+  bottom: 18%;
+  opacity: 0.34;
+  animation: hero-star-orbit-two 29s ease-in-out infinite reverse;
+}
+
+.star-three {
+  right: 8%;
+  top: 47%;
+  opacity: 0.26;
+  animation: hero-star-orbit-three 31s ease-in-out infinite;
 }
 
 .tech-badge {
@@ -1350,15 +1501,14 @@ onUnmounted(() => {
   height: 18rem;
   border-radius: 999px;
   background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent 62%);
-  animation: process-glow-drift 4.8s ease-in-out infinite;
+  animation: none;
   pointer-events: none;
 }
 
 .working-process-panel svg {
   position: relative;
   z-index: 1;
-  filter: drop-shadow(0 14px 24px rgba(79, 70, 229, 0.12));
-  animation: process-panel-float 4.2s ease-in-out infinite;
+  animation: none;
 }
 
 .process-step-node {
@@ -1369,6 +1519,36 @@ onUnmounted(() => {
 
 .process-step-node:hover {
   transform: scale(1.08);
+}
+
+@media (max-width: 767px) {
+  .process-zigzag-svg {
+    margin-bottom: 0.25rem;
+  }
+
+  .process-step-label {
+    display: none;
+  }
+}
+
+.process-zigzag-path {
+  transition: stroke-dasharray 0.12s linear;
+}
+
+.process-travel-dot,
+.process-travel-halo,
+.process-travel-trail {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.process-travel-halo {
+  filter: blur(0.2px);
+  animation: process-dot-pulse 2.8s ease-in-out infinite;
+}
+
+.process-travel-trail {
+  filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.45));
 }
 
 .testimonial-card {
@@ -1387,6 +1567,32 @@ onUnmounted(() => {
   animation: testimonial-from-top 0.72s cubic-bezier(.22, 1, .36, 1) 0.38s both;
 }
 
+.section-in .service-lottie-icon {
+  animation: service-icon-dash-pop 0.58s cubic-bezier(.22, 1, .36, 1) var(--service-delay, 0s) both;
+}
+
+.section-in .service-lottie-icon::before {
+  animation: none;
+}
+
+.section-in .service-lottie-icon::after {
+  animation: service-core-pulse 4.2s ease-in-out calc(var(--service-delay, 0s) + 0.58s) infinite;
+}
+
+.section-in .service-svg-icon {
+  animation:
+    service-icon-scramble 0.48s steps(4, end) var(--service-delay, 0s) both,
+    service-icon-breathe 4.2s ease-in-out calc(var(--service-delay, 0s) + 0.48s) infinite;
+}
+
+.section-in .service-icon-orbit {
+  animation: none;
+}
+
+.section-in .service-icon-spark {
+  animation: service-spark 4.4s ease-in-out calc(var(--service-delay, 0s) + 0.58s) infinite;
+}
+
 @keyframes marquee {
   from { transform: translateX(0) }
   to { transform: translateX(-50%) }
@@ -1398,6 +1604,76 @@ onUnmounted(() => {
 @keyframes process-glow-drift {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.72; }
   50% { transform: translate3d(24rem, 4rem, 0) scale(1.18); opacity: 0.35; }
+}
+
+@keyframes hero-star-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hero-star-orbit-one {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  28% { transform: translate3d(4.5rem, 1.8rem, 0) rotate(42deg) scale(1.08); }
+  58% { transform: translate3d(2.2rem, 5.2rem, 0) rotate(96deg) scale(0.92); }
+  82% { transform: translate3d(-2.6rem, 2.2rem, 0) rotate(142deg) scale(1.04); }
+}
+
+@keyframes hero-star-orbit-two {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  30% { transform: translate3d(-5rem, -1.5rem, 0) rotate(-38deg) scale(1.1); }
+  62% { transform: translate3d(-2.8rem, -5rem, 0) rotate(-92deg) scale(0.94); }
+  84% { transform: translate3d(2.2rem, -2.4rem, 0) rotate(-150deg) scale(1.03); }
+}
+
+@keyframes hero-star-orbit-three {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  35% { transform: translate3d(-3.8rem, 2.2rem, 0) rotate(54deg) scale(1.12); }
+  68% { transform: translate3d(-1.2rem, -3.8rem, 0) rotate(126deg) scale(0.9); }
+}
+
+@keyframes process-dot-pulse {
+  0%, 100% { opacity: 0.18; transform: scale(0.92); }
+  50% { opacity: 0.36; transform: scale(1.16); }
+}
+
+@keyframes service-icon-dash-pop {
+  0% {
+    opacity: 0;
+    transform: translate3d(3.4rem, -0.4rem, 0) rotate(14deg) scale(0.7);
+  }
+  58% {
+    opacity: 1;
+    transform: translate3d(-0.42rem, 0, 0) rotate(-5deg) scale(1.08);
+  }
+  78% {
+    transform: translate3d(0.15rem, 0, 0) rotate(2deg) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes service-icon-scramble {
+  0% {
+    opacity: 0;
+    transform: translate3d(1rem, -0.6rem, 0) rotate(18deg) scale(0.68);
+  }
+  20% {
+    opacity: 0.55;
+    transform: translate3d(-0.5rem, 0.42rem, 0) rotate(-12deg) scale(1.1);
+  }
+  42% {
+    opacity: 0.85;
+    transform: translate3d(0.35rem, -0.25rem, 0) rotate(8deg) scale(0.92);
+  }
+  70% {
+    opacity: 1;
+    transform: translate3d(-0.12rem, 0.1rem, 0) rotate(-3deg) scale(1.04);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
 }
 
 @keyframes process-panel-float {

@@ -1,22 +1,30 @@
 <template>
-  <div class="min-h-screen bg-zinc-950 px-6 py-24 text-white overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-20 left-10 w-72 h-72 bg-violet-600/15 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-10 right-10 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl"></div>
+  <div class="work-page relative min-h-screen px-6 py-24 text-white overflow-hidden">
+    <div class="work-ambient absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="work-grid"></div>
+      <div class="work-orb work-orb-one"></div>
+      <div class="work-orb work-orb-two"></div>
+      <div class="work-orb work-orb-three"></div>
+      <svg class="work-star star-a" width="34" height="34" viewBox="0 0 40 40">
+        <path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#818cf8"/>
+      </svg>
+      <svg class="work-star star-b" width="24" height="24" viewBox="0 0 40 40">
+        <path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#c4b5fd"/>
+      </svg>
     </div>
 
     <div class="max-w-5xl mx-auto relative z-10">
       <div class="text-center mb-16">
-        <span class="text-xs uppercase tracking-widest text-violet-300 border border-violet-800 bg-violet-500/10 px-4 py-1 rounded-full">Our work</span>
+        <span class="text-xs uppercase tracking-widest text-indigo-200 border border-indigo-400/30 bg-indigo-500/15 px-4 py-1 rounded-full">Our work</span>
         <h2 class="text-4xl md:text-5xl font-black text-white mt-6 mb-4 tracking-tight">Projects we're proud of</h2>
-        <p class="text-zinc-400 max-w-md mx-auto">A selection of websites and apps we've built for our clients.</p>
+        <p class="text-slate-300 max-w-md mx-auto">A selection of websites and apps we've built for our clients.</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <article
           v-for="project in projects"
           :key="project.title"
-          class="work-card group bg-zinc-900/80 rounded-2xl overflow-hidden border border-zinc-800 hover:border-violet-500/70 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-violet-950/40"
+          class="work-card group bg-white/[0.055] rounded-2xl overflow-hidden border border-white/10 hover:border-indigo-400/55 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-950/40"
         >
           <div class="project-preview" :class="project.previewClass">
             <div class="preview-glow"></div>
@@ -86,9 +94,9 @@
           <div class="p-6">
             <span class="text-xs uppercase tracking-widest" :class="project.accent">{{ project.category }}</span>
             <h3 class="text-white font-bold text-xl mt-1 mb-2">{{ project.title }}</h3>
-            <p class="text-zinc-400 text-sm leading-relaxed">{{ project.desc }}</p>
+            <p class="text-slate-400 text-sm leading-relaxed">{{ project.desc }}</p>
             <div class="flex flex-wrap gap-2 mt-4">
-              <span v-for="tag in project.tags" :key="tag" class="text-xs bg-zinc-800 text-zinc-300 px-3 py-1 rounded-full">{{ tag }}</span>
+              <span v-for="tag in project.tags" :key="tag" class="text-xs bg-indigo-500/10 text-indigo-100 border border-indigo-300/10 px-3 py-1 rounded-full">{{ tag }}</span>
             </div>
           </div>
         </article>
@@ -139,8 +147,83 @@ const projects = [
 </script>
 
 <style scoped>
+.work-page {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(99, 102, 241, 0.24), transparent 34%),
+    radial-gradient(circle at 82% 16%, rgba(124, 58, 237, 0.22), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(34, 197, 94, 0.09), transparent 34%),
+    linear-gradient(135deg, #080b33 0%, #0f1147 52%, #1b0f58 100%);
+}
+
+.work-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(199, 210, 254, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(199, 210, 254, 0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 82%);
+  opacity: 0.7;
+  animation: work-grid-drift 22s linear infinite;
+}
+
+.work-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(28px);
+  opacity: 0.5;
+  transform: translate3d(0, 0, 0);
+  animation: work-orb-float 12s ease-in-out infinite;
+}
+
+.work-orb-one {
+  top: 7rem;
+  left: 7%;
+  width: 18rem;
+  height: 18rem;
+  background: rgba(99, 102, 241, 0.32);
+}
+
+.work-orb-two {
+  top: 16rem;
+  right: 8%;
+  width: 20rem;
+  height: 20rem;
+  background: rgba(167, 139, 250, 0.24);
+  animation-delay: -4s;
+}
+
+.work-orb-three {
+  bottom: 4rem;
+  left: 42%;
+  width: 16rem;
+  height: 16rem;
+  background: rgba(34, 197, 94, 0.12);
+  animation-delay: -7s;
+}
+
+.work-star {
+  position: absolute;
+  opacity: 0.28;
+  transform-origin: center;
+  animation: work-star-orbit 20s ease-in-out infinite;
+}
+
+.star-a {
+  top: 8.5rem;
+  right: 15%;
+}
+
+.star-b {
+  top: 31rem;
+  left: 12%;
+  animation-duration: 26s;
+  animation-direction: reverse;
+}
+
 .work-card {
   will-change: transform;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .project-preview {
@@ -168,44 +251,52 @@ const projects = [
 
 .preview-glow {
   position: absolute;
-  width: 14rem;
-  height: 14rem;
+  width: 15rem;
+  height: 15rem;
   border-radius: 999px;
-  filter: blur(42px);
-  opacity: 0.7;
-  animation: preview-float 5s ease-in-out infinite;
+  filter: blur(26px);
+  opacity: 0.55;
+  animation: preview-float 7s ease-in-out infinite;
 }
 
 .shop-preview {
-  background: linear-gradient(135deg, #2e1065, #111827);
+  background:
+    radial-gradient(circle at 22% 22%, rgba(129, 140, 248, 0.26), transparent 32%),
+    linear-gradient(135deg, #15175f 0%, #25125f 55%, #0f1147 100%);
 }
 
 .shop-preview .preview-glow {
-  background: rgba(139, 92, 246, 0.55);
+  background: rgba(129, 140, 248, 0.46);
 }
 
 .metrics-preview {
-  background: linear-gradient(135deg, #042f2e, #111827);
+  background:
+    radial-gradient(circle at 76% 24%, rgba(34, 197, 94, 0.16), transparent 30%),
+    linear-gradient(135deg, #0d1555 0%, #122063 50%, #0f1147 100%);
 }
 
 .metrics-preview .preview-glow {
-  background: rgba(20, 184, 166, 0.45);
+  background: rgba(34, 197, 94, 0.22);
 }
 
 .stay-preview {
-  background: linear-gradient(135deg, #451a03, #111827);
+  background:
+    radial-gradient(circle at 20% 78%, rgba(245, 158, 11, 0.16), transparent 30%),
+    linear-gradient(135deg, #1a1060 0%, #24115f 50%, #0f1147 100%);
 }
 
 .stay-preview .preview-glow {
-  background: rgba(245, 158, 11, 0.42);
+  background: rgba(167, 139, 250, 0.34);
 }
 
 .folio-preview {
-  background: linear-gradient(135deg, #4a044e, #111827);
+  background:
+    radial-gradient(circle at 72% 26%, rgba(236, 72, 153, 0.18), transparent 30%),
+    linear-gradient(135deg, #130f55 0%, #2d1b69 55%, #0f1147 100%);
 }
 
 .folio-preview .preview-glow {
-  background: rgba(236, 72, 153, 0.44);
+  background: rgba(196, 181, 253, 0.34);
 }
 
 .mock-browser {
@@ -217,7 +308,6 @@ const projects = [
   border-radius: 1rem;
   background: rgba(15, 23, 42, 0.78);
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.32);
-  backdrop-filter: blur(12px);
   overflow: hidden;
 }
 
@@ -357,7 +447,6 @@ const projects = [
   border-radius: 1rem;
   background: rgba(15, 23, 42, 0.76);
   box-shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(12px);
 }
 
 .hotel-card {
@@ -524,6 +613,21 @@ const projects = [
   to { background-position: 24px 24px; }
 }
 
+@keyframes work-grid-drift {
+  to { background-position: 44px 44px; }
+}
+
+@keyframes work-orb-float {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(1.2rem, -0.9rem, 0) scale(1.04); }
+}
+
+@keyframes work-star-orbit {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  35% { transform: translate3d(-2.8rem, 1.2rem, 0) rotate(72deg); }
+  70% { transform: translate3d(1.8rem, 2.8rem, 0) rotate(148deg); }
+}
+
 @keyframes preview-float {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
   50% { transform: translate3d(1rem, -0.7rem, 0) scale(1.08); }
@@ -567,5 +671,15 @@ const projects = [
 @keyframes brush-paint {
   0%, 100% { transform: rotate(-12deg) translate(0, 0); }
   50% { transform: rotate(8deg) translate(-0.5rem, -0.35rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .work-grid,
+  .work-orb,
+  .work-star,
+  .preview-glow,
+  .project-preview::before {
+    animation: none !important;
+  }
 }
 </style>

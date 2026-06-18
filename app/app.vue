@@ -10,9 +10,8 @@
       >
         <div class="preloader-grid"></div>
         <div class="preloader-glow preloader-glow-one"></div>
-        <div class="preloader-glow preloader-glow-two"></div>
 
-        <div class="preloader-orbit" aria-hidden="true">
+        <div class="preloader-orbit hidden" aria-hidden="true">
           <span></span>
           <span></span>
           <span></span>
@@ -79,12 +78,18 @@
 
     <!-- READING PROGRESS -->
     <div class="fixed top-0 left-0 right-0 z-[200] h-[3px] bg-white/10">
-      <div class="h-full bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-400 transition-all duration-100" :style="{ width: scrollProgress + '%' }"></div>
+      <div
+        ref="progressBar"
+        class="h-full origin-left scale-x-0 bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-400"
+      ></div>
     </div>
 
     <!-- NAVBAR -->
     <nav class="fixed top-2 left-0 right-0 z-[100] px-4 md:px-6">
-      <div class="max-w-6xl mx-auto flex items-center justify-between py-4 px-5 md:px-8 rounded-2xl bg-[#0f1147]/88 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/20">
+      <div
+        class="max-w-6xl mx-auto flex items-center justify-between py-4 px-5 md:px-8 rounded-2xl border border-white/10 shadow-lg shadow-black/20 transition-colors duration-200"
+        :class="menuOpen ? 'bg-[#080b33]' : 'bg-[#0f1147]/95'"
+      >
 
         <NuxtLink to="/">
           <img
@@ -107,7 +112,7 @@
         </a>
 
         <!-- hamburger -->
-        <button class="md:hidden text-white p-2" @click="menuOpen = !menuOpen">
+        <button class="md:hidden text-white p-2 rounded-xl bg-white/8 border border-white/10" @click="menuOpen = !menuOpen">
           <span class="block w-5 h-0.5 bg-white mb-1.5 transition-all origin-center" :class="menuOpen ? 'rotate-45 translate-y-2' : ''"></span>
           <span class="block w-5 h-0.5 bg-white mb-1.5 transition-all" :class="menuOpen ? 'opacity-0' : ''"></span>
           <span class="block w-5 h-0.5 bg-white transition-all origin-center" :class="menuOpen ? '-rotate-45 -translate-y-2' : ''"></span>
@@ -115,12 +120,12 @@
       </div>
 
       <!-- Mobile menu -->
-      <div v-if="menuOpen" class="md:hidden mt-2 bg-[#0f1147]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex flex-col gap-1 shadow-xl">
-        <NuxtLink to="/" class="text-slate-300 hover:text-white hover:bg-white/10 text-sm py-2.5 px-4 rounded-xl transition-all" @click="menuOpen = false">Home</NuxtLink>
-        <NuxtLink to="/#about" class="text-slate-300 hover:text-white hover:bg-white/10 text-sm py-2.5 px-4 rounded-xl transition-all" @click="menuOpen = false">About</NuxtLink>
-        <NuxtLink to="/#services" class="text-slate-300 hover:text-white hover:bg-white/10 text-sm py-2.5 px-4 rounded-xl transition-all" @click="menuOpen = false">Services</NuxtLink>
-        <NuxtLink to="/work" class="text-slate-300 hover:text-white hover:bg-white/10 text-sm py-2.5 px-4 rounded-xl transition-all" @click="menuOpen = false">Work</NuxtLink>
-        <NuxtLink to="/contact" class="text-slate-300 hover:text-white hover:bg-white/10 text-sm py-2.5 px-4 rounded-xl transition-all" @click="menuOpen = false">Contact</NuxtLink>
+      <div v-if="menuOpen" class="md:hidden mt-2 bg-[#080b33] border border-indigo-300/20 rounded-2xl p-4 flex flex-col gap-1 shadow-2xl shadow-indigo-950/50 ring-1 ring-white/10">
+        <NuxtLink to="/" class="text-slate-100 hover:text-white hover:bg-white/10 text-sm font-semibold py-2.5 px-4 rounded-xl transition-all" @click="menuOpen = false">Home</NuxtLink>
+        <NuxtLink to="/#about" class="text-slate-100 hover:text-white hover:bg-white/10 text-sm font-semibold py-2.5 px-4 rounded-xl transition-all" @click="menuOpen = false">About</NuxtLink>
+        <NuxtLink to="/#services" class="text-slate-100 hover:text-white hover:bg-white/10 text-sm font-semibold py-2.5 px-4 rounded-xl transition-all" @click="menuOpen = false">Services</NuxtLink>
+        <NuxtLink to="/work" class="text-slate-100 hover:text-white hover:bg-white/10 text-sm font-semibold py-2.5 px-4 rounded-xl transition-all" @click="menuOpen = false">Work</NuxtLink>
+        <NuxtLink to="/contact" class="text-slate-100 hover:text-white hover:bg-white/10 text-sm font-semibold py-2.5 px-4 rounded-xl transition-all" @click="menuOpen = false">Contact</NuxtLink>
         <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
           class="bg-gradient-to-r from-indigo-600 to-violet-600 text-white text-sm font-semibold px-4 py-2.5 rounded-xl text-center mt-2" @click="menuOpen = false">
           Get a Quote →
@@ -135,7 +140,7 @@
     <button
       type="button"
       class="back-to-top"
-      :class="{ 'is-visible': scrollProgress > 8 }"
+      :class="{ 'is-visible': backToTopVisible }"
       aria-label="Back to top"
       @click="scrollToTop"
     >
@@ -266,12 +271,9 @@ const loadingTexts = ['Loading']
 const magneticDots = [
   { x: -44, y: -22, delay: 0.02, size: 5, hue: '#818cf8' },
   { x: -32, y: 18, delay: 0.1, size: 4, hue: '#c4b5fd' },
-  { x: -14, y: 28, delay: 0.06, size: 4, hue: '#a78bfa' },
   { x: -6, y: -18, delay: 0.22, size: 5, hue: '#93c5fd' },
   { x: 8, y: 22, delay: 0.12, size: 6, hue: '#818cf8' },
-  { x: 16, y: -26, delay: 0.28, size: 4, hue: '#c4b5fd' },
   { x: 34, y: -18, delay: 0.16, size: 6, hue: '#a78bfa' },
-  { x: 44, y: 24, delay: 0.24, size: 4, hue: '#93c5fd' },
 ].map(dot => ({
   ...dot,
   x: `${dot.x}vw`,
@@ -285,7 +287,9 @@ const magneticDots = [
 }))
 
 const menuOpen = ref(false)
-const scrollProgress = ref(0)
+const progressBar = ref(null)
+const backToTopVisible = ref(false)
+let scrollRaf = 0
 
 const footerServices = [
   'Website Development',
@@ -296,10 +300,22 @@ const footerServices = [
 ]
 
 function onScroll() {
-  const el = document.documentElement
-  const scrolled = el.scrollTop || document.body.scrollTop
-  const total = el.scrollHeight - el.clientHeight
-  scrollProgress.value = total > 0 ? Math.round((scrolled / total) * 100) : 0
+  if (scrollRaf) return
+  scrollRaf = requestAnimationFrame(() => {
+    const el = document.documentElement
+    const scrolled = el.scrollTop || document.body.scrollTop
+    const total = el.scrollHeight - el.clientHeight
+    const progress = total > 0 ? scrolled / total : 0
+    if (progressBar.value) {
+      progressBar.value.style.transform = `scaleX(${Math.min(Math.max(progress, 0), 1)})`
+    }
+
+    const shouldShowBackToTop = progress > 0.08
+    if (backToTopVisible.value !== shouldShowBackToTop) {
+      backToTopVisible.value = shouldShowBackToTop
+    }
+    scrollRaf = 0
+  })
 }
 
 function scrollToTop() {
@@ -307,34 +323,26 @@ function scrollToTop() {
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', onScroll)
+  window.addEventListener('scroll', onScroll, { passive: true })
+  onScroll()
 
-  const duration = 2200
-  const start = performance.now()
+  const duration = 1150
 
-  const textTimer = setInterval(() => {
-    if (loadingTextIdx.value < loadingTexts.length - 1) {
-      loadingTextIdx.value++
-    }
-  }, duration / loadingTexts.length)
+  requestAnimationFrame(() => {
+    loadingProgress.value = 100
+  })
 
-  const progressTimer = setInterval(() => {
-    const elapsed = performance.now() - start
-    const pct = Math.min(Math.round((elapsed / duration) * 100), 100)
-    loadingProgress.value = pct
-    if (pct >= 100) {
-      clearInterval(progressTimer)
-      clearInterval(textTimer)
-      loadingTextIdx.value = loadingTexts.length - 1
-      setTimeout(() => {
-        curtainOpening.value = true
-        setTimeout(() => { loading.value = false }, 1420)
-      }, 280)
-    }
-  }, 32)
+  setTimeout(() => {
+    loadingTextIdx.value = loadingTexts.length - 1
+    curtainOpening.value = true
+    setTimeout(() => { loading.value = false }, 520)
+  }, duration)
 })
 
-onUnmounted(() => window.removeEventListener('scroll', onScroll))
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
+  if (scrollRaf) cancelAnimationFrame(scrollRaf)
+})
 </script>
 
 <style>
@@ -435,7 +443,7 @@ html, body {
     linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
   background-size: 42px 42px;
   mask-image: radial-gradient(circle at center, black 0%, transparent 68%);
-  opacity: 0.3;
+  opacity: 0.22;
 }
 
 .preloader-glow {
@@ -443,7 +451,7 @@ html, body {
   width: 14rem;
   height: 14rem;
   border-radius: 999px;
-  filter: blur(36px);
+  filter: blur(16px);
   pointer-events: none;
 }
 
@@ -451,7 +459,7 @@ html, body {
   top: 14%;
   left: 16%;
   background: rgba(99, 102, 241, 0.28);
-  animation: loader-float 5s ease-in-out infinite;
+  animation: none;
 }
 
 .preloader-glow-two {
@@ -516,6 +524,7 @@ html, body {
   z-index: 4;
   pointer-events: none;
   overflow: hidden;
+  display: none;
 }
 
 .magnetic-field span {
@@ -527,17 +536,16 @@ html, body {
   border-radius: 999px;
   background: var(--hue);
   box-shadow:
-    0 0 10px rgba(129, 140, 248, 0.45),
-    0 0 18px rgba(167, 139, 250, 0.22);
+    0 0 8px rgba(129, 140, 248, 0.35);
   opacity: 0.78;
   transform: translate3d(var(--x), var(--y), 0) scale(0.72);
   will-change: transform, opacity;
-  animation: magnetic-gather 2.25s cubic-bezier(.22, 1, .36, 1) infinite;
+  animation: magnetic-gather 1.7s cubic-bezier(.22, 1, .36, 1) infinite;
   animation-delay: var(--delay);
 }
 
 .preloader.is-opening .magnetic-field span {
-  animation: magnetic-release 1.05s cubic-bezier(.16, 1, .3, 1) forwards;
+  animation: magnetic-release 0.7s cubic-bezier(.16, 1, .3, 1) forwards;
   animation-delay: var(--delay);
 }
 
@@ -560,8 +568,7 @@ html, body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 18px 28px rgba(129, 140, 248, 0.22));
-  animation: loader-letter 1.5s ease-in-out infinite;
+  animation: loader-letter 1.05s cubic-bezier(.22, 1, .36, 1) both;
 }
 
 .loader-reference-text {
@@ -577,7 +584,7 @@ html, body {
   display: inline-block;
   width: 1.15rem;
   text-align: left;
-  animation: loading-dots 1.2s steps(4, end) infinite;
+  animation: loading-dots 1.4s steps(4, end) infinite;
 }
 
 .loader-status {
@@ -684,8 +691,8 @@ html, body {
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, #6366f1, #a78bfa, #22c55e);
-  box-shadow: 0 0 18px rgba(167, 139, 250, 0.72);
-  transition: width 0.28s ease;
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.38);
+  transition: width 1.05s cubic-bezier(.22, 1, .36, 1);
 }
 
 .preloader.is-opening {
@@ -709,7 +716,7 @@ html, body {
 }
 
 .preloader.is-opening .brand-loader {
-  animation: logo-soft-release 1.12s cubic-bezier(.22, 1, .36, 1) forwards;
+  animation: logo-soft-release 0.72s cubic-bezier(.22, 1, .36, 1) forwards;
 }
 
 .preloader.is-opening .loader-reference-text,
@@ -741,7 +748,7 @@ html, body {
 .loader-leave-active .preloader-glow,
 .loader-leave-active .preloader-orbit,
 .loader-leave-active .relative.z-10 {
-  transition: opacity 0.35s ease, transform 0.55s ease, filter 0.55s ease;
+  transition: opacity 0.28s ease, transform 0.42s ease;
 }
 
 .loader-leave-to .preloader-grid,
@@ -749,7 +756,6 @@ html, body {
 .loader-leave-to .preloader-orbit,
 .loader-leave-to .relative.z-10 {
   opacity: 0;
-  filter: blur(10px);
   transform: scale(0.94);
 }
 
@@ -766,7 +772,6 @@ html, body {
   45% {
     opacity: 1;
     transform: translateY(-0.32rem) scale(1.03);
-    filter: drop-shadow(0 18px 34px rgba(167, 139, 250, 0.38));
   }
 }
 
@@ -822,17 +827,14 @@ html, body {
 @keyframes logo-soft-release {
   0% {
     opacity: 1;
-    filter: blur(0) drop-shadow(0 18px 28px rgba(129, 140, 248, 0.22));
     transform: translateY(0) scale(1);
   }
   42% {
     opacity: 1;
-    filter: blur(0) drop-shadow(0 22px 36px rgba(167, 139, 250, 0.34));
     transform: translateY(-0.72rem) scale(0.9);
   }
   100% {
     opacity: 0;
-    filter: blur(12px) drop-shadow(0 26px 42px rgba(167, 139, 250, 0));
     transform: translateY(-1.35rem) scale(0.76);
   }
 }
