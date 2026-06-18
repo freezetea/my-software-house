@@ -19,7 +19,7 @@
             <span
               v-for="(letter, i) in brandLetters"
               :key="`${letter}-${i}`"
-              :style="{ animationDelay: `${i * 0.08}s` }"
+              :style="{ animationDelay: `${i * 0.08}s`, '--spread': i - (brandLetters.length - 1) / 2 }"
             >
               {{ letter }}
             </span>
@@ -204,7 +204,7 @@
             <li><NuxtLink to="/contact" class="text-slate-400 hover:text-indigo-300 text-sm transition-colors">Contact</NuxtLink></li>
             <li><a href="https://kodakode.com/blog-standard/" target="_blank" class="text-slate-400 hover:text-indigo-300 text-sm transition-colors">Blog</a></li>
           </ul>
-          <div class="mt-6">
+          <div class="hidden mt-6">
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
               class="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 hover:bg-green-500/20 text-green-400 text-xs font-medium px-4 py-2 rounded-xl transition-all hover:-translate-y-0.5">
               <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 shrink-0" fill="#4ade80" xmlns="http://www.w3.org/2000/svg">
@@ -388,8 +388,9 @@ html, body {
 }
 
 .brand-loader {
-  display: flex;
-  gap: clamp(0.35rem, 1.6vw, 0.85rem);
+  position: relative;
+  width: min(24rem, 86vw);
+  height: clamp(2.4rem, 8vw, 5rem);
   font-size: clamp(1.8rem, 7vw, 4.2rem);
   font-weight: 900;
   letter-spacing: 0;
@@ -397,13 +398,17 @@ html, body {
 }
 
 .brand-loader span {
-  display: inline-block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
   background: linear-gradient(180deg, #ffffff 0%, #c7d2fe 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   text-shadow: 0 18px 40px rgba(129, 140, 248, 0.28);
-  animation: loader-letter 1.4s ease-in-out infinite;
+  transform: translate(-50%, -50%);
+  animation: loader-letter 2.2s cubic-bezier(.34, 1.56, .64, 1) infinite;
 }
 
 .loader-status {
@@ -519,13 +524,33 @@ html, body {
 }
 
 @keyframes loader-letter {
-  0%, 100% {
-    opacity: 0.68;
-    transform: translateY(0);
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.76);
   }
-  45% {
+  12% {
     opacity: 1;
-    transform: translateY(-0.45rem);
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  48% {
+    opacity: 1;
+    transform: translate(
+      calc(-50% + (var(--spread) * clamp(1.52rem, 6.2vw, 2.95rem))),
+      -50%
+    ) scale(1.08);
+  }
+  64% {
+    transform: translate(
+      calc(-50% + (var(--spread) * clamp(1.32rem, 5.5vw, 2.55rem))),
+      -50%
+    ) scale(0.98);
+  }
+  78%, 100% {
+    opacity: 1;
+    transform: translate(
+      calc(-50% + (var(--spread) * clamp(1.42rem, 5.8vw, 2.72rem))),
+      -50%
+    ) scale(1);
   }
 }
 
