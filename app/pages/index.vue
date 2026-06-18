@@ -806,7 +806,7 @@ onMounted(() => {
           renderer: 'svg',
           loop: true,
           autoplay: true,
-          path: '/Web_Development.json'
+          path: '/Software_House_Alive.json'
         })
       }
 
