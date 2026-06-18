@@ -55,69 +55,37 @@
       </div>
     </section>
 
-    <!-- PARTNERS — WHITE with mobile carousel -->
-<section class="py-16 bg-white">
-  <div class="max-w-6xl mx-auto px-4 md:px-6">
-    <div class="text-center mb-10">
-      <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-600 bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-full mb-3">Global Partners</div>
-      <h2 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">World Wide Partners</h2>
-      <p class="text-gray-500 text-sm mt-2">Trusted by businesses across Indonesia and beyond</p>
-    </div>
-
-    <!-- Desktop: grid biasa -->
-    <div class="hidden md:grid grid-cols-4 gap-4">
-      <a v-for="partner in partners" :key="partner.name" :href="partner.url" target="_blank"
-        class="group flex flex-col items-center gap-3 bg-gray-50 hover:bg-indigo-50 border border-gray-200 hover:border-indigo-300 rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-indigo-100">
-        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl font-black text-white shadow-md transition-transform group-hover:scale-110 duration-300"
-          :style="`background: linear-gradient(135deg, ${partner.color1}, ${partner.color2})`">
-          {{ partner.logo }}
+    <!-- PARTNERS — WHITE -->
+    <section class="py-20 px-4 md:px-6 bg-white relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-0 left-0 w-72 h-72 bg-indigo-50 rounded-full opacity-40 -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-50 rounded-full opacity-30 translate-x-1/3 translate-y-1/3"></div>
+      </div>
+      <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-14">
+          <span class="inline-block text-xs font-semibold tracking-widest uppercase text-indigo-500 mb-3">Global Partners</span>
+          <h2 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">World Wide Partners</h2>
+          <p class="text-gray-500 text-sm mt-2">Trusted by businesses across Indonesia and beyond</p>
         </div>
-        <div class="text-center">
-          <div class="text-gray-800 font-bold text-sm group-hover:text-indigo-700 transition-colors">{{ partner.name }}</div>
-          <div class="text-gray-400 text-xs mt-0.5">{{ partner.type }}</div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+          <a
+            v-for="partner in partners"
+            :key="partner.name"
+            :href="partner.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex items-center justify-center p-6 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 hover:-translate-y-1"
+          >
+            <img
+              :src="partner.logo"
+              :alt="partner.name"
+               class="max-h-14 w-auto object-contain transition-all duration-300"
+              loading="lazy"
+            />
+          </a>
         </div>
-        <div class="text-indigo-500 text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">Visit site →</div>
-      </a>
-    </div>
-
-    <!-- Mobile: swipeable carousel -->
-    <div class="md:hidden relative">
-      <div
-        ref="carouselRef"
-        class="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scroll-smooth"
-        style="scrollbar-width:none; -ms-overflow-style:none;"
-        @scroll="onCarouselScroll">
-        <a v-for="partner in partners" :key="partner.name" :href="partner.url" target="_blank"
-          class="flex-shrink-0 snap-center w-40 flex flex-col items-center gap-3 bg-gray-50 border border-gray-200 rounded-2xl p-5 transition-all duration-300 active:scale-95">
-          <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl font-black text-white shadow-md"
-            :style="`background: linear-gradient(135deg, ${partner.color1}, ${partner.color2})`">
-            {{ partner.logo }}
-          </div>
-          <div class="text-center">
-            <div class="text-gray-800 font-bold text-sm">{{ partner.name }}</div>
-            <div class="text-gray-400 text-xs mt-0.5">{{ partner.type }}</div>
-          </div>
-          <div class="text-indigo-500 text-xs font-medium flex items-center gap-1">Visit site →</div>
-        </a>
       </div>
-
-      <!-- dot indicators -->
-      <div class="flex justify-center gap-1.5 mt-4">
-        <button
-          v-for="(_, i) in partners" :key="i"
-          @click="scrollToPartner(i)"
-          :class="['w-1.5 h-1.5 rounded-full transition-all duration-300',
-            carouselIndex === i ? 'bg-indigo-600 w-4' : 'bg-gray-300']">
-        </button>
-      </div>
-
-      <!-- swipe hint -->
-      <div v-if="showSwipeHint" class="flex items-center justify-center gap-1 mt-3 text-gray-400 text-xs animate-pulse">
-        <span>←</span> swipe to see more <span>→</span>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- ABOUT — WHITE -->
     <section id="about" class="py-20 md:py-28 px-4 md:px-6 bg-white relative overflow-hidden">
@@ -541,25 +509,7 @@ const partners = [
   { name: 'YPI Asia', logo: 'https://kodakode.com/wp-content/uploads/2025/07/1.png', url: 'https://www.ypi-asia.com/' },
 ]
 
-// carousel
-const carouselRef = ref(null)
-const carouselIndex = ref(0)
-const showSwipeHint = ref(true)
 
-function onCarouselScroll() {
-  showSwipeHint.value = false
-  if (!carouselRef.value) return
-  const el = carouselRef.value
-  const cardWidth = 160 + 16 // w-40 + gap-4
-  carouselIndex.value = Math.round(el.scrollLeft / cardWidth)
-}
-
-function scrollToPartner(i) {
-  if (!carouselRef.value) return
-  const cardWidth = 160 + 16
-  carouselRef.value.scrollTo({ left: i * cardWidth, behavior: 'smooth' })
-  carouselIndex.value = i
-}
 
 const aboutCards = [
   { icon: '💡', title: 'IT Consulting', desc: 'Smart strategies to boost performance and security.', lottie: '/Backend_Icon.json' },
