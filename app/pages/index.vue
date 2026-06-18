@@ -336,9 +336,10 @@
         <div class="text-center mb-12">
           <div class="inline-flex items-center gap-2 text-xs font-medium text-violet-300 bg-violet-500/15 border border-violet-500/30 px-3 py-1.5 rounded-full mb-4">Our Testimonials</div>
           <h2 class="text-3xl md:text-4xl font-black tracking-tight">
-            What Our Clients Say<br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">About Solutions</span>
+            Real Results From<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-indigo-400">Growing Businesses</span>
           </h2>
+          <p class="text-slate-400 text-sm mt-4 max-w-xl mx-auto">See how founders and teams use our websites, apps, and systems to sell faster, operate smoother, and look more credible online.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div v-for="(t, i) in testimonials" :key="t.name"
@@ -346,11 +347,18 @@
               i === 1 ? 'md:mt-8' : '']">
             <div class="absolute inset-0 bg-gradient-to-br from-violet-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"></div>
             <div class="absolute top-4 right-6 text-6xl text-violet-500/15 font-serif leading-none">"</div>
-            <div class="flex items-center gap-1 mb-1 relative z-10">
+            <div class="hidden items-center gap-1 mb-1 relative z-10">
               <span v-for="n in 5" :key="n" class="text-yellow-400 text-sm">★</span>
             </div>
-            <div class="text-white font-bold text-sm mb-3 relative z-10">Excellent Works</div>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6 relative z-10">"{{ t.text }}"</p>
+            <div class="flex items-center justify-between gap-3 mb-4 relative z-10">
+              <div class="flex items-center gap-1">
+                <span v-for="n in 5" :key="n" class="text-yellow-400 text-sm">★</span>
+              </div>
+              <span class="text-[11px] font-semibold text-violet-200 bg-violet-500/15 border border-violet-400/20 px-2.5 py-1 rounded-full">{{ t.result }}</span>
+            </div>
+            <div class="text-white font-bold text-sm mb-3 relative z-10">{{ t.headline }}</div>
+            <p class="text-slate-400 text-sm leading-relaxed mb-5 relative z-10">"{{ t.text }}"</p>
+            <div class="text-xs text-violet-200/90 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 mb-5 relative z-10">{{ t.cta }}</div>
             <div class="flex items-center gap-3 pt-4 border-t border-white/5 relative z-10">
               <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-violet-600/40 to-indigo-600/40 border border-violet-500/30 flex items-center justify-center text-violet-300 font-black text-base shrink-0">
                 {{ t.name.charAt(0) }}
@@ -358,6 +366,7 @@
               <div>
                 <div class="text-white font-bold text-sm">{{ t.name }}</div>
                 <div class="text-slate-500 text-xs">{{ t.role }}</div>
+                <div class="text-slate-600 text-[11px] mt-0.5">{{ t.company }}</div>
               </div>
             </div>
           </div>
@@ -947,6 +956,36 @@ const steps = [
 ]
 
 const testimonials = [
+  {
+    name: 'Andrew D. Bricker',
+    role: 'Founder',
+    company: 'Bali hospitality brand',
+    result: '+38% inquiries',
+    headline: 'The website finally feels like our business.',
+    text: 'We came in with scattered ideas and left with a site that made our offer clear. Within the first month, more guests contacted us directly instead of asking basic questions over chat.',
+    cta: 'Best for founders who need a website that explains, sells, and builds trust before the first call.',
+  },
+  {
+    name: 'Jose T. McMichael',
+    role: 'Operations Manager',
+    company: 'Service-based company',
+    result: '2x faster workflow',
+    headline: 'They built the system around how our team actually works.',
+    text: 'The dashboard removed a lot of manual follow-up from our daily routine. It feels simple for the team, but the automation behind it saves hours every week.',
+    cta: 'A strong fit if your business is growing but your operations are still handled manually.',
+  },
+  {
+    name: 'Marcel A. Shannon',
+    role: 'Marketing Lead',
+    company: 'Digital-first SME',
+    result: 'Better conversion',
+    headline: 'More polished, more credible, and easier to act on.',
+    text: 'The new design helped visitors understand what we do much faster. The pages feel professional without being heavy, and our campaign traffic now has a clearer path to convert.',
+    cta: 'Ideal for teams that already have traffic and want to turn more visitors into real leads.',
+  },
+]
+
+const legacyTestimonials = [
   { name: 'Andrew D. Bricker', role: 'CEO & Founder', text: 'Their expertise and clear communication made the entire process smooth and efficient. Highly recommended for website development.' },
   { name: 'Jose T. McMichael', role: 'Senior Manager', text: 'A reliable partner that truly understands our business goals and turns them into effective digital solutions especially website development.' },
   { name: 'Marcel A. Shannon', role: 'Senior Manager', text: 'Excellent service from start to finish — innovative, responsive, and results-driven.' },
