@@ -3,37 +3,57 @@
 
     <!-- LOADING SCREEN -->
     <Transition name="loader">
-      <div v-if="loading" class="fixed inset-0 z-[999] flex flex-col items-center justify-center" style="background: linear-gradient(135deg, #0a0d3d 0%, #0f1147 60%, #1a1060 100%)">
-        <svg class="absolute top-16 left-16 opacity-40 animate-spin" style="animation-duration:20s" width="32" height="32" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#818cf8"/></svg>
-        <svg class="absolute bottom-16 right-16 opacity-30 animate-spin" style="animation-duration:28s;animation-direction:reverse" width="22" height="22" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#a78bfa"/></svg>
-        <svg class="absolute top-1/3 right-1/4 opacity-20 animate-spin" style="animation-duration:15s" width="16" height="16" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#c4b5fd"/></svg>
-        <svg class="absolute bottom-1/3 left-1/4 opacity-25 animate-spin" style="animation-duration:22s;animation-direction:reverse" width="14" height="14" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#818cf8"/></svg>
-        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-violet-600/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div v-if="loading" class="preloader fixed inset-0 z-[999] flex items-center justify-center overflow-hidden">
+        <div class="preloader-grid"></div>
+        <div class="preloader-glow preloader-glow-one"></div>
+        <div class="preloader-glow preloader-glow-two"></div>
 
-        <!-- LOGO -->
-        <img
-          src="https://kodakode.com/wp-content/uploads/2023/02/kodakode-logo-biru-teks-putih-300x106.png"
-          alt="kodakode logo"
-          class="h-16 w-auto mb-8 relative z-10"
-        />
+        <div class="preloader-orbit" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
 
-        <!-- animated loading text -->
-        <div class="text-slate-400 text-sm font-medium mb-8 relative z-10 h-5 overflow-hidden">
-          <div class="loading-text-wrap" :style="`transform: translateY(-${loadingTextIdx * 20}px); transition: transform 0.4s ease`">
-            <div v-for="t in loadingTexts" :key="t" class="h-5 flex items-center justify-center text-indigo-300">{{ t }}</div>
+        <div class="relative z-10 flex flex-col items-center px-6 text-center">
+          <div class="brand-loader mb-5" aria-label="KODAKODE">
+            <span
+              v-for="(letter, i) in brandLetters"
+              :key="`${letter}-${i}`"
+              :style="{ animationDelay: `${i * 0.08}s` }"
+            >
+              {{ letter }}
+            </span>
           </div>
-        </div>
 
-        <!-- progress bar -->
-        <div class="w-48 h-1 bg-white/10 rounded-full overflow-hidden relative z-10">
-          <div class="h-full bg-gradient-to-r from-indigo-500 via-violet-500 to-indigo-500 rounded-full transition-all duration-300" :style="`width: ${loadingProgress}%`"></div>
-        </div>
-        <div class="text-slate-600 text-xs mt-3 relative z-10">{{ loadingProgress }}%</div>
+          <div class="loader-status mb-8">
+            <span class="loader-pulse-dot"></span>
+            <span class="h-5 overflow-hidden">
+              <span class="loading-text-wrap" :style="`transform: translateY(-${loadingTextIdx * 20}px); transition: transform 0.45s cubic-bezier(.22,1,.36,1)`">
+                <span v-for="t in loadingTexts" :key="t" class="h-5 flex items-center justify-center">{{ t }}</span>
+              </span>
+            </span>
+          </div>
 
-        <!-- bouncing dots -->
-        <div class="flex gap-2 mt-6 relative z-10">
-          <div v-for="i in 3" :key="i" class="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" :style="`animation-delay: ${(i-1) * 0.15}s`"></div>
+          <div class="loader-ring mb-7">
+            <svg viewBox="0 0 120 120" class="loader-ring-svg" aria-hidden="true">
+              <circle cx="60" cy="60" r="48" class="loader-ring-track" />
+              <circle
+                cx="60"
+                cy="60"
+                r="48"
+                class="loader-ring-progress"
+                :style="{ strokeDashoffset: 302 - (302 * loadingProgress) / 100 }"
+              />
+            </svg>
+            <div class="loader-ring-core">
+              <span>{{ loadingProgress }}</span>
+              <small>%</small>
+            </div>
+          </div>
+
+          <div class="loader-bar">
+            <div :style="{ width: `${loadingProgress}%` }"></div>
+          </div>
         </div>
       </div>
     </Transition>
@@ -211,12 +231,13 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const loading = ref(true)
 const loadingProgress = ref(0)
 const loadingTextIdx = ref(0)
+const brandLetters = 'KODAKODE'.split('')
 const loadingTexts = [
-  'Initializing...',
-  'Loading assets...',
-  'Building UI...',
-  'Almost ready...',
-  'Welcome to kodakode!',
+  'Loading',
+  'Preparing ideas',
+  'Building experience',
+  'Almost ready',
+  'Welcome to kodakode',
 ]
 
 const menuOpen = ref(false)
@@ -274,16 +295,269 @@ html, body {
   padding: 0;
 }
 
-.loader-leave-active {
-  transition: opacity 0.6s ease, transform 0.6s ease;
+.preloader {
+  background:
+    radial-gradient(circle at 50% 45%, rgba(124, 58, 237, 0.28), transparent 32%),
+    radial-gradient(circle at 22% 24%, rgba(79, 70, 229, 0.24), transparent 28%),
+    linear-gradient(135deg, #080b33 0%, #0f1147 52%, #1b0f58 100%);
+  color: white;
 }
-.loader-leave-to {
-  opacity: 0;
-  transform: scale(1.05);
+
+.preloader-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at center, black 0%, transparent 68%);
+  opacity: 0.55;
+  animation: loader-grid-drift 10s linear infinite;
+}
+
+.preloader-glow {
+  position: absolute;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 999px;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.preloader-glow-one {
+  top: 14%;
+  left: 16%;
+  background: rgba(99, 102, 241, 0.28);
+  animation: loader-float 5s ease-in-out infinite;
+}
+
+.preloader-glow-two {
+  right: 16%;
+  bottom: 12%;
+  background: rgba(168, 85, 247, 0.22);
+  animation: loader-float 6s ease-in-out infinite reverse;
+}
+
+.preloader-orbit {
+  position: absolute;
+  width: min(72vw, 28rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  animation: loader-orbit 10s linear infinite;
+}
+
+.preloader-orbit::before,
+.preloader-orbit::after {
+  content: "";
+  position: absolute;
+  inset: 15%;
+  border: 1px solid rgba(129, 140, 248, 0.16);
+  border-radius: 999px;
+}
+
+.preloader-orbit::after {
+  inset: 30%;
+  border-color: rgba(196, 181, 253, 0.18);
+}
+
+.preloader-orbit span {
+  position: absolute;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: #c4b5fd;
+  box-shadow: 0 0 24px rgba(196, 181, 253, 0.8);
+}
+
+.preloader-orbit span:nth-child(1) {
+  top: -0.25rem;
+  left: 50%;
+}
+
+.preloader-orbit span:nth-child(2) {
+  right: 12%;
+  bottom: 18%;
+  background: #818cf8;
+}
+
+.preloader-orbit span:nth-child(3) {
+  left: 14%;
+  bottom: 20%;
+  background: #a78bfa;
+}
+
+.brand-loader {
+  display: flex;
+  gap: clamp(0.35rem, 1.6vw, 0.85rem);
+  font-size: clamp(1.8rem, 7vw, 4.2rem);
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.brand-loader span {
+  display: inline-block;
+  background: linear-gradient(180deg, #ffffff 0%, #c7d2fe 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 18px 40px rgba(129, 140, 248, 0.28);
+  animation: loader-letter 1.4s ease-in-out infinite;
+}
+
+.loader-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  height: 2.25rem;
+  padding: 0 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #c7d2fe;
+  font-size: 0.82rem;
+  font-weight: 700;
+  backdrop-filter: blur(16px);
+}
+
+.loader-pulse-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 18px rgba(34, 197, 94, 0.8);
+  animation: loader-pulse 1.1s ease-in-out infinite;
 }
 
 .loading-text-wrap {
   display: flex;
   flex-direction: column;
+}
+
+.loader-ring {
+  position: relative;
+  width: 7.5rem;
+  height: 7.5rem;
+}
+
+.loader-ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.loader-ring-track,
+.loader-ring-progress {
+  fill: none;
+  stroke-width: 7;
+}
+
+.loader-ring-track {
+  stroke: rgba(255, 255, 255, 0.08);
+}
+
+.loader-ring-progress {
+  stroke: url("#loader-gradient");
+  stroke: #a78bfa;
+  stroke-linecap: round;
+  stroke-dasharray: 302;
+  transition: stroke-dashoffset 0.28s ease;
+  filter: drop-shadow(0 0 10px rgba(167, 139, 250, 0.65));
+}
+
+.loader-ring-core {
+  position: absolute;
+  inset: 1.35rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.12rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(15, 17, 71, 0.72);
+  box-shadow: inset 0 0 28px rgba(129, 140, 248, 0.18);
+  backdrop-filter: blur(12px);
+}
+
+.loader-ring-core span {
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: white;
+}
+
+.loader-ring-core small {
+  color: #a5b4fc;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.loader-bar {
+  width: min(18rem, 68vw);
+  height: 0.28rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.loader-bar div {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #6366f1, #a78bfa, #22c55e);
+  box-shadow: 0 0 18px rgba(167, 139, 250, 0.72);
+  transition: width 0.28s ease;
+}
+
+.loader-leave-active {
+  transition: opacity 0.75s ease, transform 0.75s ease, filter 0.75s ease;
+}
+
+.loader-leave-to {
+  opacity: 0;
+  filter: blur(12px);
+  transform: scale(1.04);
+}
+
+@keyframes loader-letter {
+  0%, 100% {
+    opacity: 0.68;
+    transform: translateY(0);
+  }
+  45% {
+    opacity: 1;
+    transform: translateY(-0.45rem);
+  }
+}
+
+@keyframes loader-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-grid-drift {
+  to {
+    background-position: 42px 42px;
+  }
+}
+
+@keyframes loader-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(1rem, -0.75rem, 0) scale(1.08);
+  }
+}
+
+@keyframes loader-pulse {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
 }
 </style>

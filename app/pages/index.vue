@@ -395,7 +395,9 @@
           </h2>
           <p class="text-gray-500 text-sm leading-relaxed mb-8">Empower your business with innovative IT solutions. Let's turn your ideas into technology.</p>
           <div class="bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100 rounded-3xl p-6 relative overflow-hidden mb-6">
-            <svg viewBox="0 0 280 160" class="w-full" xmlns="http://www.w3.org/2000/svg">
+            <div class="absolute top-0 right-0 w-28 h-28 bg-indigo-200/30 rounded-full blur-2xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+            <div id="lottie-growth" class="relative z-10 w-full h-52"></div>
+            <svg viewBox="0 0 280 160" class="hidden w-full" xmlns="http://www.w3.org/2000/svg">
               <rect x="20" y="30" width="160" height="110" rx="12" fill="#ede9fe" stroke="#6366f1" stroke-width="1.5"/>
               <path d="M20 42 L100 90 L180 42" stroke="#6366f1" stroke-width="2" fill="none"/>
               <path d="M20 140 L70 95" stroke="#a78bfa" stroke-width="1.5" opacity="0.5"/>
@@ -420,7 +422,7 @@
               </circle>
             </svg>
           </div>
-          <div class="flex flex-col gap-2">
+          <div class="hidden flex-col gap-2">
             <a href="mailto:info@kodakode.com" class="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">📧 info@kodakode.com</a>
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank" class="flex items-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors text-sm">💬 Chat on WhatsApp</a>
           </div>
@@ -477,7 +479,7 @@
             Get Free Quote <span class="group-hover:translate-x-1 transition-transform">→</span>
           </a>
           <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
-            class="border border-white/20 bg-white/5 hover:border-violet-500/50 hover:bg-violet-600/10 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 inline-flex items-center gap-2 hover:-translate-y-1">
+            class="hidden border border-white/20 bg-white/5 hover:border-violet-500/50 hover:bg-violet-600/10 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 items-center gap-2 hover:-translate-y-1">
             💬 Chat on WhatsApp
           </a>
         </div>
@@ -708,6 +710,12 @@ const testimonials = [
 ]
 
 const blogPosts = [
+  { title: 'Turn Ideas into Digital Products: The Journey from Concept to Code', category: 'Development', date: 'October 10, 2025', excerpt: 'How we transform your business ideas into powerful digital solutions using modern web technologies.', image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80', imagePosition: 'center', url: 'https://kodakode.com/turn-ideas-into-digital-products-the-from-concept-to-code/' },
+  { title: 'Why Your Business Needs a Mobile App in 2025', category: 'Mobile', date: 'September 20, 2025', excerpt: 'Mobile apps are no longer a luxury - they are a necessity for businesses looking to stay competitive.', image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=900&q=80', imagePosition: 'center', url: 'https://kodakode.com/blog-standard/' },
+  { title: 'The Power of SEO: Getting Your Business Found Online', category: 'Marketing', date: 'August 15, 2025', excerpt: 'Learn how strategic SEO can dramatically increase your online visibility and drive more customers.', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80', imagePosition: 'center', url: 'https://kodakode.com/blog-standard/' },
+]
+
+const legacyBlogPosts = [
   { title: 'Turn Ideas into Digital Products: The Journey from Concept to Code', category: 'Development', date: 'October 10, 2025', excerpt: 'How we transform your business ideas into powerful digital solutions using modern web technologies.', icon: '💻', bg1: '#4f46e5', bg2: '#7c3aed', url: 'https://kodakode.com/turn-ideas-into-digital-products-the-from-concept-to-code/' },
   { title: 'Why Your Business Needs a Mobile App in 2025', category: 'Mobile', date: 'September 20, 2025', excerpt: 'Mobile apps are no longer a luxury — they are a necessity for businesses looking to stay competitive.', icon: '📱', bg1: '#7c3aed', bg2: '#ec4899', url: 'https://kodakode.com/blog-standard/' },
   { title: 'The Power of SEO: Getting Your Business Found Online', category: 'Marketing', date: 'August 15, 2025', excerpt: 'Learn how strategic SEO can dramatically increase your online visibility and drive more customers.', icon: '🔍', bg1: '#0891b2', bg2: '#4f46e5', url: 'https://kodakode.com/blog-standard/' },
@@ -785,6 +793,17 @@ onMounted(() => {
           loop: true,
           autoplay: true,
           path: '/Web_Development.json'
+        })
+      }
+
+      const growthEl = document.getElementById('lottie-growth')
+      if (growthEl) {
+        window.lottie.loadAnimation({
+          container: growthEl,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: '/Seo isometric composition with human characters.json'
         })
       }
 
