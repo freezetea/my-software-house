@@ -101,7 +101,48 @@
           <div class="relative bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100 rounded-3xl p-8 overflow-hidden">
             <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-200/40 rounded-full blur-2xl translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
             <div class="absolute bottom-0 left-0 w-28 h-28 bg-violet-200/50 rounded-full blur-2xl -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
-            <div id="lottie-about-company" class="relative z-10 w-full h-72 md:h-80"></div>
+            <div class="about-company-visual relative z-10 w-full h-72 md:h-80">
+              <div class="about-orbit about-orbit-one"></div>
+              <div class="about-orbit about-orbit-two"></div>
+              <div class="about-node node-one"></div>
+              <div class="about-node node-two"></div>
+              <div class="about-node node-three"></div>
+
+              <div class="about-laptop">
+                <div class="about-browser-bar">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="about-screen-grid">
+                  <div class="about-sidebar"></div>
+                  <div class="about-code-lines">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="about-chart">
+                    <i style="--h: 42%"></i>
+                    <i style="--h: 72%"></i>
+                    <i style="--h: 56%"></i>
+                    <i style="--h: 86%"></i>
+                  </div>
+                </div>
+              </div>
+
+              <div class="about-code-card">
+                <svg viewBox="0 0 80 56" fill="none" aria-hidden="true">
+                  <path d="M26 17 16 28l10 11M54 17l10 11-10 11M45 14 35 42" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+
+              <div class="about-rocket">
+                <svg viewBox="0 0 72 72" fill="none" aria-hidden="true">
+                  <path d="M38 7c10 5 18 16 20 30L43 52 20 29C22 15 28 9 38 7Z" fill="currentColor"/>
+                  <circle cx="39" cy="27" r="7" fill="white" opacity=".92"/>
+                  <path d="M24 47c-7 2-11 7-13 14 7-2 12-6 14-13" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </div>
             <svg viewBox="0 0 320 260" class="hidden w-full" xmlns="http://www.w3.org/2000/svg">
               <rect x="20" y="10" width="100" height="180" rx="14" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
               <rect x="30" y="28" width="80" height="140" rx="6" fill="white"/>
@@ -585,6 +626,205 @@
   filter: drop-shadow(0 10px 16px color-mix(in srgb, var(--service-color) 45%, transparent));
   transform: translateY(-1px) rotate(-3deg) scale(1.08);
 }
+
+.about-company-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+}
+
+.about-orbit {
+  position: absolute;
+  border: 1px solid rgba(99, 102, 241, 0.22);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.about-orbit-one {
+  width: 82%;
+  height: 58%;
+  animation: about-spin 14s linear infinite;
+}
+
+.about-orbit-two {
+  width: 58%;
+  height: 78%;
+  border-color: rgba(167, 139, 250, 0.22);
+  animation: about-spin 18s linear infinite reverse;
+}
+
+.about-node {
+  position: absolute;
+  z-index: 3;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 22px rgba(34, 197, 94, 0.65);
+  animation: about-pulse 1.8s ease-in-out infinite;
+}
+
+.node-one { top: 18%; left: 24%; }
+.node-two { right: 18%; top: 32%; background: #818cf8; box-shadow: 0 0 22px rgba(129, 140, 248, 0.65); animation-delay: 0.25s; }
+.node-three { left: 30%; bottom: 16%; background: #a78bfa; box-shadow: 0 0 22px rgba(167, 139, 250, 0.65); animation-delay: 0.5s; }
+
+.about-laptop {
+  position: relative;
+  z-index: 2;
+  width: min(86%, 24rem);
+  height: 13.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(99, 102, 241, 0.28);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 26px 70px rgba(79, 70, 229, 0.18);
+  backdrop-filter: blur(16px);
+  animation: about-float 4.5s ease-in-out infinite;
+}
+
+.about-browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  height: 2rem;
+  padding: 0 1rem;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.14);
+  background: rgba(237, 233, 254, 0.8);
+}
+
+.about-browser-bar span {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: #818cf8;
+}
+
+.about-screen-grid {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  grid-template-rows: 1fr 3rem;
+  gap: 0.85rem;
+  height: calc(100% - 2rem);
+  padding: 1rem;
+}
+
+.about-sidebar,
+.about-code-lines,
+.about-chart {
+  border-radius: 1rem;
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.about-sidebar {
+  grid-row: span 2;
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.18), rgba(167, 139, 250, 0.12));
+}
+
+.about-code-lines {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 1rem;
+}
+
+.about-code-lines span {
+  height: 0.55rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6366f1, #a78bfa);
+  transform-origin: left;
+  animation: about-line 2.4s ease-in-out infinite;
+}
+
+.about-code-lines span:nth-child(2) { width: 76%; animation-delay: 0.15s; }
+.about-code-lines span:nth-child(3) { width: 58%; animation-delay: 0.3s; }
+.about-code-lines span:nth-child(4) { width: 88%; animation-delay: 0.45s; }
+
+.about-chart {
+  display: flex;
+  align-items: end;
+  gap: 0.55rem;
+  padding: 0.65rem 1rem;
+}
+
+.about-chart i {
+  width: 0.7rem;
+  height: var(--h);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #22c55e, #6366f1);
+  animation: about-bar 1.8s ease-in-out infinite;
+}
+
+.about-chart i:nth-child(2) { animation-delay: 0.15s; }
+.about-chart i:nth-child(3) { animation-delay: 0.3s; }
+.about-chart i:nth-child(4) { animation-delay: 0.45s; }
+
+.about-code-card {
+  position: absolute;
+  z-index: 4;
+  right: 4%;
+  top: 14%;
+  width: 5.25rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.1rem;
+  color: white;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  box-shadow: 0 18px 36px rgba(79, 70, 229, 0.3);
+  animation: about-card 3.2s ease-in-out infinite;
+}
+
+.about-code-card svg {
+  width: 3.3rem;
+}
+
+.about-rocket {
+  position: absolute;
+  z-index: 4;
+  left: 5%;
+  bottom: 11%;
+  width: 4.5rem;
+  color: #6366f1;
+  filter: drop-shadow(0 16px 26px rgba(99, 102, 241, 0.32));
+  animation: about-rocket 3.8s ease-in-out infinite;
+}
+
+@keyframes about-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes about-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-0.75rem) rotate(1deg); }
+}
+
+@keyframes about-pulse {
+  0%, 100% { opacity: 0.48; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.16); }
+}
+
+@keyframes about-line {
+  0%, 100% { transform: scaleX(0.58); opacity: 0.5; }
+  50% { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes about-bar {
+  0%, 100% { transform: scaleY(0.65); opacity: 0.58; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes about-card {
+  0%, 100% { transform: translateY(0) rotate(6deg); }
+  50% { transform: translateY(-0.65rem) rotate(-4deg); }
+}
+
+@keyframes about-rocket {
+  0%, 100% { transform: translate(0, 0) rotate(-10deg); }
+  50% { transform: translate(0.8rem, -0.8rem) rotate(8deg); }
+}
 </style>
 
 <script setup>
@@ -796,17 +1036,6 @@ onMounted(() => {
           loop: true,
           autoplay: true,
           path: '/Web_Development.json'
-        })
-      }
-
-      const aboutCompanyEl = document.getElementById('lottie-about-company')
-      if (aboutCompanyEl) {
-        window.lottie.loadAnimation({
-          container: aboutCompanyEl,
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          path: '/Software_House_Alive.json'
         })
       }
 
