@@ -204,7 +204,19 @@
               class="service-lottie-icon mb-5 relative z-10"
               :style="{ '--service-color': svc.color }"
             >
-              <div :id="`lottie-service-${svc.key}`" class="w-full h-full"></div>
+              <svg
+                v-if="svc.iconSvg"
+                class="service-svg-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.9"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                v-html="svc.iconSvg"
+              ></svg>
+              <div v-else :id="`lottie-service-${svc.key}`" class="w-full h-full"></div>
             </div>
             <h3 class="text-white font-bold mb-2 relative z-10">{{ svc.title }}</h3>
             <p class="text-slate-500 text-sm leading-relaxed relative z-10 mb-4">{{ svc.desc }}</p>
@@ -321,15 +333,16 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <a v-for="post in blogPosts" :key="post.title" :href="post.url" target="_blank"
             class="group bg-white border border-gray-200 hover:border-indigo-300 rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-100 block">
-            <div class="relative h-44 flex items-center justify-center overflow-hidden"
-              :style="`background: linear-gradient(135deg, ${post.bg1}, ${post.bg2})`">
-              <div class="absolute inset-0 opacity-10">
-                <div class="absolute top-2 right-4 w-20 h-20 rounded-full border-2 border-white"></div>
-                <div class="absolute bottom-2 left-4 w-12 h-12 rounded-full border-2 border-white"></div>
-              </div>
-              <div class="text-5xl relative z-10 group-hover:scale-110 transition-transform duration-300">{{ post.icon }}</div>
-              <div class="absolute top-3 left-3 text-white text-xs px-3 py-1 rounded-full font-medium"
-                :style="`background: ${post.bg2}cc`">{{ post.category }}</div>
+            <div class="relative h-48 overflow-hidden bg-gray-100">
+              <img
+                :src="post.image"
+                :alt="post.title"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                :style="{ objectPosition: post.imagePosition }"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-gray-950/55 via-gray-950/10 to-transparent"></div>
+              <div class="absolute top-3 left-3 text-white text-xs px-3 py-1 rounded-full font-medium bg-gray-950/45 backdrop-blur-sm border border-white/15">{{ post.category }}</div>
             </div>
             <div class="p-5">
               <div class="text-gray-400 text-xs mb-2">{{ post.date }}</div>
@@ -545,6 +558,14 @@
   transition: transform 0.3s ease;
 }
 
+.service-svg-icon {
+  width: 2.45rem;
+  height: 2.45rem;
+  color: white;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.18));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
 .group:hover .service-lottie-icon {
   border-color: color-mix(in srgb, var(--service-color) 75%, white 12%);
   box-shadow: 0 18px 42px color-mix(in srgb, var(--service-color) 34%, transparent);
@@ -553,6 +574,11 @@
 
 .group:hover .service-lottie-icon > div {
   transform: scale(1.52);
+}
+
+.group:hover .service-svg-icon {
+  filter: drop-shadow(0 10px 16px color-mix(in srgb, var(--service-color) 45%, transparent));
+  transform: translateY(-1px) rotate(-3deg) scale(1.08);
 }
 </style>
 
@@ -641,14 +667,14 @@ const categories = ['All', 'Development', 'Design', 'Marketing']
 const activeCategory = ref('All')
 
 const allServices = [
-  { key: 'digital-consulting', title: 'Digital Consulting', desc: 'Digital strategies that drive innovation and measurable growth.', cat: 'Marketing', color: '#f59e0b', lottie: '/Loading 40 _ Paperplane.json' },
-  { key: 'website-development', title: 'Website Development', desc: 'Powerful digital experiences through creative design and development.', cat: 'Development', color: '#6366f1', lottie: '/Web_Development.json' },
-  { key: 'mobile-app-solutions', title: 'Mobile App Solutions', desc: 'Seamless apps that connect your brand with customers anywhere.', cat: 'Development', color: '#8b5cf6', lottie: '/Mobile_App_Icon.json' },
-  { key: 'ux-ui-design', title: 'UX/UI Design', desc: 'Intuitive experiences that turn users into loyal customers.', cat: 'Design', color: '#ec4899', lottie: '/UX_UI_Icon.json' },
-  { key: 'seo-optimization', title: 'SEO Optimization', desc: 'Boost your visibility with data-driven SEO strategies.', cat: 'Marketing', color: '#10b981', lottie: '/Seo isometric composition with human characters.json' },
-  { key: 'custom-software', title: 'Custom Software', desc: 'Tailor-made software solutions for unique business needs.', cat: 'Development', color: '#3b82f6', lottie: '/Custom_Software_Icon.json' },
-  { key: 'cloud-solutions', title: 'Cloud Solutions', desc: 'Scalable cloud infrastructure and web-based systems.', cat: 'Development', color: '#06b6d4', lottie: '/Cloud_Solutions_Icon.json' },
-  { key: 'maintenance', title: 'Maintenance', desc: 'Ongoing support to keep your systems running smoothly.', cat: 'Development', color: '#a78bfa', lottie: '/Cyber Security.json' },
+  { key: 'digital-consulting', title: 'Digital Consulting', desc: 'Digital strategies that drive innovation and measurable growth.', cat: 'Marketing', color: '#f59e0b', iconSvg: '<circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2.1 5-5 2.1 2.1-5 5-2.1Z"/><path d="M12 3.5v2"/><path d="M12 18.5v2"/><path d="M3.5 12h2"/><path d="M18.5 12h2"/>' },
+  { key: 'website-development', title: 'Website Development', desc: 'Powerful digital experiences through creative design and development.', cat: 'Development', color: '#6366f1', iconSvg: '<rect x="3" y="4" width="18" height="14" rx="3"/><path d="M3 9h18"/><path d="m9 13-2 2 2 2"/><path d="m15 13 2 2-2 2"/><path d="M12 18v2"/><path d="M8 20h8"/>' },
+  { key: 'mobile-app-solutions', title: 'Mobile App Solutions', desc: 'Seamless apps that connect your brand with customers anywhere.', cat: 'Development', color: '#8b5cf6', iconSvg: '<rect x="7" y="2.8" width="10" height="18.4" rx="2.6"/><path d="M10.5 6h3"/><path d="M10 16h4"/><path d="M9.5 10.2h5"/><path d="M9.5 12.4h3.5"/><circle cx="17.5" cy="7" r="2.2"/><path d="M17.5 5.5v3"/><path d="M16 7h3"/>' },
+  { key: 'ux-ui-design', title: 'UX/UI Design', desc: 'Intuitive experiences that turn users into loyal customers.', cat: 'Design', color: '#ec4899', iconSvg: '<rect x="3.5" y="4" width="17" height="14" rx="3"/><path d="M7 8h5"/><path d="M7 11h3"/><circle cx="16.5" cy="10.5" r="2"/><path d="m14.8 16.2 1.2-3.7 3.1 2.3-2 .4 1.1 2-1.7.9-1.1-2-1.4 1.5z"/>' },
+  { key: 'seo-optimization', title: 'SEO Optimization', desc: 'Boost your visibility with data-driven SEO strategies.', cat: 'Marketing', color: '#10b981', iconSvg: '<circle cx="10.5" cy="10.5" r="5.5"/><path d="m15 15 4.5 4.5"/><path d="M7.5 11.5 9.5 13.5 13.5 8.5"/><path d="M4 20h16"/><path d="M7 17v3"/><path d="M12 15v5"/><path d="M17 12v8"/>' },
+  { key: 'custom-software', title: 'Custom Software', desc: 'Tailor-made software solutions for unique business needs.', cat: 'Development', color: '#3b82f6', iconSvg: '<rect x="3" y="5" width="18" height="13" rx="3"/><path d="M7 9.5 5.5 11 7 12.5"/><path d="m10.5 13 2-4"/><path d="M15 9.5 16.5 11 15 12.5"/><circle cx="18" cy="17" r="2.6"/><path d="M18 15.8v2.4"/><path d="M16.8 17h2.4"/>' },
+  { key: 'cloud-solutions', title: 'Cloud Solutions', desc: 'Scalable cloud infrastructure and web-based systems.', cat: 'Development', color: '#06b6d4', iconSvg: '<path d="M7 17h10a4 4 0 0 0 .8-7.9 5.5 5.5 0 0 0-10.6-1.6A4.7 4.7 0 0 0 7 17Z"/><path d="M8 20h8"/><path d="M12 17v3"/><circle cx="6" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M7.5 20h3"/><path d="M13.5 20h3"/>' },
+  { key: 'maintenance', title: 'Maintenance', desc: 'Ongoing support to keep your systems running smoothly.', cat: 'Development', color: '#a78bfa', iconSvg: '<path d="M14.5 5.5a4.5 4.5 0 0 0-5.6 5.8l-5.1 5.1a2.2 2.2 0 0 0 3.1 3.1l5.1-5.1a4.5 4.5 0 0 0 5.8-5.6l-3.1 3.1-2.6-.7-.7-2.6 3.1-3.1Z"/><path d="M16.5 18.5 18 20l3-3"/>' },
 ]
 
 const legacyServices = [
