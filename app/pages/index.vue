@@ -509,6 +509,26 @@ const partners = [
   { name: 'YPI Asia', logo: 'https://kodakode.com/wp-content/uploads/2025/07/1.png', url: 'https://www.ypi-asia.com/' },
 ]
 
+// carousel
+const carouselRef = ref(null)
+const carouselIndex = ref(0)
+const showSwipeHint = ref(true)
+
+function onCarouselScroll() {
+  showSwipeHint.value = false
+  if (!carouselRef.value) return
+  const el = carouselRef.value
+  const cardWidth = 160 + 16 // w-40 + gap-4
+  carouselIndex.value = Math.round(el.scrollLeft / cardWidth)
+}
+
+function scrollToPartner(i) {
+  if (!carouselRef.value) return
+  const cardWidth = 160 + 16
+  carouselRef.value.scrollTo({ left: i * cardWidth, behavior: 'smooth' })
+  carouselIndex.value = i
+}
+
 const aboutCards = [
   { icon: '💡', title: 'IT Consulting', desc: 'Smart strategies to boost performance and security.', lottie: '/Backend_Icon.json' },
   { icon: '📈', title: 'Business Growth', desc: 'Tailored strategies that drive sustainable growth.', lottie: '/Business_Growth_Icon.json' },
