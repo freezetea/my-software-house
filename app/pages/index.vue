@@ -67,7 +67,7 @@
           <h2 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">World Wide Partners</h2>
           <p class="text-gray-500 text-sm mt-2">Trusted by businesses across Indonesia and beyond</p>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="partner-slider grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           <a
             v-for="partner in partners"
             :key="partner.name"
@@ -464,6 +464,28 @@
 
   </div>
 </template>
+
+<style scoped>
+@media (max-width: 639px) {
+  .partner-slider {
+    display: flex;
+    gap: 1rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    overflow-x: auto;
+    padding: 0 1rem 0.75rem;
+    scroll-padding-left: 1rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .partner-slider > a {
+    flex: 0 0 72%;
+    min-height: 7rem;
+    scroll-snap-align: start;
+  }
+}
+</style>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
