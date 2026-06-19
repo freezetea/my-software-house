@@ -38,18 +38,10 @@
         </div>
 
         <div class="relative z-10 flex flex-col items-center px-6 text-center">
-          <div class="brand-loader mb-4" aria-label="KODAKODE">
-            <span
-              v-for="(letter, i) in brandLetters"
-              :key="`${letter}-${i}`"
-              :style="{ animationDelay: `${i * 0.08}s` }"
-            >
-              {{ letter }}
-            </span>
-          </div>
-
-          <div class="loader-reference-text mb-7">
-            Loading
+          <div class="brand-loader" aria-label="KODAKODE">
+            <div class="preloader-logo-mark">
+              <span class="logo-loading-orbit" aria-hidden="true"></span>
+            </div>
           </div>
 
           <div class="loader-ring hidden mb-7">
@@ -69,9 +61,6 @@
             </div>
           </div>
 
-          <div class="loader-bar reference-loader-bar">
-            <div :style="{ width: `${loadingProgress}%` }"></div>
-          </div>
         </div>
       </div>
     </Transition>
@@ -264,10 +253,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const loading = ref(true)
 const loadingProgress = ref(0)
-const loadingTextIdx = ref(0)
 const curtainOpening = ref(false)
-const brandLetters = 'KODAKODE'.split('')
-const loadingTexts = ['Loading']
 const magneticDots = [
   { x: -44, y: -22, delay: 0.02, size: 5, hue: '#818cf8' },
   { x: -32, y: 18, delay: 0.1, size: 4, hue: '#c4b5fd' },
@@ -333,7 +319,6 @@ onMounted(() => {
   })
 
   setTimeout(() => {
-    loadingTextIdx.value = loadingTexts.length - 1
     curtainOpening.value = true
     setTimeout(() => { loading.value = false }, 520)
   }, duration)
@@ -550,25 +535,77 @@ html, body {
 }
 
 .brand-loader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(0.48rem, 2.5vw, 1.35rem);
-  width: min(31rem, 88vw);
-  min-height: clamp(2.4rem, 8vw, 5rem);
-  font-size: clamp(1.65rem, 6.2vw, 4rem);
-  font-weight: 900;
-  letter-spacing: 0;
-  line-height: 1;
+  position: relative;
+  display: grid;
+  width: 7.5rem;
+  min-height: 7.5rem;
+  place-items: center;
+  border-radius: 999px;
 }
 
-.brand-loader span {
-  display: inline-block;
-  background: linear-gradient(180deg, #ffffff 0%, #c7d2fe 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: loader-letter 1.05s cubic-bezier(.22, 1, .36, 1) both;
+.brand-loader::before {
+  content: "";
+  position: absolute;
+  inset: -1.4rem -2.4rem;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.18), transparent 66%);
+  opacity: 0.9;
+  animation: loader-logo-aura 1.8s ease-in-out infinite;
+}
+
+.preloader-logo-mark {
+  position: relative;
+  display: grid;
+  width: 5.35rem;
+  height: 5.35rem;
+  place-items: center;
+  overflow: visible;
+  border-radius: 999px;
+}
+
+.preloader-logo-mark::before {
+  content: "";
+  width: 4.45rem;
+  height: 4.45rem;
+  display: block;
+  border-radius: 999px;
+  background-image: url("https://kodakode.com/wp-content/uploads/2023/02/kodakode-logo-biru-teks-putih-300x106.png");
+  background-repeat: no-repeat;
+  background-size: auto 4.45rem;
+  background-position: left center;
+  filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.26));
+  opacity: 0;
+  transform: translateY(0.55rem) scale(0.94);
+  animation: loader-logo-arrive 0.72s cubic-bezier(.22, 1, .36, 1) 0.08s both;
+}
+
+.preloader-logo {
+  display: none;
+}
+
+.logo-loading-orbit {
+  position: absolute;
+  inset: -0.55rem;
+  border-radius: 999px;
+  background:
+    conic-gradient(from 0deg, transparent 0deg 256deg, rgba(248, 250, 252, 0.98) 284deg, #a78bfa 318deg, transparent 344deg 360deg);
+  filter: drop-shadow(0 0 12px rgba(167, 139, 250, 0.5));
+  animation: logo-orbit-spin 1.08s linear infinite;
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+}
+
+.logo-loading-orbit::after {
+  content: "";
+  position: absolute;
+  right: 0.08rem;
+  top: 50%;
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 999px;
+  background: #f8fafc;
+  box-shadow: 0 0 16px rgba(248, 250, 252, 0.8);
+  transform: translateY(-50%);
 }
 
 .loader-reference-text {
@@ -674,25 +711,28 @@ html, body {
 }
 
 .loader-bar {
-  width: min(18rem, 68vw);
-  height: 0.28rem;
+  width: min(18rem, 62vw);
+  height: 0.2rem;
   overflow: hidden;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(226, 232, 240, 0.18);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 18px 42px rgba(15, 23, 42, 0.2);
 }
 
 .reference-loader-bar {
-  width: min(14rem, 58vw);
-  height: 0.16rem;
-  background: rgba(199, 210, 254, 0.14);
+  width: min(15.5rem, 60vw);
+  height: 0.18rem;
+  background: rgba(199, 210, 254, 0.16);
 }
 
 .loader-bar div {
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #6366f1, #a78bfa, #22c55e);
-  box-shadow: 0 0 10px rgba(167, 139, 250, 0.38);
-  transition: width 1.05s cubic-bezier(.22, 1, .36, 1);
+  background: linear-gradient(90deg, #f8fafc 0%, #c7d2fe 42%, #8b5cf6 72%, #22c55e 100%);
+  box-shadow: 0 0 18px rgba(167, 139, 250, 0.48);
+  transition: width 1.08s cubic-bezier(.22, 1, .36, 1);
 }
 
 .preloader.is-opening {
@@ -717,13 +757,6 @@ html, body {
 
 .preloader.is-opening .brand-loader {
   animation: logo-soft-release 0.72s cubic-bezier(.22, 1, .36, 1) forwards;
-}
-
-.preloader.is-opening .loader-reference-text,
-.preloader.is-opening .loader-bar {
-  opacity: 0;
-  transform: translateY(0.8rem);
-  transition: opacity 0.34s ease, transform 0.5s ease;
 }
 
 .loader-leave-active {
@@ -764,29 +797,38 @@ html, body {
   opacity: 0;
 }
 
-@keyframes loader-letter {
-  0%, 100% {
-    opacity: 0.76;
-    transform: translateY(0) scale(1);
+@keyframes loader-logo-arrive {
+  0% {
+    opacity: 0;
+    transform: translateY(0.55rem) scale(0.94);
+    filter: blur(6px) drop-shadow(0 18px 34px rgba(0, 0, 0, 0.24));
   }
-  45% {
+  72% {
     opacity: 1;
-    transform: translateY(-0.32rem) scale(1.03);
+    transform: translateY(-0.08rem) scale(1.02);
+    filter: blur(0) drop-shadow(0 18px 34px rgba(0, 0, 0, 0.26));
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0) drop-shadow(0 18px 34px rgba(0, 0, 0, 0.26));
   }
 }
 
-@keyframes loading-dots {
-  0% {
-    content: "";
-  }
-  25% {
-    content: ".";
+@keyframes loader-logo-aura {
+  0%, 100% {
+    opacity: 0.46;
+    transform: scale(0.92);
   }
   50% {
-    content: "..";
+    opacity: 0.9;
+    transform: scale(1.08);
   }
-  75%, 100% {
-    content: "...";
+}
+
+@keyframes logo-orbit-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 

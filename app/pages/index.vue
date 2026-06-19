@@ -2,10 +2,29 @@
   <div class="text-white overflow-x-hidden">
 
     <!-- HERO -->
-    <section class="relative min-h-screen flex items-center px-4 md:px-6 py-28 overflow-hidden" style="background: linear-gradient(135deg, #0a0d3d 0%, #0f1147 50%, #1a1060 100%)">
+    <section
+      class="hero-space-section relative min-h-screen flex items-center px-4 md:px-6 py-28 overflow-hidden"
+    >
       <div class="absolute inset-0 pointer-events-none">
         <div class="absolute top-10 right-10 w-60 h-60 bg-indigo-500/14 rounded-full blur-[48px]"></div>
         <div class="absolute bottom-20 left-10 w-72 h-72 bg-violet-600/10 rounded-full blur-[56px]"></div>
+        <div class="hero-sparkle-field">
+          <span
+            v-for="sparkle in heroSparkles"
+            :key="sparkle.id"
+            class="hero-sparkle"
+            :style="{
+              left: sparkle.left,
+              top: sparkle.top,
+              width: sparkle.size,
+              height: sparkle.size,
+              '--sparkle-delay': sparkle.delay,
+              '--sparkle-duration': sparkle.duration,
+              '--sparkle-drift': sparkle.drift,
+              '--sparkle-opacity': sparkle.opacity,
+            }"
+          ></span>
+        </div>
       </div>
       <svg class="hero-orbit-star star-one" width="40" height="40" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#818cf8"/></svg>
       <svg class="hero-orbit-star star-two" width="28" height="28" viewBox="0 0 40 40"><path d="M20 0 L22 18 L40 20 L22 22 L20 40 L18 22 L0 20 L18 18 Z" fill="#a78bfa"/></svg>
@@ -1046,6 +1065,20 @@ const stats = ref([
 ])
 
 const techs = ['Nuxt.js', 'Vue 3', 'React', 'Laravel', 'Flutter', 'MySQL', 'AWS', 'Vercel']
+const heroSparkles = [
+  { id: 1, left: '9%', top: '18%', size: '3px', delay: '0s', duration: '4.8s', drift: '14px', opacity: '0.72' },
+  { id: 2, left: '18%', top: '70%', size: '2px', delay: '0.8s', duration: '5.6s', drift: '-10px', opacity: '0.55' },
+  { id: 3, left: '30%', top: '12%', size: '4px', delay: '1.4s', duration: '6.2s', drift: '18px', opacity: '0.68' },
+  { id: 4, left: '43%', top: '82%', size: '2px', delay: '0.2s', duration: '5.2s', drift: '-16px', opacity: '0.6' },
+  { id: 5, left: '54%', top: '22%', size: '3px', delay: '1.1s', duration: '5.8s', drift: '12px', opacity: '0.72' },
+  { id: 6, left: '63%', top: '66%', size: '2px', delay: '0.5s', duration: '6.4s', drift: '-14px', opacity: '0.54' },
+  { id: 7, left: '74%', top: '16%', size: '5px', delay: '1.8s', duration: '7s', drift: '20px', opacity: '0.62' },
+  { id: 8, left: '83%', top: '48%', size: '3px', delay: '0.9s', duration: '5.4s', drift: '-18px', opacity: '0.66' },
+  { id: 9, left: '91%', top: '78%', size: '2px', delay: '1.6s', duration: '6.8s', drift: '16px', opacity: '0.48' },
+  { id: 10, left: '68%', top: '36%', size: '2px', delay: '0.35s', duration: '4.9s', drift: '10px', opacity: '0.7' },
+  { id: 11, left: '22%', top: '42%', size: '2px', delay: '2s', duration: '6.1s', drift: '-12px', opacity: '0.5' },
+  { id: 12, left: '47%', top: '48%', size: '3px', delay: '1.25s', duration: '5.7s', drift: '15px', opacity: '0.58' },
+]
 
 const partners = [
   { name: 'Go-Nanny', logo: 'https://kodakode.com/wp-content/uploads/2025/07/6.png', url: 'https://go-nanny.id/' },
@@ -1340,17 +1373,22 @@ async function loadLottieNow(id, path) {
   const lottie = await ensureLottie()
   if (!lottie) return
 
-  serviceAnimations.push(lottie.loadAnimation({
+  const animation = lottie.loadAnimation({
     container: el,
-    renderer: 'canvas',
+    renderer: 'svg',
     loop: true,
     autoplay: true,
     rendererSettings: {
-      clearCanvas: true,
       progressiveLoad: true,
     },
     path,
-  }))
+  })
+
+  animation.addEventListener?.('DOMLoaded', () => {
+    el.dataset.lottieReady = 'true'
+  })
+
+  serviceAnimations.push(animation)
 }
 
 function startProcessTimer() {
@@ -1371,7 +1409,7 @@ function startProcessTimer() {
 onMounted(() => {
   typingTimer = setTimeout(typeLoop, 4200)
   nextTick(() => {
-    loadLottieNow('lottie-hero', '/Mobile_App_Icon.json')
+    loadLottieNow('lottie-hero', '/Web_Development.json')
   })
 
   revealObserver = new IntersectionObserver((entries) => {
@@ -1469,6 +1507,54 @@ section {
   animation-play-state: paused !important;
 }
 
+.hero-space-section {
+  background:
+    radial-gradient(circle at 72% 32%, rgba(129, 140, 248, 0.24), transparent 22rem),
+    radial-gradient(circle at 12% 18%, rgba(34, 197, 94, 0.08), transparent 18rem),
+    linear-gradient(135deg, #0a0d3d 0%, #0f1147 50%, #1a1060 100%);
+}
+
+.hero-space-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.34) 0 1px, transparent 1.4px),
+    radial-gradient(circle, rgba(167, 139, 250, 0.28) 0 1px, transparent 1.5px);
+  background-position: 12px 18px, 46px 24px;
+  background-size: 92px 92px, 138px 138px;
+  opacity: 0.32;
+}
+
+.hero-sparkle-field {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-sparkle {
+  position: absolute;
+  border-radius: 999px;
+  background: white;
+  opacity: var(--sparkle-opacity);
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.68),
+    0 0 22px rgba(129, 140, 248, 0.42);
+  animation: hero-sparkle-twinkle var(--sparkle-duration) ease-in-out var(--sparkle-delay) infinite;
+}
+
+.hero-sparkle::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  border: 1px solid rgba(196, 181, 253, 0.22);
+  transform: scale(0.75);
+  opacity: 0;
+  animation: hero-sparkle-ring var(--sparkle-duration) ease-in-out var(--sparkle-delay) infinite;
+}
+
 .hero-orbit-star {
   position: absolute;
   z-index: 1;
@@ -1518,6 +1604,122 @@ section {
   border-color: rgba(167, 139, 250, 0.58);
   transform: translateY(-2px);
   box-shadow: 0 12px 24px rgba(79, 70, 229, 0.18);
+}
+
+.partner-slider > a,
+#services .grid > .group,
+.working-process-panel,
+.testimonial-card,
+a.group,
+.about-company-visual,
+.about-card-icon {
+  position: relative;
+  isolation: isolate;
+}
+
+.partner-slider > a::after,
+#services .grid > .group::after,
+.working-process-panel::after,
+.testimonial-card::after,
+a.group::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 18%, rgba(255, 255, 255, 0.2) 44%, transparent 68%);
+  opacity: 0;
+  transform: translateX(-120%) skewX(-12deg);
+  transition: opacity 0.28s ease, transform 0.72s cubic-bezier(.22, 1, .36, 1);
+}
+
+.partner-slider > a:hover::after,
+#services .grid > .group:hover::after,
+.working-process-panel:hover::after,
+.testimonial-card:hover::after,
+a.group:hover::after {
+  opacity: 1;
+  transform: translateX(120%) skewX(-12deg);
+}
+
+.section-reveal::after {
+  content: "";
+  position: absolute;
+  right: clamp(1.5rem, 8vw, 6rem);
+  top: clamp(1.25rem, 7vw, 5rem);
+  z-index: 0;
+  width: 5.5rem;
+  height: 5.5rem;
+  pointer-events: none;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(129, 140, 248, 0.2) 0 2px, transparent 3px),
+    radial-gradient(circle at 24% 28%, rgba(34, 197, 94, 0.18) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 70% 72%, rgba(167, 139, 250, 0.22) 0 1.5px, transparent 2.5px);
+  opacity: 0;
+  transform: translate3d(0, 0.8rem, 0) scale(0.72) rotate(-12deg);
+}
+
+.section-reveal.section-in::after {
+  animation: section-sparkle-pop 1.1s cubic-bezier(.22, 1, .36, 1) calc(var(--section-delay, 0s) + 0.1s) both;
+}
+
+.hero-space-section::after {
+  display: none;
+}
+
+.about-company-visual::after {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  z-index: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(99, 102, 241, 0.12);
+  transform: rotate(-8deg);
+  animation: webflow-orbit-ring 16s linear infinite;
+}
+
+.about-card-icon::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  z-index: 0;
+  border-radius: inherit;
+  border: 1px solid var(--icon-ring);
+  opacity: 0.38;
+  transform: scale(0.82);
+  animation: icon-ring-breathe 3.8s ease-in-out infinite;
+}
+
+.section-in .partner-slider > a,
+.section-in #services .grid > .group,
+.section-in a.group {
+  animation: webflow-card-rise 0.68s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.section-in .partner-slider > a:nth-child(2),
+.section-in #services .grid > .group:nth-child(2),
+.section-in a.group:nth-child(2) {
+  animation-delay: 0.07s;
+}
+
+.section-in .partner-slider > a:nth-child(3),
+.section-in #services .grid > .group:nth-child(3),
+.section-in a.group:nth-child(3) {
+  animation-delay: 0.14s;
+}
+
+.section-in .partner-slider > a:nth-child(4),
+.section-in #services .grid > .group:nth-child(4),
+.section-in a.group:nth-child(4) {
+  animation-delay: 0.21s;
+}
+
+.section-in .partner-slider > a:nth-child(n+5),
+.section-in #services .grid > .group:nth-child(n+5),
+.section-in a.group:nth-child(n+5) {
+  animation-delay: 0.28s;
 }
 
 .working-process-panel::before {
@@ -1657,6 +1859,72 @@ section {
   68% { transform: translate3d(-1.2rem, -3.8rem, 0) rotate(126deg) scale(0.9); }
 }
 
+@keyframes hero-sparkle-twinkle {
+  0%, 100% {
+    opacity: calc(var(--sparkle-opacity) * 0.45);
+    transform: translate3d(0, 0, 0) scale(0.72);
+  }
+  48% {
+    opacity: var(--sparkle-opacity);
+    transform: translate3d(var(--sparkle-drift), -0.55rem, 0) scale(1);
+  }
+}
+
+@keyframes hero-sparkle-ring {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.65);
+  }
+  48% {
+    opacity: 1;
+    transform: scale(1.28);
+  }
+}
+
+@keyframes section-sparkle-pop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 1.1rem, 0) scale(0.72) rotate(-14deg);
+    filter: blur(1px);
+  }
+  48% {
+    opacity: 0.72;
+    transform: translate3d(-0.5rem, -0.15rem, 0) scale(1.08) rotate(8deg);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0.38;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    filter: blur(0);
+  }
+}
+
+@keyframes webflow-card-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.25rem, 0) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes webflow-orbit-ring {
+  to { transform: rotate(352deg); }
+}
+
+@keyframes icon-ring-breathe {
+  0%, 100% {
+    opacity: 0.24;
+    transform: scale(0.84);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.08);
+  }
+}
+
 @keyframes process-dot-pulse {
   0%, 100% { opacity: 0.18; transform: scale(0.92); }
   50% { opacity: 0.36; transform: scale(1.16); }
@@ -1733,8 +2001,15 @@ section {
 @media (prefers-reduced-motion: reduce) {
   .section-reveal,
   .testimonial-card,
+  .hero-sparkle,
+  .hero-sparkle::after,
+  .hero-orbit-star,
+  .hero-orbit-star path,
   .working-process-panel svg,
-  .working-process-panel::before {
+  .working-process-panel::before,
+  .section-reveal::after,
+  .about-company-visual::after,
+  .about-card-icon::before {
     animation: none !important;
     transition: none !important;
     opacity: 1;
