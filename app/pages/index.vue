@@ -38,7 +38,7 @@
         </div>
 
         <!-- hero right — Lottie + stats -->
-        <div class="hidden md:flex flex-col gap-4">
+        <div class="flex flex-col gap-4 mt-8 md:mt-0">
           <div class="relative bg-gradient-to-br from-indigo-600/20 to-violet-600/20 border border-indigo-500/30 rounded-3xl p-6 overflow-hidden flex items-center justify-center" style="min-height:260px">
             <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-500/15 rounded-full blur-xl pointer-events-none"></div>
             <div id="lottie-hero" style="width:100%;max-width:260px;height:240px"></div>
@@ -1306,9 +1306,36 @@ function observeLottie(id, path) {
   observer.observe(el)
 }
 
+function waitForElementBox(el) {
+  if (!el) return Promise.resolve(false)
+  const rect = el.getBoundingClientRect()
+  if (rect.width > 0 && rect.height > 0) return Promise.resolve(true)
+
+  return new Promise((resolve) => {
+    let frame = 0
+    const started = Date.now()
+    const check = () => {
+      const nextRect = el.getBoundingClientRect()
+      if (nextRect.width > 0 && nextRect.height > 0) {
+        resolve(true)
+        return
+      }
+      if (Date.now() - started > 1800) {
+        resolve(false)
+        return
+      }
+      frame = requestAnimationFrame(check)
+    }
+    frame = requestAnimationFrame(check)
+  })
+}
+
 async function loadLottieNow(id, path) {
   const el = document.getElementById(id)
   if (!el || el.dataset.lottieLoaded) return
+  const hasBox = await waitForElementBox(el)
+  if (!hasBox) return
+  el.innerHTML = ''
   el.dataset.lottieLoaded = 'true'
   const lottie = await ensureLottie()
   if (!lottie) return
