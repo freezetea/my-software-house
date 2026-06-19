@@ -1693,31 +1693,26 @@ a.group:hover::after {
 }
 
 .section-in .partner-slider > a,
-.section-in #services .grid > .group,
 .section-in a.group {
   animation: webflow-card-rise 0.68s cubic-bezier(.22, 1, .36, 1) both;
 }
 
 .section-in .partner-slider > a:nth-child(2),
-.section-in #services .grid > .group:nth-child(2),
 .section-in a.group:nth-child(2) {
   animation-delay: 0.07s;
 }
 
 .section-in .partner-slider > a:nth-child(3),
-.section-in #services .grid > .group:nth-child(3),
 .section-in a.group:nth-child(3) {
   animation-delay: 0.14s;
 }
 
 .section-in .partner-slider > a:nth-child(4),
-.section-in #services .grid > .group:nth-child(4),
 .section-in a.group:nth-child(4) {
   animation-delay: 0.21s;
 }
 
 .section-in .partner-slider > a:nth-child(n+5),
-.section-in #services .grid > .group:nth-child(n+5),
 .section-in a.group:nth-child(n+5) {
   animation-delay: 0.28s;
 }
@@ -1797,7 +1792,7 @@ a.group:hover::after {
 }
 
 .section-in .service-lottie-icon {
-  animation: service-icon-dash-pop 0.58s cubic-bezier(.22, 1, .36, 1) var(--service-delay, 0s) both;
+  animation: none;
 }
 
 .section-in .service-lottie-icon::before {
@@ -1809,9 +1804,7 @@ a.group:hover::after {
 }
 
 .section-in .service-svg-icon {
-  animation:
-    service-icon-scramble 0.48s steps(4, end) var(--service-delay, 0s) both,
-    service-icon-breathe 4.2s ease-in-out calc(var(--service-delay, 0s) + 0.48s) infinite;
+  animation: service-icon-breathe 4.2s ease-in-out var(--service-delay, 0s) infinite;
 }
 
 .section-in .service-icon-orbit {
