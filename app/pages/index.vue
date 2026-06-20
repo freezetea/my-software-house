@@ -93,12 +93,12 @@
             :href="partner.url"
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex items-center justify-center p-6 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 hover:-translate-y-1"
+            class="group flex items-center justify-center p-7 md:p-8 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 hover:-translate-y-1"
           >
             <img
               :src="partner.logo"
               :alt="partner.name"
-               class="max-h-14 w-auto object-contain transition-all duration-300"
+               class="max-h-16 md:max-h-[4.5rem] w-auto object-contain transition-all duration-300"
               loading="lazy"
             />
           </a>
@@ -227,11 +227,11 @@
           </div>
           <div class="flex items-center gap-4 flex-wrap">
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
-              class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-6 py-3 rounded-xl font-semibold transition-all inline-flex items-center gap-2 text-sm hover:shadow-lg hover:shadow-indigo-300">
+              class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-7 md:px-8 py-3.5 md:py-4 rounded-xl font-semibold transition-all inline-flex items-center gap-2.5 text-base hover:shadow-lg hover:shadow-indigo-300">
               Learn more →
             </a>
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
-              class="rounded-xl border border-green-200 bg-green-50 px-4 py-2.5 text-green-700 text-base font-semibold hover:bg-green-100 transition-colors inline-flex items-center gap-2">
+              class="rounded-xl border border-green-200 bg-green-50 px-6 md:px-7 py-3.5 md:py-4 text-green-700 text-base md:text-lg font-semibold hover:bg-green-100 transition-colors inline-flex items-center gap-2.5">
               💬 <span class="text-indigo-600 font-semibold">Chat on WhatsApp</span>
             </a>
           </div>
