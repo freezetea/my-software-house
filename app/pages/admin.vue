@@ -32,8 +32,12 @@
       </aside>
 
       <div class="min-w-0 rounded-2xl border border-white/10 bg-white/[0.04] p-5 md:p-7">
-        <div v-if="pending" class="rounded-xl border border-indigo-400/20 bg-indigo-500/10 p-4 text-sm text-indigo-100">Loading CMS database...</div>
-        <div v-else-if="error" class="rounded-xl border border-red-400/20 bg-red-500/10 p-4 text-sm text-red-100">Failed to load CMS database.</div>
+        <div v-if="loadingContent" class="rounded-xl border border-indigo-400/20 bg-indigo-500/10 p-4 text-sm text-indigo-100">Loading CMS database...</div>
+        <div v-else-if="contentError" class="rounded-xl border border-red-400/20 bg-red-500/10 p-4 text-sm text-red-100">
+          <div class="font-bold">Failed to load CMS database.</div>
+          <div class="mt-1 text-red-100/80">{{ contentError }}</div>
+          <button class="mt-3 rounded-lg border border-red-200/20 px-3 py-1.5 text-xs font-bold text-red-50 hover:bg-red-500/10" @click="loadContent">Retry</button>
+        </div>
 
         <div v-else>
           <div v-if="activeTab === 'banner'" class="space-y-5">
@@ -165,6 +169,8 @@ const tabs = computed(() => [
 const activeTab = ref('banner')
 const saving = ref(false)
 const message = ref('')
+const loadingContent = ref(true)
+const contentError = ref('')
 const selectedPostIndex = ref(0)
 const editor = ref(null)
 const ckeditorReady = ref(false)
@@ -176,12 +182,6 @@ const content = reactive({
   services: [],
   blogPosts: [],
 })
-
-const { data, pending, error } = await useFetch('/api/content')
-
-if (data.value) {
-  Object.assign(content, clone(data.value))
-}
 
 const selectedPost = computed(() => content.blogPosts[selectedPostIndex.value])
 
@@ -219,6 +219,22 @@ const RepeaterAdd = defineComponent({
 
 function clone(value) {
   return JSON.parse(JSON.stringify(value))
+}
+
+async function loadContent() {
+  loadingContent.value = true
+  contentError.value = ''
+
+  try {
+    const response = await $fetch('/api/content')
+    Object.assign(content, clone(response))
+    selectedPostIndex.value = 0
+    await refreshEditor()
+  } catch (loadError) {
+    contentError.value = loadError?.data?.statusMessage || loadError?.message || 'Unable to reach /api/content'
+  } finally {
+    loadingContent.value = false
+  }
 }
 
 function addBlogPost() {
@@ -334,6 +350,7 @@ watch(activeTab, async (tab) => {
 
 onMounted(async () => {
   try {
+    await loadContent()
     await loadCkeditor()
     if (activeTab.value === 'blog') await refreshEditor()
   } catch {
