@@ -1,5 +1,6 @@
 import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
+import { isAdminSession } from '../utils/adminAuth'
 
 const dataPath = join(process.cwd(), 'data', 'cms.json')
 
@@ -13,9 +14,11 @@ export default defineEventHandler(async (event) => {
   const adminToken = process.env.ADMIN_TOKEN
   if (adminToken) {
     const requestToken = getHeader(event, 'x-admin-token')
-    if (requestToken !== adminToken) {
+    if (requestToken !== adminToken && !isAdminSession(event)) {
       throw createError({ statusCode: 401, statusMessage: 'Invalid admin token' })
     }
+  } else if (!isAdminSession(event)) {
+    throw createError({ statusCode: 401, statusMessage: 'Login required' })
   }
 
   const body = await readBody(event)

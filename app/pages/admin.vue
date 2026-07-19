@@ -9,6 +9,7 @@
         </div>
         <div class="flex flex-wrap items-center gap-3">
           <NuxtLink to="/" class="rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold text-slate-200 hover:bg-white/10">View Site</NuxtLink>
+          <button class="rounded-xl border border-red-400/20 px-4 py-2 text-sm font-semibold text-red-100 hover:bg-red-500/10" @click="logout">Logout</button>
           <button class="rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-indigo-950/40 disabled:cursor-not-allowed disabled:opacity-60" :disabled="saving" @click="saveContent">
             {{ saving ? 'Saving...' : 'Save Changes' }}
           </button>
@@ -260,6 +261,11 @@ async function saveContent() {
   } finally {
     saving.value = false
   }
+}
+
+async function logout() {
+  await $fetch('/api/auth/logout', { method: 'POST' })
+  await navigateTo('/admin-login')
 }
 
 function syncEditorContent() {
