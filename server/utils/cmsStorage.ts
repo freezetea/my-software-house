@@ -3,6 +3,33 @@ import { dirname, join } from 'node:path'
 
 const dataPath = join(process.cwd(), 'data', 'cms.json')
 const cmsKey = process.env.CMS_KV_KEY || 'kodakode:cms'
+const memoryKey = '__kodakodeCmsContent'
+
+const defaultCmsContent = {
+  banner: {
+    titlePhrases: [
+      'Proper technology<br>brings proper solutions',
+      'Custom website<br>development',
+      'Mobile app<br>solutions',
+      'Your idea.<br>Our technology.',
+    ],
+    subtitle: 'Proper technology brings proper solutions. We build web, app, and software systems that help your business look credible, run smoother, and grow faster.',
+    primaryCta: "Let's get started",
+    secondaryCta: 'View our work',
+  },
+  partners: [],
+  testimonials: [],
+  services: [],
+  blogPosts: [],
+}
+
+function getMemoryContent() {
+  return (globalThis as unknown as Record<string, unknown>)[memoryKey]
+}
+
+function setMemoryContent(payload: unknown) {
+  ;(globalThis as unknown as Record<string, unknown>)[memoryKey] = payload
+}
 
 function getKvConfig() {
   const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL
@@ -56,29 +83,46 @@ async function writeFileContent(payload: unknown) {
 }
 
 export async function readCmsContent() {
+  const memoryContent = getMemoryContent()
+  if (memoryContent) {
+    return memoryContent
+  }
+
   if (getKvConfig()) {
     try {
       const value = await kvCommand<string | null>(['GET', cmsKey])
       if (value) {
-        return typeof value === 'string' ? JSON.parse(value) : value
+        const parsed = typeof value === 'string' ? JSON.parse(value) : value
+        setMemoryContent(parsed)
+        return parsed
       }
     } catch (error) {
       console.error('Failed to read CMS content from KV. Falling back to bundled JSON.', error)
     }
   }
 
-  return readFileContent()
+  try {
+    const fileContent = await readFileContent()
+    setMemoryContent(fileContent)
+    return fileContent
+  } catch (error) {
+    console.error('Failed to read CMS content from file. Falling back to default content.', error)
+    setMemoryContent(defaultCmsContent)
+    return defaultCmsContent
+  }
 }
 
 export async function writeCmsContent(payload: unknown) {
+  setMemoryContent(payload)
+
   if (getKvConfig()) {
     await kvCommand(['SET', cmsKey, JSON.stringify(payload)])
     return
   }
 
-  if (process.env.VERCEL) {
-    throw new Error('CMS storage is not configured for Vercel. Add KV_REST_API_URL and KV_REST_API_TOKEN environment variables.')
+  try {
+    await writeFileContent(payload)
+  } catch (error) {
+    console.error('Failed to write CMS content to file. Keeping content in memory.', error)
   }
-
-  await writeFileContent(payload)
 }
