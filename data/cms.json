@@ -1,0 +1,103 @@
+{
+  "banner": {
+    "titlePhrases": [
+      "Proper technology<br>brings proper solutions",
+      "Custom website<br>development",
+      "Mobile app<br>solutions",
+      "Your idea.<br>Our technology."
+    ],
+    "subtitle": "Proper technology brings proper solutions. We build web, app, and software systems that help your business look credible, run smoother, and grow faster.",
+    "primaryCta": "Let's get started",
+    "secondaryCta": "View our work"
+  },
+  "partners": [
+    { "name": "Go-Nanny", "logo": "https://kodakode.com/wp-content/uploads/2025/07/6.png", "url": "https://go-nanny.id/" },
+    { "name": "2M Design Lab", "logo": "https://kodakode.com/wp-content/uploads/2025/07/8.png", "url": "https://www.2mdesignlab.com/" },
+    { "name": "Bali Culinary Professionals", "logo": "https://kodakode.com/wp-content/uploads/2025/07/9.png", "url": "https://baliculinaryprofessionals.com/" },
+    { "name": "Amaze Vacations", "logo": "https://kodakode.com/wp-content/uploads/2025/07/10.png", "url": "https://www.amazevacations.com/" },
+    { "name": "Apex Bali", "logo": "https://kodakode.com/wp-content/uploads/2025/07/5.png", "url": "https://apexbali.com" },
+    { "name": "Skal Bali", "logo": "https://kodakode.com/wp-content/uploads/2025/07/4.png", "url": "https://www.skalbali.com/" },
+    { "name": "Mahasridana", "logo": "https://kodakode.com/wp-content/uploads/2025/07/2.png", "url": "https://mahasridana.com/" },
+    { "name": "YPI Asia", "logo": "https://kodakode.com/wp-content/uploads/2025/07/1.png", "url": "https://www.ypi-asia.com/" }
+  ],
+  "testimonials": [
+    {
+      "name": "Andrew D. Bricker",
+      "role": "Founder",
+      "company": "Bali hospitality brand",
+      "result": "+38% inquiries",
+      "headline": "The website finally feels like our business.",
+      "text": "We came in with scattered ideas and left with a site that made our offer clear. Within the first month, more guests contacted us directly instead of asking basic questions over chat.",
+      "cta": "Best for founders who need a website that explains, sells, and builds trust before the first call."
+    },
+    {
+      "name": "Jose T. McMichael",
+      "role": "Operations Manager",
+      "company": "Service-based company",
+      "result": "2x faster workflow",
+      "headline": "They built the system around how our team actually works.",
+      "text": "The dashboard removed a lot of manual follow-up from our daily routine. It feels simple for the team, but the automation behind it saves hours every week.",
+      "cta": "A strong fit if your business is growing but your operations are still handled manually."
+    },
+    {
+      "name": "Marcel A. Shannon",
+      "role": "Marketing Lead",
+      "company": "Digital-first SME",
+      "result": "Better conversion",
+      "headline": "More polished, more credible, and easier to act on.",
+      "text": "The new design helped visitors understand what we do much faster. The pages feel professional without being heavy, and our campaign traffic now has a clearer path to convert.",
+      "cta": "Ideal for teams that already have traffic and want to turn more visitors into real leads."
+    }
+  ],
+  "services": [
+    { "key": "digital-consulting", "title": "Digital Consulting", "desc": "Digital strategies that drive innovation and measurable growth.", "cat": "Marketing", "color": "#f59e0b" },
+    { "key": "website-development", "title": "Website Development", "desc": "Powerful digital experiences through creative design and development.", "cat": "Development", "color": "#6366f1" },
+    { "key": "mobile-app-solutions", "title": "Mobile App Solutions", "desc": "Seamless apps that connect your brand with customers anywhere.", "cat": "Development", "color": "#8b5cf6" },
+    { "key": "ux-ui-design", "title": "UX/UI Design", "desc": "Intuitive experiences that turn users into loyal customers.", "cat": "Design", "color": "#ec4899" },
+    { "key": "seo-optimization", "title": "SEO Optimization", "desc": "Boost your visibility with data-driven SEO strategies.", "cat": "Marketing", "color": "#10b981" },
+    { "key": "custom-software", "title": "Custom Software", "desc": "Tailor-made software solutions for unique business needs.", "cat": "Development", "color": "#3b82f6" },
+    { "key": "cloud-solutions", "title": "Cloud Solutions", "desc": "Scalable cloud infrastructure and web-based systems.", "cat": "Development", "color": "#06b6d4" },
+    { "key": "maintenance", "title": "Maintenance", "desc": "Ongoing support to keep your systems running smoothly.", "cat": "Development", "color": "#a78bfa" }
+  ],
+  "blogPosts": [
+    {
+      "title": "Turn Ideas into Digital Products: The Journey from Concept to Code",
+      "slug": "turn-ideas-into-digital-products",
+      "category": "Development",
+      "date": "October 10, 2025",
+      "excerpt": "How we transform your business ideas into powerful digital solutions using modern web technologies.",
+      "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80",
+      "imagePosition": "center",
+      "url": "https://kodakode.com/turn-ideas-into-digital-products-the-from-concept-to-code/",
+      "metaTitle": "Turn Ideas into Digital Products",
+      "metaDescription": "A practical look at how business ideas become polished digital products.",
+      "content": "<h2>From Concept to Code</h2><p>A strong product starts with clear goals, user journeys, and a build plan that keeps business outcomes visible.</p>"
+    },
+    {
+      "title": "Why Your Business Needs a Mobile App in 2025",
+      "slug": "why-your-business-needs-mobile-app",
+      "category": "Mobile",
+      "date": "September 20, 2025",
+      "excerpt": "Mobile apps are no longer a luxury - they are a necessity for businesses looking to stay competitive.",
+      "image": "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=900&q=80",
+      "imagePosition": "center",
+      "url": "https://kodakode.com/blog-standard/",
+      "metaTitle": "Why Your Business Needs a Mobile App",
+      "metaDescription": "How mobile apps help businesses stay connected with customers.",
+      "content": "<h2>Mobile First, Business Ready</h2><p>A mobile app can simplify repeat actions, improve retention, and keep your brand close to customers.</p>"
+    },
+    {
+      "title": "The Power of SEO: Getting Your Business Found Online",
+      "slug": "power-of-seo-business-found-online",
+      "category": "Marketing",
+      "date": "August 15, 2025",
+      "excerpt": "Learn how strategic SEO can dramatically increase your online visibility and drive more customers.",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80",
+      "imagePosition": "center",
+      "url": "https://kodakode.com/blog-standard/",
+      "metaTitle": "The Power of SEO",
+      "metaDescription": "Why SEO structure matters for long-term visibility.",
+      "content": "<h2>SEO Starts With Structure</h2><p>Clear headlines, strong metadata, and useful content make your website easier to discover and trust.</p>"
+    }
+  ]
+}

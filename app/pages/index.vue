@@ -40,15 +40,15 @@
             <span v-html="typedText"></span><span class="text-indigo-400 animate-pulse">|</span>
           </h1>
           <p class="text-slate-400 text-base md:text-lg max-w-lg mb-10 leading-relaxed">
-            Our focus is not to sell you our services but to bring you solutions and innovations that will make your business profitable.
+            {{ heroSubtitle }}
           </p>
           <div class="flex flex-wrap gap-3 mb-10">
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
               class="group bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-7 py-3.5 rounded-xl font-semibold transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/40 hover:-translate-y-0.5 inline-flex items-center gap-2">
-              Let's get started <span class="group-hover:translate-x-1 transition-transform">→</span>
+              {{ heroPrimaryCta }} <span class="group-hover:translate-x-1 transition-transform">→</span>
             </a>
             <NuxtLink to="/work" class="border border-white/20 hover:border-indigo-400/60 bg-white/5 hover:bg-indigo-600/10 text-white px-7 py-3.5 rounded-xl font-semibold transition-all duration-300 inline-flex items-center gap-2">
-              View our work
+              {{ heroSecondaryCta }}
             </NuxtLink>
           </div>
           <div class="flex flex-wrap gap-2">
@@ -83,8 +83,8 @@
       <div class="max-w-6xl mx-auto relative z-10">
         <div class="text-center mb-14">
           <span class="inline-block text-xs font-semibold tracking-widest uppercase text-indigo-500 mb-3">Global Partners</span>
-          <h2 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">World Wide Partners</h2>
-          <p class="text-gray-500 text-sm mt-2">Trusted by businesses across Indonesia and beyond</p>
+          <h2 class="text-2xl md:text-3xl font-black text-gray-900 tracking-tight">Dynamic Partner Network</h2>
+          <p class="text-gray-500 text-sm mt-2">Partner data is structured and ready to connect with an API or admin panel.</p>
         </div>
         <div class="partner-slider grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           <a
@@ -93,7 +93,7 @@
             :href="partner.url"
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex items-center justify-center p-7 md:p-8 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 hover:-translate-y-1"
+            class="group flex min-h-[8rem] items-center justify-center p-7 md:p-8 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 hover:-translate-y-1"
           >
             <img
               :src="partner.logo"
@@ -206,7 +206,7 @@
             Web company &<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">software house</span>
           </h2>
           <p class="text-gray-500 leading-relaxed mb-4 text-sm md:text-base">We are kodakode, a web company and software house specializing in custom software development, website development, and mobile apps tailored to business needs.</p>
-          <p class="text-gray-500 leading-relaxed mb-8 text-sm md:text-base">Our technology is web-based and cloud computing system — built to scale.</p>
+          <p class="text-gray-500 leading-relaxed mb-8 text-sm md:text-base">Proper technology brings proper solutions — built with a web-based and cloud computing system that can scale.</p>
           <div class="grid grid-cols-2 gap-3 mb-8">
             <div
               v-for="card in aboutCards"
@@ -227,12 +227,11 @@
           </div>
           <div class="flex items-center gap-4 flex-wrap">
             <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
-              class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white px-7 md:px-8 py-3.5 md:py-4 rounded-xl font-semibold transition-all inline-flex items-center gap-2.5 text-base hover:shadow-lg hover:shadow-indigo-300">
-              Learn more →
-            </a>
-            <a href="https://api.whatsapp.com/send/?phone=6287784794214" target="_blank"
-              class="rounded-xl border border-green-200 bg-green-50 px-6 md:px-7 py-3.5 md:py-4 text-green-700 text-base md:text-lg font-semibold hover:bg-green-100 transition-colors inline-flex items-center gap-2.5">
-              💬 <span class="text-indigo-600 font-semibold">Chat on WhatsApp</span>
+              class="group rounded-xl border border-green-200 bg-green-50 px-7 md:px-8 py-3.5 md:py-4 text-green-700 text-base md:text-lg font-semibold hover:bg-green-100 transition-colors inline-flex items-center gap-2.5 shadow-sm hover:shadow-lg hover:shadow-green-100">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 md:w-6 md:h-6 shrink-0 transition-transform group-hover:scale-110" fill="#25d366" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              <span class="text-indigo-600 font-semibold">Chat on WhatsApp</span>
             </a>
           </div>
         </div>
@@ -247,19 +246,12 @@
       <div class="max-w-6xl mx-auto relative z-10">
         <div class="text-center mb-12">
           <div class="inline-flex items-center gap-2 text-xs font-medium text-blue-300 bg-blue-500/15 border border-blue-500/30 px-3 py-1.5 rounded-full mb-4">Latest Services</div>
-          <h2 class="text-3xl md:text-4xl font-black tracking-tight mb-6">We Provide Best IT Services</h2>
-          <div class="flex flex-wrap justify-center gap-2">
-            <button v-for="cat in categories" :key="cat"
-              :class="['px-4 py-2 rounded-xl text-xs md:text-sm font-semibold border transition-all duration-200',
-                activeCategory === cat
-                  ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg shadow-indigo-500/25'
-                  : 'border-white/10 bg-white/5 text-slate-400 hover:border-indigo-500/40 hover:text-white']"
-              @click="activeCategory = cat">{{ cat }}</button>
-          </div>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight mb-4">Proper Technology Brings Proper Solutions</h2>
+          <p class="text-slate-400 text-sm max-w-2xl mx-auto leading-relaxed">From consulting to development, every service is shaped to make the user experience clearer, faster, and easier to grow.</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-          <div v-for="(svc, i) in filteredServices" :key="svc.title"
-            class="group relative flex h-full min-h-[260px] flex-col bg-white/5 border border-white/10 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 overflow-hidden cursor-default">
+          <div v-for="(svc, i) in allServices" :key="svc.title"
+            class="group relative flex h-full min-h-[280px] flex-col bg-white/5 border border-white/10 hover:border-indigo-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-2 overflow-hidden cursor-default">
             <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
               :style="`background: linear-gradient(135deg, ${svc.color}12 0%, transparent 100%)`"></div>
             <div
@@ -286,7 +278,7 @@
             <h3 class="text-white font-bold mb-2 relative z-10">{{ svc.title }}</h3>
             <p class="text-slate-500 text-sm leading-relaxed relative z-10 mb-4">{{ svc.desc }}</p>
             <div class="text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 relative z-10 flex items-center gap-1"
-              :style="`color: ${svc.color}`">Learn more →</div>
+              :style="`color: ${svc.color}`">Built for growth →</div>
           </div>
         </div>
       </div>
@@ -357,7 +349,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div v-for="(t, i) in testimonials" :key="t.name"
-            :class="['testimonial-card group relative bg-white/5 border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all duration-300 hover:-translate-y-2 overflow-hidden',
+            :class="['testimonial-card group relative flex h-full min-h-[360px] flex-col bg-white/5 border border-white/10 hover:border-violet-500/40 rounded-3xl p-7 transition-all duration-300 hover:-translate-y-2 overflow-hidden',
               `testimonial-card-${i}`]">
             <div class="absolute inset-0 bg-gradient-to-br from-violet-600/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"></div>
             <div class="absolute top-4 right-6 text-6xl text-violet-500/15 font-serif leading-none">"</div>
@@ -394,12 +386,13 @@
       <div class="absolute bottom-0 right-0 w-64 h-64 bg-indigo-50 rounded-full translate-x-1/4 pointer-events-none"></div>
       <div class="max-w-6xl mx-auto relative z-10">
         <div class="text-center mb-12">
-          <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-600 bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-full mb-4">Our Blog & News</div>
-          <h2 class="text-3xl md:text-4xl font-black tracking-tight text-gray-900">Latest Blog, News & Articles</h2>
+          <div class="inline-flex items-center gap-2 text-xs font-medium text-indigo-600 bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-full mb-4">Articles Timeline</div>
+          <h2 class="text-3xl md:text-4xl font-black tracking-tight text-gray-900">Blog Articles, Headlines & SEO Directory</h2>
+          <p class="text-gray-500 text-sm mt-4 max-w-2xl mx-auto">A clean article timeline designed for SEO-friendly headlines, readable excerpts, and future dynamic publishing from an admin panel.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <a v-for="post in blogPosts" :key="post.title" :href="post.url" target="_blank"
-            class="group bg-white border border-gray-200 hover:border-indigo-300 rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-100 block">
+            class="group flex h-full min-h-[420px] flex-col bg-white border border-gray-200 hover:border-indigo-300 rounded-3xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-indigo-100">
             <div class="relative h-48 overflow-hidden bg-gray-100">
               <img
                 :src="post.image"
@@ -411,11 +404,11 @@
               <div class="absolute inset-0 bg-gradient-to-t from-gray-950/55 via-gray-950/10 to-transparent"></div>
               <div class="absolute top-3 left-3 text-white text-xs px-3 py-1 rounded-full font-medium bg-gray-950/45 backdrop-blur-sm border border-white/15">{{ post.category }}</div>
             </div>
-            <div class="p-5">
+            <div class="flex flex-1 flex-col p-5">
               <div class="text-gray-400 text-xs mb-2">{{ post.date }}</div>
               <h3 class="text-gray-800 font-bold text-sm mb-2 group-hover:text-indigo-600 transition-colors leading-snug">{{ post.title }}</h3>
               <p class="text-gray-500 text-xs leading-relaxed mb-4">{{ post.excerpt }}</p>
-              <div class="text-indigo-600 text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">Read more →</div>
+              <div class="mt-auto text-indigo-600 text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">Read more →</div>
             </div>
           </a>
         </div>
@@ -1031,14 +1024,19 @@
 </style>
 
 <script setup>
-import { ref, computed, nextTick, onMounted, onUnmounted, watch } from 'vue'
+import { ref, computed, nextTick, onMounted, onUnmounted } from 'vue'
 
-const phrases = [
-  'Bring innovation<br>to every solution',
+const { data: cmsContent } = await useFetch('/api/content', {
+  default: () => ({}),
+})
+
+const defaultPhrases = [
+  'Proper technology<br>brings proper solutions',
   'Custom website<br>development',
   'Mobile app<br>solutions',
   'Your idea.<br>Our technology.',
 ]
+const phrases = cmsContent.value?.banner?.titlePhrases?.length ? cmsContent.value.banner.titlePhrases : defaultPhrases
 const typedText = ref(phrases[0])
 let pIdx = 0
 let cIdx = phrases[0].replace('<br>', '\n').length
@@ -1064,7 +1062,10 @@ const stats = ref([
   { label: 'Retention', target: 98, display: 0, suffix: '%' },
 ])
 
-const techs = ['Nuxt.js', 'Vue 3', 'React', 'Laravel', 'Flutter', 'MySQL', 'AWS', 'Vercel']
+const techs = ['Nuxt.js', 'Vue 3', 'React', 'Laravel', 'Flutter', 'MySQL', 'AWS']
+const heroSubtitle = computed(() => cmsContent.value?.banner?.subtitle || 'Proper technology brings proper solutions. We build web, app, and software systems that help your business look credible, run smoother, and grow faster.')
+const heroPrimaryCta = computed(() => cmsContent.value?.banner?.primaryCta || "Let's get started")
+const heroSecondaryCta = computed(() => cmsContent.value?.banner?.secondaryCta || 'View our work')
 const heroSparkles = [
   { id: 1, left: '9%', top: '18%', size: '3px', delay: '0s', duration: '4.8s', drift: '14px', opacity: '0.72' },
   { id: 2, left: '18%', top: '70%', size: '2px', delay: '0.8s', duration: '5.6s', drift: '-10px', opacity: '0.55' },
@@ -1080,7 +1081,7 @@ const heroSparkles = [
   { id: 12, left: '47%', top: '48%', size: '3px', delay: '1.25s', duration: '5.7s', drift: '15px', opacity: '0.58' },
 ]
 
-const partners = [
+const defaultPartners = [
   { name: 'Go-Nanny', logo: 'https://kodakode.com/wp-content/uploads/2025/07/6.png', url: 'https://go-nanny.id/' },
   { name: '2M Design Lab', logo: 'https://kodakode.com/wp-content/uploads/2025/07/8.png', url: 'https://www.2mdesignlab.com/' },
   { name: 'Bali Culinary Professionals', logo: 'https://kodakode.com/wp-content/uploads/2025/07/9.png', url: 'https://baliculinaryprofessionals.com/' },
@@ -1090,6 +1091,8 @@ const partners = [
   { name: 'Mahasridana', logo: 'https://kodakode.com/wp-content/uploads/2025/07/2.png', url: 'https://mahasridana.com/' },
   { name: 'YPI Asia', logo: 'https://kodakode.com/wp-content/uploads/2025/07/1.png', url: 'https://www.ypi-asia.com/' },
 ]
+
+const partners = computed(() => cmsContent.value?.partners?.length ? cmsContent.value.partners : defaultPartners)
 
 
 
@@ -1128,10 +1131,7 @@ const aboutCards = [
   },
 ]
 
-const categories = ['All', 'Development', 'Design', 'Marketing']
-const activeCategory = ref('All')
-
-const allServices = [
+const defaultAllServices = [
   { key: 'digital-consulting', title: 'Digital Consulting', desc: 'Digital strategies that drive innovation and measurable growth.', cat: 'Marketing', color: '#f59e0b', iconSvg: '<circle cx="12" cy="12" r="8.5"/><path d="m15.5 8.5-2.1 5-5 2.1 2.1-5 5-2.1Z"/><path d="M12 3.5v2"/><path d="M12 18.5v2"/><path d="M3.5 12h2"/><path d="M18.5 12h2"/>' },
   { key: 'website-development', title: 'Website Development', desc: 'Powerful digital experiences through creative design and development.', cat: 'Development', color: '#6366f1', iconSvg: '<rect x="3" y="4" width="18" height="14" rx="3"/><path d="M3 9h18"/><path d="m9 13-2 2 2 2"/><path d="m15 13 2 2-2 2"/><path d="M12 18v2"/><path d="M8 20h8"/>' },
   { key: 'mobile-app-solutions', title: 'Mobile App Solutions', desc: 'Seamless apps that connect your brand with customers anywhere.', cat: 'Development', color: '#8b5cf6', iconSvg: '<rect x="7" y="2.8" width="10" height="18.4" rx="2.6"/><path d="M10.5 6h3"/><path d="M10 16h4"/><path d="M9.5 10.2h5"/><path d="M9.5 12.4h3.5"/><circle cx="17.5" cy="7" r="2.2"/><path d="M17.5 5.5v3"/><path d="M16 7h3"/>' },
@@ -1141,6 +1141,16 @@ const allServices = [
   { key: 'cloud-solutions', title: 'Cloud Solutions', desc: 'Scalable cloud infrastructure and web-based systems.', cat: 'Development', color: '#06b6d4', iconSvg: '<path d="M7 17h10a4 4 0 0 0 .8-7.9 5.5 5.5 0 0 0-10.6-1.6A4.7 4.7 0 0 0 7 17Z"/><path d="M8 20h8"/><path d="M12 17v3"/><circle cx="6" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M7.5 20h3"/><path d="M13.5 20h3"/>' },
   { key: 'maintenance', title: 'Maintenance', desc: 'Ongoing support to keep your systems running smoothly.', cat: 'Development', color: '#a78bfa', iconSvg: '<path d="M14.5 5.5a4.5 4.5 0 0 0-5.6 5.8l-5.1 5.1a2.2 2.2 0 0 0 3.1 3.1l5.1-5.1a4.5 4.5 0 0 0 5.8-5.6l-3.1 3.1-2.6-.7-.7-2.6 3.1-3.1Z"/><path d="M16.5 18.5 18 20l3-3"/>' },
 ]
+
+const allServices = computed(() => {
+  const serviceOverrides = cmsContent.value?.services
+  if (!serviceOverrides?.length) return defaultAllServices
+
+  return defaultAllServices.map((service) => {
+    const override = serviceOverrides.find(item => item.key === service.key)
+    return override ? { ...service, ...override, iconSvg: service.iconSvg } : service
+  })
+})
 
 const legacyServices = [
   { icon: '💡', title: 'Digital Consulting', desc: 'Digital strategies that drive innovation and measurable growth.', cat: 'Marketing', color: '#f59e0b' },
@@ -1152,10 +1162,6 @@ const legacyServices = [
   { icon: '☁️', title: 'Cloud Solutions', desc: 'Scalable cloud infrastructure and web-based systems.', cat: 'Development', color: '#06b6d4' },
   { icon: '🛠️', title: 'Maintenance', desc: 'Ongoing support to keep your systems running smoothly.', cat: 'Development', color: '#a78bfa' },
 ]
-
-const filteredServices = computed(() =>
-  activeCategory.value === 'All' ? allServices : allServices.filter(s => s.cat === activeCategory.value)
-)
 
 const activeStep = ref(0)
 const processProgress = ref(0)
@@ -1196,7 +1202,7 @@ const processDot = computed(() => getProcessPoint(processTravelProgress.value))
 const processTrail = computed(() => getProcessPoint(Math.max(processTravelProgress.value - 0.025, 0)))
 const processStrokeDash = computed(() => `${Math.max(processTravelProgress.value * processPathLength, 12)} ${processPathLength}`)
 
-const testimonials = [
+const defaultTestimonials = [
   {
     name: 'Andrew D. Bricker',
     role: 'Founder',
@@ -1226,17 +1232,21 @@ const testimonials = [
   },
 ]
 
+const testimonials = computed(() => cmsContent.value?.testimonials?.length ? cmsContent.value.testimonials : defaultTestimonials)
+
 const legacyTestimonials = [
   { name: 'Andrew D. Bricker', role: 'CEO & Founder', text: 'Their expertise and clear communication made the entire process smooth and efficient. Highly recommended for website development.' },
   { name: 'Jose T. McMichael', role: 'Senior Manager', text: 'A reliable partner that truly understands our business goals and turns them into effective digital solutions especially website development.' },
   { name: 'Marcel A. Shannon', role: 'Senior Manager', text: 'Excellent service from start to finish — innovative, responsive, and results-driven.' },
 ]
 
-const blogPosts = [
+const defaultBlogPosts = [
   { title: 'Turn Ideas into Digital Products: The Journey from Concept to Code', category: 'Development', date: 'October 10, 2025', excerpt: 'How we transform your business ideas into powerful digital solutions using modern web technologies.', image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80', imagePosition: 'center', url: 'https://kodakode.com/turn-ideas-into-digital-products-the-from-concept-to-code/' },
   { title: 'Why Your Business Needs a Mobile App in 2025', category: 'Mobile', date: 'September 20, 2025', excerpt: 'Mobile apps are no longer a luxury - they are a necessity for businesses looking to stay competitive.', image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=900&q=80', imagePosition: 'center', url: 'https://kodakode.com/blog-standard/' },
   { title: 'The Power of SEO: Getting Your Business Found Online', category: 'Marketing', date: 'August 15, 2025', excerpt: 'Learn how strategic SEO can dramatically increase your online visibility and drive more customers.', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80', imagePosition: 'center', url: 'https://kodakode.com/blog-standard/' },
 ]
+
+const blogPosts = computed(() => cmsContent.value?.blogPosts?.length ? cmsContent.value.blogPosts : defaultBlogPosts)
 
 const legacyBlogPosts = [
   { title: 'Turn Ideas into Digital Products: The Journey from Concept to Code', category: 'Development', date: 'October 10, 2025', excerpt: 'How we transform your business ideas into powerful digital solutions using modern web technologies.', icon: '💻', bg1: '#4f46e5', bg2: '#7c3aed', url: 'https://kodakode.com/turn-ideas-into-digital-products-the-from-concept-to-code/' },
@@ -1443,11 +1453,6 @@ onMounted(() => {
   setTimeout(() => {
     observeLottie('lottie-growth', '/Seo isometric composition with human characters.json')
   }, 1800)
-})
-
-watch(activeCategory, async () => {
-  await nextTick()
-  loadServiceLotties()
 })
 
 onUnmounted(() => {
@@ -1724,8 +1729,10 @@ a.group:hover::after {
   width: 18rem;
   height: 18rem;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.2), transparent 62%);
-  animation: none;
+  background:
+    radial-gradient(circle, rgba(99, 102, 241, 0.22), transparent 62%),
+    radial-gradient(circle at 72% 30%, rgba(34, 197, 94, 0.12), transparent 48%);
+  animation: process-glow-drift 9s ease-in-out infinite;
   pointer-events: none;
 }
 
@@ -1733,6 +1740,10 @@ a.group:hover::after {
   position: relative;
   z-index: 1;
   animation: none;
+}
+
+.section-in .working-process-panel {
+  animation: process-panel-float 6s ease-in-out 0.8s infinite;
 }
 
 .process-step-node {
@@ -1777,6 +1788,11 @@ a.group:hover::after {
 
 .testimonial-card {
   min-height: 100%;
+}
+
+.testimonial-card p,
+.testimonial-card .relative.z-10:last-child {
+  margin-top: auto;
 }
 
 .section-in .testimonial-card-0 {
