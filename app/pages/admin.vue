@@ -24,7 +24,7 @@
           :key="tab.key"
           type="button"
           :class="['mb-1 flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-sm font-semibold transition', activeTab === tab.key ? 'bg-indigo-600 text-white' : 'text-slate-300 hover:bg-white/10 hover:text-white']"
-          @click="activeTab = tab.key"
+          @click="setActiveTab(tab.key)"
         >
           {{ tab.label }}
           <span class="text-xs opacity-70">{{ tab.count }}</span>
@@ -67,7 +67,8 @@
 
           <div v-if="activeTab === 'partners'" class="space-y-5">
             <SectionHeader title="Dynamic Partners" note="Logo cards shown in World Wide Partners." />
-            <RepeaterAdd label="Add partner" @add="content.partners.push({ name: 'New Partner', logo: '', url: '' })" />
+            <RepeaterAdd label="Add partner" @add="addPartner" />
+            <EmptyState v-if="!content.partners.length" title="No partners yet" note="Add your first partner logo and website link." />
             <div class="grid gap-4">
               <div v-for="(partner, i) in content.partners" :key="i" class="admin-card grid gap-4 md:grid-cols-3">
                 <Field label="Name"><input v-model="partner.name" class="admin-input" /></Field>
@@ -80,7 +81,8 @@
 
           <div v-if="activeTab === 'testimonials'" class="space-y-5">
             <SectionHeader title="Dynamic Testimonials" note="Realistic proof cards for upselling new visitors." />
-            <RepeaterAdd label="Add testimonial" @add="content.testimonials.push({ name: 'New Client', role: '', company: '', result: '', headline: '', text: '', cta: '' })" />
+            <RepeaterAdd label="Add testimonial" @add="addTestimonial" />
+            <EmptyState v-if="!content.testimonials.length" title="No testimonials yet" note="Add client proof that makes new visitors trust the service faster." />
             <div class="grid gap-4">
               <div v-for="(item, i) in content.testimonials" :key="i" class="admin-card space-y-4">
                 <div class="grid gap-4 md:grid-cols-4">
@@ -99,6 +101,8 @@
 
           <div v-if="activeTab === 'services'" class="space-y-5">
             <SectionHeader title="Latest Services" note="Edit text and colors. Icons remain mapped by service key." />
+            <RepeaterAdd label="Add service" @add="addService" />
+            <EmptyState v-if="!content.services.length" title="No services yet" note="Add your service list for the homepage latest services section." />
             <div class="grid gap-4">
               <div v-for="service in content.services" :key="service.key" class="admin-card grid gap-4 md:grid-cols-4">
                 <Field label="Key"><input v-model="service.key" class="admin-input" /></Field>
@@ -113,6 +117,7 @@
           <div v-if="activeTab === 'blog'" class="space-y-5">
             <SectionHeader title="Blog Editor" note="SEO-friendly article editor powered by CKEditor." />
             <RepeaterAdd label="Add article" @add="addBlogPost" />
+            <EmptyState v-if="!content.blogPosts.length" title="No blog articles yet" note="Add an article to begin editing SEO content." />
             <div class="grid gap-5 xl:grid-cols-[18rem_1fr]">
               <div class="space-y-2">
                 <button
@@ -217,8 +222,83 @@ const RepeaterAdd = defineComponent({
   },
 })
 
+const EmptyState = defineComponent({
+  props: {
+    title: { type: String, required: true },
+    note: { type: String, required: true },
+  },
+  setup(props) {
+    return () => h('div', { class: 'rounded-xl border border-dashed border-white/15 bg-white/[0.03] p-5 text-sm' }, [
+      h('div', { class: 'font-black text-white' }, props.title),
+      h('p', { class: 'mt-1 text-slate-400' }, props.note),
+    ])
+  },
+})
+
+const fallbackContent = {
+  banner: {
+    titlePhrases: [
+      'Proper technology<br>brings proper solutions',
+      'Custom website<br>development',
+      'Mobile app<br>solutions',
+      'Your idea.<br>Our technology.',
+    ],
+    subtitle: 'Proper technology brings proper solutions. We build web, app, and software systems that help your business look credible, run smoother, and grow faster.',
+    primaryCta: "Let's get started",
+    secondaryCta: 'View our work',
+  },
+  partners: [
+    { name: 'Go-Nanny', logo: 'https://kodakode.com/wp-content/uploads/2025/07/6.png', url: 'https://go-nanny.id/' },
+    { name: '2M Design Lab', logo: 'https://kodakode.com/wp-content/uploads/2025/07/8.png', url: 'https://www.2mdesignlab.com/' },
+    { name: 'Bali Culinary Professionals', logo: 'https://kodakode.com/wp-content/uploads/2025/07/9.png', url: 'https://baliculinaryprofessionals.com/' },
+    { name: 'Amaze Vacations', logo: 'https://kodakode.com/wp-content/uploads/2025/07/10.png', url: 'https://www.amazevacations.com/' },
+    { name: 'Apex Bali', logo: 'https://kodakode.com/wp-content/uploads/2025/07/5.png', url: 'https://apexbali.com' },
+    { name: 'Skal Bali', logo: 'https://kodakode.com/wp-content/uploads/2025/07/4.png', url: 'https://www.skalbali.com/' },
+    { name: 'Mahasridana', logo: 'https://kodakode.com/wp-content/uploads/2025/07/2.png', url: 'https://mahasridana.com/' },
+    { name: 'YPI Asia', logo: 'https://kodakode.com/wp-content/uploads/2025/07/1.png', url: 'https://www.ypi-asia.com/' },
+  ],
+  testimonials: [
+    { name: 'Andrew D. Bricker', role: 'Founder', company: 'Bali hospitality brand', result: '+38% inquiries', headline: 'The website finally feels like our business.', text: 'We came in with scattered ideas and left with a site that made our offer clear.', cta: 'Best for founders who need a website that explains, sells, and builds trust before the first call.' },
+  ],
+  services: [
+    { key: 'digital-consulting', title: 'Digital Consulting', desc: 'Digital strategies that drive innovation and measurable growth.', cat: 'Marketing', color: '#f59e0b' },
+    { key: 'website-development', title: 'Website Development', desc: 'Powerful digital experiences through creative design and development.', cat: 'Development', color: '#6366f1' },
+    { key: 'mobile-app-solutions', title: 'Mobile App Solutions', desc: 'Seamless apps that connect your brand with customers anywhere.', cat: 'Development', color: '#8b5cf6' },
+    { key: 'ux-ui-design', title: 'UX/UI Design', desc: 'Intuitive experiences that turn users into loyal customers.', cat: 'Design', color: '#ec4899' },
+    { key: 'seo-optimization', title: 'SEO Optimization', desc: 'Boost your visibility with data-driven SEO strategies.', cat: 'Marketing', color: '#10b981' },
+    { key: 'custom-software', title: 'Custom Software', desc: 'Tailor-made software solutions for unique business needs.', cat: 'Development', color: '#3b82f6' },
+    { key: 'cloud-solutions', title: 'Cloud Solutions', desc: 'Scalable cloud infrastructure and web-based systems.', cat: 'Development', color: '#06b6d4' },
+    { key: 'maintenance', title: 'Maintenance', desc: 'Ongoing support to keep your systems running smoothly.', cat: 'Development', color: '#a78bfa' },
+  ],
+  blogPosts: [
+    { title: 'Turn Ideas into Digital Products: The Journey from Concept to Code', slug: 'turn-ideas-into-digital-products', category: 'Development', date: 'October 10, 2025', excerpt: 'How we transform your business ideas into powerful digital solutions using modern web technologies.', image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80', imagePosition: 'center', url: 'https://kodakode.com/turn-ideas-into-digital-products-the-from-concept-to-code/', metaTitle: 'Turn Ideas into Digital Products', metaDescription: 'A practical look at how business ideas become polished digital products.', content: '<h2>From Concept to Code</h2><p>A strong product starts with clear goals, user journeys, and a build plan that keeps business outcomes visible.</p>' },
+  ],
+}
+
 function clone(value) {
   return JSON.parse(JSON.stringify(value))
+}
+
+function normalizeContent(source) {
+  return {
+    banner: {
+      ...clone(fallbackContent.banner),
+      ...(source?.banner || {}),
+      titlePhrases: Array.isArray(source?.banner?.titlePhrases) && source.banner.titlePhrases.length
+        ? source.banner.titlePhrases
+        : clone(fallbackContent.banner.titlePhrases),
+    },
+    partners: Array.isArray(source?.partners) && source.partners.length ? source.partners : clone(fallbackContent.partners),
+    testimonials: Array.isArray(source?.testimonials) && source.testimonials.length ? source.testimonials : clone(fallbackContent.testimonials),
+    services: Array.isArray(source?.services) && source.services.length ? source.services : clone(fallbackContent.services),
+    blogPosts: Array.isArray(source?.blogPosts) && source.blogPosts.length ? source.blogPosts : clone(fallbackContent.blogPosts),
+  }
+}
+
+async function setActiveTab(tab) {
+  syncEditorContent()
+  activeTab.value = tab
+  await refreshEditor()
 }
 
 async function loadContent() {
@@ -227,7 +307,7 @@ async function loadContent() {
 
   try {
     const response = await $fetch('/api/content')
-    Object.assign(content, clone(response))
+    Object.assign(content, normalizeContent(response))
     selectedPostIndex.value = 0
     await refreshEditor()
   } catch (loadError) {
@@ -235,6 +315,24 @@ async function loadContent() {
   } finally {
     loadingContent.value = false
   }
+}
+
+function addPartner() {
+  content.partners.push({ name: 'New Partner', logo: '', url: '' })
+}
+
+function addTestimonial() {
+  content.testimonials.push({ name: 'New Client', role: '', company: '', result: '', headline: '', text: '', cta: '' })
+}
+
+function addService() {
+  content.services.push({
+    key: `new-service-${Date.now()}`,
+    title: 'New Service',
+    desc: '',
+    cat: 'Development',
+    color: '#6366f1',
+  })
 }
 
 function addBlogPost() {
