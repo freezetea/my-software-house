@@ -161,7 +161,7 @@
 </template>
 
 <script setup>
-import { computed, defineComponent, h, nextTick, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
+import { computed, defineComponent, h, nextTick, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 
 const tabs = computed(() => [
   { key: 'banner', label: 'Banner', count: 'API' },
@@ -296,9 +296,19 @@ function normalizeContent(source) {
 }
 
 async function setActiveTab(tab) {
-  syncEditorContent()
+  if (activeTab.value === tab) return
+
+  safeSyncEditorContent()
+
+  if (activeTab.value === 'blog') {
+    await destroyEditor()
+  }
+
   activeTab.value = tab
-  await refreshEditor()
+
+  if (tab === 'blog') {
+    await refreshEditor()
+  }
 }
 
 async function loadContent() {
@@ -349,20 +359,20 @@ function addBlogPost() {
     metaDescription: '',
     content: '<h2>New Article</h2><p>Write your content here.</p>',
   })
-  selectBlogPost(content.blogPosts.length - 1)
+  void selectBlogPost(content.blogPosts.length - 1)
 }
 
 function deleteSelectedPost() {
   if (!selectedPost.value) return
   content.blogPosts.splice(selectedPostIndex.value, 1)
   selectedPostIndex.value = Math.max(0, selectedPostIndex.value - 1)
-  refreshEditor()
+  void refreshEditor()
 }
 
 async function saveContent() {
   saving.value = true
   message.value = ''
-  syncEditorContent()
+  safeSyncEditorContent()
 
   try {
     const response = await $fetch('/api/content', {
@@ -388,8 +398,16 @@ function syncEditorContent() {
   }
 }
 
+function safeSyncEditorContent() {
+  try {
+    syncEditorContent()
+  } catch (error) {
+    console.error('Failed to sync CKEditor content.', error)
+  }
+}
+
 async function selectBlogPost(index) {
-  syncEditorContent()
+  safeSyncEditorContent()
   selectedPostIndex.value = index
   await refreshEditor()
 }
@@ -424,10 +442,7 @@ async function refreshEditor() {
   await nextTick()
   if (activeTab.value !== 'blog' || !selectedPost.value || !ckeditorReady.value) return
 
-  if (editor.value) {
-    await editor.value.destroy()
-    editor.value = null
-  }
+  await destroyEditor()
 
   const host = document.getElementById('ckeditor-host')
   if (!host) return
@@ -438,13 +453,17 @@ async function refreshEditor() {
   editor.value.setData(selectedPost.value.content || '')
 }
 
-watch(activeTab, async (tab) => {
-  if (tab === 'blog') {
-    await refreshEditor()
-  } else {
-    syncEditorContent()
+async function destroyEditor() {
+  if (!editor.value) return
+
+  try {
+    await editor.value.destroy()
+  } catch (error) {
+    console.error('Failed to destroy CKEditor instance.', error)
+  } finally {
+    editor.value = null
   }
-})
+}
 
 onMounted(async () => {
   try {
@@ -457,9 +476,7 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(async () => {
-  if (editor.value) {
-    await editor.value.destroy()
-  }
+  await destroyEditor()
 })
 </script>
 
