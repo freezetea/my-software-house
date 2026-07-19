@@ -1,8 +1,5 @@
-import { mkdir, writeFile } from 'node:fs/promises'
-import { dirname, join } from 'node:path'
 import { isAdminSession } from '../utils/adminAuth'
-
-const dataPath = join(process.cwd(), 'data', 'cms.json')
+import { writeCmsContent } from '../utils/cmsStorage'
 
 function assertArray(value: unknown, name: string) {
   if (!Array.isArray(value)) {
@@ -40,8 +37,7 @@ export default defineEventHandler(async (event) => {
     updatedAt: new Date().toISOString(),
   }
 
-  await mkdir(dirname(dataPath), { recursive: true })
-  await writeFile(dataPath, `${JSON.stringify(payload, null, 2)}\n`, 'utf8')
+  await writeCmsContent(payload)
 
   return { ok: true, updatedAt: payload.updatedAt }
 })
