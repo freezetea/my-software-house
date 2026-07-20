@@ -88,17 +88,18 @@
         </div>
         <div class="partner-slider grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
           <a
-            v-for="partner in partners"
+            v-for="(partner, i) in partners"
             :key="partner.name"
             :href="partner.url"
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex min-h-[8rem] items-center justify-center p-7 md:p-8 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 hover:-translate-y-1"
+            class="partner-logo-card group flex min-h-[8rem] items-center justify-center p-7 md:p-8 rounded-2xl border border-gray-100 bg-white shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 hover:-translate-y-1"
+            :style="{ '--partner-delay': `${Math.min(i * 0.1, 0.6)}s` }"
           >
             <img
               :src="partner.logo"
               :alt="partner.name"
-               class="max-h-16 md:max-h-[4.5rem] w-auto object-contain transition-all duration-300"
+               class="partner-logo-image max-h-16 md:max-h-[4.5rem] w-auto object-contain transition-all duration-300"
               loading="lazy"
             />
           </a>
@@ -1622,6 +1623,43 @@ a.group,
   isolation: isolate;
 }
 
+.partner-logo-card {
+  opacity: 0;
+  transform: translate3d(var(--partner-x, 0), 2rem, 0) scale(0.94);
+  will-change: opacity, transform;
+}
+
+.partner-logo-card:nth-child(odd) {
+  --partner-x: -0.7rem;
+}
+
+.partner-logo-card:nth-child(even) {
+  --partner-x: 0.7rem;
+}
+
+.partner-logo-image {
+  opacity: 0;
+  filter: none;
+  transform: translate3d(0, 0.7rem, 0) scale(0.88);
+  will-change: opacity, transform;
+}
+
+.section-in .partner-logo-card {
+  animation: partner-card-enter 0.92s cubic-bezier(.16, 1, .3, 1) var(--partner-delay, 0s) both;
+}
+
+.section-in .partner-logo-image {
+  animation: partner-logo-enter 0.82s cubic-bezier(.16, 1, .3, 1) calc(var(--partner-delay, 0s) + 0.16s) both;
+}
+
+.section-in .partner-logo-card::after {
+  animation: partner-card-shine 0.9s cubic-bezier(.22, 1, .36, 1) calc(var(--partner-delay, 0s) + 0.12s) both;
+}
+
+.section-in .partner-logo-card:hover .partner-logo-image {
+  transform: translate3d(0, -0.1rem, 0) scale(1.035);
+}
+
 .partner-slider > a::after,
 #services .grid > .group::after,
 .working-process-panel::after,
@@ -1697,28 +1735,28 @@ a.group:hover::after {
   animation: icon-ring-breathe 3.8s ease-in-out infinite;
 }
 
-.section-in .partner-slider > a,
-.section-in a.group {
+.section-in .partner-slider > a:not(.partner-logo-card),
+.section-in a.group:not(.partner-logo-card) {
   animation: webflow-card-rise 0.68s cubic-bezier(.22, 1, .36, 1) both;
 }
 
-.section-in .partner-slider > a:nth-child(2),
-.section-in a.group:nth-child(2) {
+.section-in .partner-slider > a:not(.partner-logo-card):nth-child(2),
+.section-in a.group:not(.partner-logo-card):nth-child(2) {
   animation-delay: 0.07s;
 }
 
-.section-in .partner-slider > a:nth-child(3),
-.section-in a.group:nth-child(3) {
+.section-in .partner-slider > a:not(.partner-logo-card):nth-child(3),
+.section-in a.group:not(.partner-logo-card):nth-child(3) {
   animation-delay: 0.14s;
 }
 
-.section-in .partner-slider > a:nth-child(4),
-.section-in a.group:nth-child(4) {
+.section-in .partner-slider > a:not(.partner-logo-card):nth-child(4),
+.section-in a.group:not(.partner-logo-card):nth-child(4) {
   animation-delay: 0.21s;
 }
 
-.section-in .partner-slider > a:nth-child(n+5),
-.section-in a.group:nth-child(n+5) {
+.section-in .partner-slider > a:not(.partner-logo-card):nth-child(n+5),
+.section-in a.group:not(.partner-logo-card):nth-child(n+5) {
   animation-delay: 0.28s;
 }
 
@@ -1919,6 +1957,53 @@ a.group:hover::after {
   }
 }
 
+@keyframes partner-card-enter {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--partner-x, 0), 2rem, 0) scale(0.94);
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0);
+  }
+  58% {
+    opacity: 1;
+    transform: translate3d(0, -0.35rem, 0) scale(1.035);
+    box-shadow: 0 22px 46px rgba(79, 70, 229, 0.14);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  }
+}
+
+@keyframes partner-logo-enter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0.7rem, 0) scale(0.88);
+  }
+  60% {
+    opacity: 1;
+    transform: translate3d(0, -0.08rem, 0) scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes partner-card-shine {
+  0% {
+    opacity: 0;
+    transform: translateX(-120%) skewX(-12deg);
+  }
+  38% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(120%) skewX(-12deg);
+  }
+}
+
 @keyframes webflow-orbit-ring {
   to { transform: rotate(352deg); }
 }
@@ -2010,6 +2095,8 @@ a.group:hover::after {
 @media (prefers-reduced-motion: reduce) {
   .section-reveal,
   .testimonial-card,
+  .partner-logo-card,
+  .partner-logo-image,
   .hero-sparkle,
   .hero-sparkle::after,
   .hero-orbit-star,
