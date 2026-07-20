@@ -3,7 +3,12 @@
     <section class="flex min-h-screen items-center justify-center px-4 py-16">
       <div class="w-full max-w-md rounded-3xl border border-white/10 bg-white/[0.04] p-7 shadow-2xl shadow-indigo-950/30">
         <div class="mb-7 text-center">
-          <p class="text-xs font-bold uppercase tracking-[0.28em] text-indigo-300">Kodakode Admin</p>
+          <img
+            src="https://kodakode.com/wp-content/uploads/2023/02/kodakode-logo-biru-teks-putih-300x106.png"
+            alt="Kodakode"
+            class="mx-auto h-16 w-auto object-contain"
+          />
+          <p class="mt-5 text-xs font-bold uppercase tracking-[0.28em] text-indigo-300">Kodakode Admin</p>
           <h1 class="mt-3 text-3xl font-black tracking-tight">Login Panel</h1>
           <p class="mt-2 text-sm text-slate-400">Masuk untuk mengelola banner, partners, testimonials, services, dan blog.</p>
         </div>

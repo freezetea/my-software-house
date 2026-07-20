@@ -2,10 +2,17 @@
   <main class="min-h-screen bg-slate-950 text-slate-100">
     <section class="border-b border-white/10 bg-slate-900/80 px-4 py-6">
       <div class="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div>
-          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-indigo-300">Kodakode Admin</p>
-          <h1 class="mt-2 text-3xl font-black tracking-tight text-white">CMS Control Panel</h1>
-          <p class="mt-2 max-w-2xl text-sm text-slate-400">Edit homepage content, dynamic partners, testimonials, services, and SEO-ready blog articles.</p>
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center">
+          <img
+            src="https://kodakode.com/wp-content/uploads/2023/02/kodakode-logo-biru-teks-putih-300x106.png"
+            alt="Kodakode"
+            class="h-16 w-auto object-contain sm:h-14"
+          />
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.28em] text-indigo-300">Kodakode Admin</p>
+            <h1 class="mt-2 text-3xl font-black tracking-tight text-white">CMS Control Panel</h1>
+            <p class="mt-2 max-w-2xl text-sm text-slate-400">Edit homepage content, dynamic partners, testimonials, services, and SEO-ready blog articles.</p>
+          </div>
         </div>
         <div class="flex flex-wrap items-center gap-3">
           <button class="rounded-xl border border-red-400/20 px-4 py-2 text-sm font-semibold text-red-100 hover:bg-red-500/10" @click="logout">Logout</button>
