@@ -85,7 +85,7 @@
                   @dragover.prevent
                   @drop.prevent="handleImageDrop($event, partner, 'logo')"
                 >
-                  <img v-if="partner.logo" :src="partner.logo" :alt="partner.name || 'Partner logo'" class="max-h-24 max-w-[78%] object-contain" />
+                  <img v-if="partner.logo" :src="partner.logo" :alt="partner.name || 'Partner logo'" class="partner-logo-preview object-contain" />
                   <div v-else class="text-center">
                     <div class="text-sm font-black text-white">Drop partner logo</div>
                     <div class="mt-1 text-xs text-slate-400">or paste an image URL below</div>
@@ -109,7 +109,6 @@
                   <div class="flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-3">
                     <div class="text-xs text-slate-500">Partner #{{ i + 1 }}</div>
                     <div class="flex flex-wrap gap-2">
-                      <button class="admin-ghost-btn" type="button" @click="duplicatePartner(i)">Duplicate</button>
                       <button class="admin-danger-btn" type="button" @click="deletePartner(i)">Delete</button>
                     </div>
                   </div>
@@ -157,7 +156,6 @@
             <SectionHeader title="Blog Editor" note="SEO-friendly article editor powered by CKEditor." />
             <div class="flex flex-wrap items-center gap-3">
               <RepeaterAdd label="Add article" @add="addBlogPost" />
-              <button class="admin-ghost-btn" type="button" @click="duplicateSelectedPost">Duplicate article</button>
               <button class="admin-ghost-btn" type="button" @click="saveContent">Save blog</button>
             </div>
             <EmptyState v-if="!content.blogPosts.length" title="No blog articles yet" note="Add an article to begin editing SEO content." />
@@ -447,15 +445,6 @@ function addPartner() {
   content.partners.unshift({ name: 'New Partner', logo: '', url: '' })
 }
 
-function duplicatePartner(index) {
-  const partner = content.partners[index]
-  if (!partner) return
-  content.partners.splice(index + 1, 0, {
-    ...clone(partner),
-    name: `${partner.name || 'Partner'} Copy`,
-  })
-}
-
 function deletePartner(index) {
   content.partners.splice(index, 1)
 }
@@ -497,16 +486,6 @@ function deleteSelectedPost() {
   content.blogPosts.splice(selectedPostIndex.value, 1)
   selectedPostIndex.value = Math.max(0, selectedPostIndex.value - 1)
   void refreshEditor()
-}
-
-function duplicateSelectedPost() {
-  if (!selectedPost.value) return
-  safeSyncEditorContent()
-  const copy = clone(selectedPost.value)
-  copy.title = `${copy.title || 'Article'} Copy`
-  copy.slug = `${copy.slug || 'article'}-copy-${Date.now()}`
-  content.blogPosts.splice(selectedPostIndex.value + 1, 0, copy)
-  void selectBlogPost(selectedPostIndex.value + 1)
 }
 
 function addTag(post) {
@@ -745,6 +724,22 @@ onBeforeUnmount(async () => {
   border: 1px dashed rgba(199, 210, 254, 0.24);
   border-radius: 1rem;
   pointer-events: none;
+}
+
+.partner-logo-preview {
+  position: relative;
+  z-index: 2;
+  width: calc(100% - 2rem);
+  height: 9rem;
+  max-width: calc(100% - 2rem);
+  max-height: 9rem;
+  opacity: 1 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  background: white;
+  border-radius: 0.85rem;
+  padding: 0.85rem;
+  box-shadow: 0 14px 34px rgba(2, 6, 23, 0.22);
 }
 
 .featured-image-zone {
