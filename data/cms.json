@@ -71,6 +71,7 @@
       "url": "https://kodakode.com/turn-ideas-into-digital-products-the-from-concept-to-code/",
       "metaTitle": "Turn Ideas into Digital Products",
       "metaDescription": "A practical look at how business ideas become polished digital products.",
+      "tags": ["Development", "Product", "Strategy"],
       "content": "<h2>From Concept to Code</h2><p>A strong product starts with clear goals, user journeys, and a build plan that keeps business outcomes visible.</p>"
     },
     {
@@ -84,6 +85,7 @@
       "url": "https://kodakode.com/blog-standard/",
       "metaTitle": "Why Your Business Needs a Mobile App",
       "metaDescription": "How mobile apps help businesses stay connected with customers.",
+      "tags": ["Mobile App", "Business", "Customer"],
       "content": "<h2>Mobile First, Business Ready</h2><p>A mobile app can simplify repeat actions, improve retention, and keep your brand close to customers.</p>"
     },
     {
@@ -97,6 +99,7 @@
       "url": "https://kodakode.com/blog-standard/",
       "metaTitle": "The Power of SEO",
       "metaDescription": "Why SEO structure matters for long-term visibility.",
+      "tags": ["SEO", "Marketing", "Visibility"],
       "content": "<h2>SEO Starts With Structure</h2><p>Clear headlines, strong metadata, and useful content make your website easier to discover and trust.</p>"
     }
   ]

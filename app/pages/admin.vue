@@ -8,7 +8,6 @@
           <p class="mt-2 max-w-2xl text-sm text-slate-400">Edit homepage content, dynamic partners, testimonials, services, and SEO-ready blog articles.</p>
         </div>
         <div class="flex flex-wrap items-center gap-3">
-          <NuxtLink to="/" class="rounded-xl border border-white/10 px-4 py-2 text-sm font-semibold text-slate-200 hover:bg-white/10">View Site</NuxtLink>
           <button class="rounded-xl border border-red-400/20 px-4 py-2 text-sm font-semibold text-red-100 hover:bg-red-500/10" @click="logout">Logout</button>
           <button class="rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-indigo-950/40 disabled:cursor-not-allowed disabled:opacity-60" :disabled="saving" @click="saveContent">
             {{ saving ? 'Saving...' : 'Save Changes' }}
@@ -67,14 +66,47 @@
 
           <div v-if="activeTab === 'partners'" class="space-y-5">
             <SectionHeader title="Dynamic Partners" note="Logo cards shown in World Wide Partners." />
-            <RepeaterAdd label="Add partner" @add="addPartner" />
+            <div class="flex flex-wrap items-center gap-3">
+              <RepeaterAdd label="Add partner" @add="addPartner" />
+              <button class="admin-ghost-btn" type="button" @click="saveContent">Save partners</button>
+            </div>
             <EmptyState v-if="!content.partners.length" title="No partners yet" note="Add your first partner logo and website link." />
-            <div class="grid gap-4">
-              <div v-for="(partner, i) in content.partners" :key="i" class="admin-card grid gap-4 md:grid-cols-3">
-                <Field label="Name"><input v-model="partner.name" class="admin-input" /></Field>
-                <Field label="Logo URL"><input v-model="partner.logo" class="admin-input" /></Field>
-                <Field label="Website URL"><input v-model="partner.url" class="admin-input" /></Field>
-                <button class="admin-danger-btn md:col-span-3" @click="content.partners.splice(i, 1)">Delete partner</button>
+            <div class="grid gap-4 md:grid-cols-2">
+              <div v-for="(partner, i) in content.partners" :key="i" class="admin-card overflow-hidden p-0">
+                <div
+                  class="image-drop-zone min-h-[11rem]"
+                  @dragover.prevent
+                  @drop.prevent="handleImageDrop($event, partner, 'logo')"
+                >
+                  <img v-if="partner.logo" :src="partner.logo" :alt="partner.name || 'Partner logo'" class="max-h-24 max-w-[78%] object-contain" />
+                  <div v-else class="text-center">
+                    <div class="text-sm font-black text-white">Drop partner logo</div>
+                    <div class="mt-1 text-xs text-slate-400">or paste an image URL below</div>
+                  </div>
+                  <label class="admin-upload-btn">
+                    Choose logo
+                    <input class="sr-only" type="file" accept="image/*" @change="handleImagePick($event, partner, 'logo')" />
+                  </label>
+                </div>
+                <div class="space-y-4 p-4">
+                  <Field label="Partner name"><input v-model="partner.name" class="admin-input" placeholder="Apex Bali" /></Field>
+                  <Field label="Instant picture / thumbnail URL">
+                    <input v-model="partner.logo" class="admin-input" placeholder="https://.../logo.png" />
+                  </Field>
+                  <Field label="Website link">
+                    <div class="flex gap-2">
+                      <input v-model="partner.url" class="admin-input" placeholder="https://example.com" />
+                      <a v-if="partner.url" :href="partner.url" target="_blank" rel="noopener noreferrer" class="admin-link-btn">Open</a>
+                    </div>
+                  </Field>
+                  <div class="flex flex-wrap items-center justify-between gap-2 border-t border-white/10 pt-3">
+                    <div class="text-xs text-slate-500">Partner #{{ i + 1 }}</div>
+                    <div class="flex flex-wrap gap-2">
+                      <button class="admin-ghost-btn" type="button" @click="duplicatePartner(i)">Duplicate</button>
+                      <button class="admin-danger-btn" type="button" @click="deletePartner(i)">Delete</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -116,7 +148,11 @@
 
           <div v-if="activeTab === 'blog'" class="space-y-5">
             <SectionHeader title="Blog Editor" note="SEO-friendly article editor powered by CKEditor." />
-            <RepeaterAdd label="Add article" @add="addBlogPost" />
+            <div class="flex flex-wrap items-center gap-3">
+              <RepeaterAdd label="Add article" @add="addBlogPost" />
+              <button class="admin-ghost-btn" type="button" @click="duplicateSelectedPost">Duplicate article</button>
+              <button class="admin-ghost-btn" type="button" @click="saveContent">Save blog</button>
+            </div>
             <EmptyState v-if="!content.blogPosts.length" title="No blog articles yet" note="Add an article to begin editing SEO content." />
             <div class="grid gap-5 xl:grid-cols-[18rem_1fr]">
               <div class="space-y-2">
@@ -127,20 +163,61 @@
                   :class="['w-full rounded-xl border px-4 py-3 text-left text-sm transition', selectedPostIndex === i ? 'border-indigo-400 bg-indigo-500/20 text-white' : 'border-white/10 bg-white/[0.03] text-slate-300 hover:bg-white/10']"
                   @click="selectBlogPost(i)"
                 >
+                  <span v-if="post.image" class="mb-3 block h-24 overflow-hidden rounded-lg bg-slate-900">
+                    <img :src="post.image" :alt="post.title || 'Blog featured image'" class="h-full w-full object-cover" :style="{ objectPosition: post.imagePosition || 'center' }" />
+                  </span>
                   <span class="block font-bold">{{ post.title || 'Untitled article' }}</span>
                   <span class="mt-1 block text-xs text-slate-500">{{ post.slug }}</span>
+                  <span v-if="normalizedTags(post).length" class="mt-2 flex flex-wrap gap-1">
+                    <span v-for="tag in normalizedTags(post).slice(0, 3)" :key="tag" class="admin-tag-small">{{ tag }}</span>
+                  </span>
                 </button>
               </div>
               <div v-if="selectedPost" class="admin-card space-y-4">
+                <div
+                  class="featured-image-zone"
+                  @dragover.prevent
+                  @drop.prevent="handleImageDrop($event, selectedPost, 'image')"
+                >
+                  <img v-if="selectedPost.image" :src="selectedPost.image" :alt="selectedPost.title || 'Featured image'" class="h-full w-full object-cover" :style="{ objectPosition: selectedPost.imagePosition || 'center' }" />
+                  <div v-else class="relative z-10 text-center">
+                    <div class="text-sm font-black text-white">Click or drag featured image</div>
+                    <div class="mt-1 text-xs text-slate-400">Use a natural article thumbnail that invites visitors to read.</div>
+                  </div>
+                  <label class="admin-upload-btn absolute bottom-4 right-4 z-20">
+                    Choose image
+                    <input class="sr-only" type="file" accept="image/*" @change="handleImagePick($event, selectedPost, 'image')" />
+                  </label>
+                </div>
                 <div class="grid gap-4 md:grid-cols-2">
                   <Field label="Title"><input v-model="selectedPost.title" class="admin-input" /></Field>
                   <Field label="Slug"><input v-model="selectedPost.slug" class="admin-input" /></Field>
                   <Field label="Category"><input v-model="selectedPost.category" class="admin-input" /></Field>
                   <Field label="Date"><input v-model="selectedPost.date" class="admin-input" /></Field>
-                  <Field label="Cover image"><input v-model="selectedPost.image" class="admin-input" /></Field>
+                  <Field label="Featured image URL"><input v-model="selectedPost.image" class="admin-input" /></Field>
                   <Field label="Image position"><input v-model="selectedPost.imagePosition" class="admin-input" /></Field>
-                  <Field label="URL"><input v-model="selectedPost.url" class="admin-input" /></Field>
+                  <Field label="Website / article link">
+                    <div class="flex gap-2">
+                      <input v-model="selectedPost.url" class="admin-input" />
+                      <a v-if="selectedPost.url" :href="selectedPost.url" target="_blank" rel="noopener noreferrer" class="admin-link-btn">Open</a>
+                    </div>
+                  </Field>
                   <Field label="Meta title"><input v-model="selectedPost.metaTitle" class="admin-input" /></Field>
+                </div>
+                <div class="rounded-xl border border-white/10 bg-slate-950/40 p-4">
+                  <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                      <div class="text-xs font-bold uppercase tracking-wide text-slate-400">Tags</div>
+                      <div class="mt-1 text-xs text-slate-500">Add keywords for article grouping and SEO planning.</div>
+                    </div>
+                    <button class="admin-small-btn" type="button" @click="addTag(selectedPost)">Add tag</button>
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    <div v-for="(_, tagIndex) in normalizedTags(selectedPost)" :key="tagIndex" class="admin-tag-editor">
+                      <input v-model="selectedPost.tags[tagIndex]" placeholder="SEO" />
+                      <button type="button" @click="removeTag(selectedPost, tagIndex)">×</button>
+                    </div>
+                  </div>
                 </div>
                 <Field label="Meta description"><textarea v-model="selectedPost.metaDescription" rows="2" class="admin-input"></textarea></Field>
                 <Field label="Excerpt"><textarea v-model="selectedPost.excerpt" rows="3" class="admin-input"></textarea></Field>
@@ -148,7 +225,13 @@
                   <label class="mb-2 block text-xs font-bold uppercase tracking-wide text-slate-400">Article content</label>
                   <div id="ckeditor-host" class="ckeditor-shell"></div>
                 </div>
-                <button class="admin-danger-btn" @click="deleteSelectedPost">Delete article</button>
+                <div class="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-4">
+                  <div class="text-xs text-slate-500">CRUD ready: create, read, update, delete article content.</div>
+                  <div class="flex flex-wrap gap-2">
+                    <a v-if="selectedPost.url" :href="selectedPost.url" target="_blank" rel="noopener noreferrer" class="admin-link-btn">Read article</a>
+                    <button class="admin-danger-btn" type="button" @click="deleteSelectedPost">Delete article</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -291,8 +374,34 @@ function normalizeContent(source) {
     partners: Array.isArray(source?.partners) && source.partners.length ? source.partners : clone(fallbackContent.partners),
     testimonials: Array.isArray(source?.testimonials) && source.testimonials.length ? source.testimonials : clone(fallbackContent.testimonials),
     services: Array.isArray(source?.services) && source.services.length ? source.services : clone(fallbackContent.services),
-    blogPosts: Array.isArray(source?.blogPosts) && source.blogPosts.length ? source.blogPosts : clone(fallbackContent.blogPosts),
+    blogPosts: Array.isArray(source?.blogPosts) && source.blogPosts.length
+      ? source.blogPosts.map((post) => ({
+        ...post,
+        tags: normalizeTagArray(post?.tags),
+      }))
+      : clone(fallbackContent.blogPosts).map((post) => ({ ...post, tags: normalizeTagArray(post.tags) })),
   }
+}
+
+function normalizeTagArray(tags) {
+  if (Array.isArray(tags)) {
+    return tags.filter(Boolean)
+  }
+
+  if (typeof tags === 'string') {
+    return tags.split(',').map((tag) => tag.trim()).filter(Boolean)
+  }
+
+  return []
+}
+
+function normalizedTags(post) {
+  if (!post) return []
+  if (!Array.isArray(post.tags)) {
+    post.tags = normalizeTagArray(post.tags)
+  }
+
+  return post.tags
 }
 
 async function setActiveTab(tab) {
@@ -328,7 +437,20 @@ async function loadContent() {
 }
 
 function addPartner() {
-  content.partners.push({ name: 'New Partner', logo: '', url: '' })
+  content.partners.unshift({ name: 'New Partner', logo: '', url: '' })
+}
+
+function duplicatePartner(index) {
+  const partner = content.partners[index]
+  if (!partner) return
+  content.partners.splice(index + 1, 0, {
+    ...clone(partner),
+    name: `${partner.name || 'Partner'} Copy`,
+  })
+}
+
+function deletePartner(index) {
+  content.partners.splice(index, 1)
 }
 
 function addTestimonial() {
@@ -346,7 +468,7 @@ function addService() {
 }
 
 function addBlogPost() {
-  content.blogPosts.push({
+  content.blogPosts.unshift({
     title: 'New SEO Article',
     slug: `new-article-${Date.now()}`,
     category: 'Development',
@@ -357,9 +479,10 @@ function addBlogPost() {
     url: '/blog/new-article',
     metaTitle: '',
     metaDescription: '',
+    tags: ['SEO'],
     content: '<h2>New Article</h2><p>Write your content here.</p>',
   })
-  void selectBlogPost(content.blogPosts.length - 1)
+  void selectBlogPost(0)
 }
 
 function deleteSelectedPost() {
@@ -367,6 +490,55 @@ function deleteSelectedPost() {
   content.blogPosts.splice(selectedPostIndex.value, 1)
   selectedPostIndex.value = Math.max(0, selectedPostIndex.value - 1)
   void refreshEditor()
+}
+
+function duplicateSelectedPost() {
+  if (!selectedPost.value) return
+  safeSyncEditorContent()
+  const copy = clone(selectedPost.value)
+  copy.title = `${copy.title || 'Article'} Copy`
+  copy.slug = `${copy.slug || 'article'}-copy-${Date.now()}`
+  content.blogPosts.splice(selectedPostIndex.value + 1, 0, copy)
+  void selectBlogPost(selectedPostIndex.value + 1)
+}
+
+function addTag(post) {
+  normalizedTags(post)
+  post.tags.push('')
+}
+
+function removeTag(post, index) {
+  normalizedTags(post)
+  post.tags.splice(index, 1)
+}
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = reject
+    reader.readAsDataURL(file)
+  })
+}
+
+async function handleImagePick(event, target, field) {
+  const file = event.target?.files?.[0]
+  if (!file) return
+  target[field] = await readFileAsDataUrl(file)
+  event.target.value = ''
+}
+
+async function handleImageDrop(event, target, field) {
+  const file = event.dataTransfer?.files?.[0]
+  if (file?.type?.startsWith('image/')) {
+    target[field] = await readFileAsDataUrl(file)
+    return
+  }
+
+  const text = event.dataTransfer?.getData('text/plain')?.trim()
+  if (text) {
+    target[field] = text
+  }
 }
 
 async function saveContent() {
@@ -522,6 +694,108 @@ onBeforeUnmount(async () => {
   color: #fecaca;
   font-size: 0.82rem;
   font-weight: 800;
+}
+
+.admin-ghost-btn,
+.admin-link-btn {
+  width: fit-content;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(15, 23, 42, 0.62);
+  padding: 0.55rem 0.85rem;
+  color: #dbeafe;
+  font-size: 0.82rem;
+  font-weight: 800;
+  white-space: nowrap;
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+.admin-ghost-btn:hover,
+.admin-link-btn:hover {
+  border-color: rgba(129, 140, 248, 0.58);
+  background: rgba(79, 70, 229, 0.16);
+  transform: translateY(-1px);
+}
+
+.image-drop-zone,
+.featured-image-zone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.22), transparent 15rem),
+    linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.72));
+}
+
+.image-drop-zone::before,
+.featured-image-zone::before {
+  content: "";
+  position: absolute;
+  inset: 0.75rem;
+  border: 1px dashed rgba(199, 210, 254, 0.24);
+  border-radius: 1rem;
+  pointer-events: none;
+}
+
+.featured-image-zone {
+  min-height: 18rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+}
+
+.admin-upload-btn {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  cursor: pointer;
+  border-radius: 999px;
+  border: 1px solid rgba(129, 140, 248, 0.36);
+  background: rgba(15, 23, 42, 0.84);
+  padding: 0.55rem 0.85rem;
+  color: #eef2ff;
+  font-size: 0.76rem;
+  font-weight: 900;
+  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.34);
+}
+
+.admin-tag-small {
+  border-radius: 999px;
+  border: 1px solid rgba(129, 140, 248, 0.28);
+  background: rgba(99, 102, 241, 0.12);
+  padding: 0.2rem 0.45rem;
+  color: #c7d2fe;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.admin-tag-editor {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 999px;
+  border: 1px solid rgba(129, 140, 248, 0.28);
+  background: rgba(99, 102, 241, 0.12);
+}
+
+.admin-tag-editor input {
+  width: 7rem;
+  border: 0;
+  background: transparent;
+  padding: 0.5rem 0.15rem 0.5rem 0.7rem;
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 800;
+  outline: none;
+}
+
+.admin-tag-editor button {
+  padding: 0.35rem 0.65rem;
+  color: #fecaca;
+  font-size: 1rem;
+  font-weight: 900;
 }
 
 .ckeditor-shell :deep(.ck-editor__main > .ck-editor__editable) {

@@ -66,7 +66,7 @@
     </Transition>
 
     <!-- READING PROGRESS -->
-    <div class="fixed top-0 left-0 right-0 z-[200] h-[3px] bg-white/10">
+    <div v-if="!isAdminRoute" class="fixed top-0 left-0 right-0 z-[200] h-[3px] bg-white/10">
       <div
         ref="progressBar"
         class="h-full origin-left scale-x-0 bg-gradient-to-r from-indigo-400 via-violet-400 to-indigo-400"
@@ -74,7 +74,7 @@
     </div>
 
     <!-- NAVBAR -->
-    <nav class="fixed top-2 left-0 right-0 z-[100] px-4 md:px-6">
+    <nav v-if="!isAdminRoute" class="fixed top-2 left-0 right-0 z-[100] px-4 md:px-6">
       <div
         class="max-w-6xl mx-auto flex items-center justify-between py-4 px-5 md:px-9 md:py-5 rounded-2xl border border-white/10 shadow-lg shadow-black/20 transition-colors duration-200"
         :class="menuOpen ? 'bg-[#080b33]' : 'bg-[#0f1147]/95'"
@@ -122,11 +122,12 @@
       </div>
     </nav>
 
-    <div class="pt-24 md:pt-28">
+    <div :class="isAdminRoute ? '' : 'pt-24 md:pt-28'">
       <NuxtPage />
     </div>
 
     <button
+      v-if="!isAdminRoute"
       type="button"
       class="back-to-top"
       :class="{ 'is-visible': backToTopVisible }"
@@ -137,7 +138,7 @@
     </button>
 
     <!-- FOOTER -->
-    <footer style="background:#0a0d3d" class="border-t border-white/10">
+    <footer v-if="!isAdminRoute" style="background:#0a0d3d" class="border-t border-white/10">
       <div class="max-w-6xl mx-auto px-4 md:px-6 py-14">
 
         <div>
@@ -179,7 +180,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
+
+const route = useRoute()
+const isAdminRoute = computed(() => route.path === '/admin' || route.path === '/admin-login' || route.path.startsWith('/admin/'))
 
 const loading = ref(true)
 const loadingProgress = ref(0)
